@@ -20,4 +20,5 @@ class Flat extends Model
 
       return $this->hasOne(Detail::class);
   }
+
 }

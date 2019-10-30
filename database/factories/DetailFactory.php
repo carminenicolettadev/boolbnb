@@ -5,7 +5,6 @@
 use App\Model;
 use Faker\Generator as Faker;
 use App\Detail;
-use App\Flat;
 
 $factory->define(Detail::class, function (Faker $faker) {
     return [
