@@ -5,4 +5,16 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
+
+
+.list-flat{
+  display: flex;
+  flex-wrap: wrap;
+  .flat-box{
+    width:400px;
+    border: solid 2px blue;
+    margin:15px;
+    padding:30px;
+  }
+}

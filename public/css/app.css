@@ -1,0 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);.list-flat {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-flat .flat-box {
+  width: 400px;
+  border: solid 2px blue;
+  margin: 15px;
+  padding: 30px;
+}
+
