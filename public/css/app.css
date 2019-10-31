@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -11100,6 +11100,10 @@ a.text-dark:focus {
   }
 }
 
+* {
+  font-family: Roboto;
+}
+
 .list-flat {
   display: -webkit-box;
   display: flex;
@@ -11120,6 +11124,27 @@ a.text-dark:focus {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-size: 30px;
+}
+
+.registrazione .form-group {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.registrazione .form-group .col-form-label {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.registrazione .form-group .btn-send {
+  width: 30%;
+  float: right;
+  background: #ff5b60;
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  border: none;
+  padding: 10px 20px;
+  letter-spacing: 2px;
 }
 
