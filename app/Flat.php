@@ -20,5 +20,8 @@ class Flat extends Model
 
       return $this->hasOne(Detail::class);
   }
+  public function mesages(){
+    return $this-> hasMany(Message::class);
+  }
 
 }
