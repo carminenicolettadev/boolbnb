@@ -15,6 +15,7 @@ class CreateDetailsTable extends Migration
     {
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
             $table->tinyInteger('num_room');
             $table->tinyInteger('bed');
             $table->tinyInteger('bathroom');

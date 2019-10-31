@@ -21,4 +21,9 @@ class Flat extends Model
       return $this->hasOne(Detail::class);
   }
 
+  public function address() {
+
+      return $this->hasOne(Address::class);
+  }
+
 }
