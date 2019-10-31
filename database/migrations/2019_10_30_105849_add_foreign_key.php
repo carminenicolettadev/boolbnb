@@ -28,6 +28,15 @@ class AddForeignKey extends Migration
                -> references('id')//colonna
                -> on('flats');//tabella
       });
+
+      Schema::table('addresses', function (Blueprint $table) {
+
+        $table -> bigInteger('flat_id') -> unsigned() -> index();//tabella riferimento
+        $table -> foreign('flat_id', 'relationAddressFlat')
+               -> references('id')//colonna
+               -> on('flats');//tabella
+      });
+
     }
 
     /**
@@ -47,6 +56,13 @@ class AddForeignKey extends Migration
       Schema::table('details', function (Blueprint $table) {
 
         $table -> dropForeign('relationDetailFlat');
+        $table -> dropColumn('flat_id');
+
+      });
+
+      Schema::table('addresses', function (Blueprint $table) {
+
+        $table -> dropForeign('relationAddressFlat');
         $table -> dropColumn('flat_id');
 
       });
