@@ -5,7 +5,7 @@
 @import 'variables';
 
 // Bootstrap
-// @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
 
 .list-flat{
@@ -17,4 +17,14 @@
     margin:15px;
     padding:30px;
   }
+}
+
+.registrazione {
+  height: 100vh;
+  width:100%;
+  background-image: url("../img/background-register.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
