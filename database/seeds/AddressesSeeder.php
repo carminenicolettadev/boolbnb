@@ -11,6 +11,10 @@ class AddressesSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> a938624d8d426cf3f3f335aeb28ee0fcce5c7d0b
         $tablerif = \DB::table('flats')->get();
         $number = count($tablerif);
 
@@ -20,5 +24,9 @@ class AddressesSeeder extends Seeder
 
           ]);
         }
+<<<<<<< HEAD
+=======
+  
+>>>>>>> a938624d8d426cf3f3f335aeb28ee0fcce5c7d0b
     }
 }

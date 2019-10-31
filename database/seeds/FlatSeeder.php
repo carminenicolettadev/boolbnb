@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Flat;
 use App\User;
+use App\Service;
+
 class FlatSeeder extends Seeder
 {
     /**
@@ -16,8 +18,8 @@ class FlatSeeder extends Seeder
             -> make()
             -> each(function($flat) {
 
-          $user = User::inRandomOrder() -> first();
-          //funzione category = category_id
+          $user = User::inRandomOrder()->first();
+
           $flat -> user() -> associate($user);
 
           $flat -> save();

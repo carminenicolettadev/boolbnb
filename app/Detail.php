@@ -8,6 +8,7 @@ class Detail extends Model
 {
     protected $fillable = [
       'num_room',
+      'title',
       'bed',
       'bathroom',
       'mq',
