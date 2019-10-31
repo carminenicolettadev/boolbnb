@@ -11,16 +11,22 @@ class AddressesSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
+=======
         
+>>>>>>> a938624d8d426cf3f3f335aeb28ee0fcce5c7d0b
         $tablerif = \DB::table('flats')->get();
         $number = count($tablerif);
-  
+
         for ($i=1; $i <= $number ; $i++) {
           factory(Address::class, 1)->create([
             'flat_id' => $i
-  
+
           ]);
         }
+<<<<<<< HEAD
+=======
   
+>>>>>>> a938624d8d426cf3f3f335aeb28ee0fcce5c7d0b
     }
 }

@@ -11100,3 +11100,26 @@ a.text-dark:focus {
   }
 }
 
+.list-flat {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-flat .flat-box {
+  width: 400px;
+  border: solid 2px blue;
+  margin: 15px;
+  padding: 30px;
+}
+
+.registrazione {
+  height: 100vh;
+  width: 100%;
+  background-image: url(/images/background-register.jpg?a306cb57b0cdff4ce21f9062d7b5b7fd);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 30px;
+}
+
