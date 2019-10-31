@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Message;
 use App\Flat;
+
 class MessageSeeder extends Seeder
 {
     /**

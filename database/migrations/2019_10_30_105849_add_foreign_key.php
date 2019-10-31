@@ -45,6 +45,19 @@ class AddForeignKey extends Migration
                -> on('flats');//tabella
       });
 
+      Schema::table('flat_service', function (Blueprint $table) {
+
+        $table -> bigInteger('flat_id') -> unsigned() -> index();//tabella riferimento
+        $table -> foreign('flat_id', 'relationFlatService')
+               -> references('id')//colonna
+               -> on('flats');//tabella
+
+        $table -> bigInteger('service_id') -> unsigned() -> index();//tabella riferimento
+        $table -> foreign('service_id', 'relationServiceFlat')
+               -> references('id')//colonna
+               -> on('services');//tabella
+      });
+
 
     }
 
@@ -80,6 +93,16 @@ class AddForeignKey extends Migration
 
         $table -> dropForeign('relationMessageFlat');
         $table -> dropColumn('flat_id');
+
+      });
+
+      Schema::table('flat_service', function (Blueprint $table) {
+
+        $table -> dropForeign('relationFlatService');
+        $table -> dropColumn('flat_id');
+
+        $table -> dropForeign('relationServiceFlat');
+        $table -> dropColumn('service_id');
 
       });
     }
