@@ -16,7 +16,7 @@ class FlatSeeder extends Seeder
             -> make()
             -> each(function($flat) {
 
-          $user = User::inRandomOrder() -> first();
+          $user = User::inRandomOrder()->first();
           //funzione category = category_id
           $flat -> user() -> associate($user);
 
