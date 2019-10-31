@@ -21,12 +21,18 @@ class Flat extends Model
       return $this->hasOne(Detail::class);
   }
   public function mesages(){
+    
     return $this-> hasMany(Message::class);
   }
 
   public function address() {
 
       return $this->hasOne(Address::class);
+  }
+
+  public function services() {
+
+      return $this->belongsToMany(Service::class);
   }
 
 }
