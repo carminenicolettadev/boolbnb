@@ -24,4 +24,9 @@ class Flat extends Model
     return $this-> hasMany(Message::class);
   }
 
+  public function address() {
+
+      return $this->hasOne(Address::class);
+  }
+
 }
