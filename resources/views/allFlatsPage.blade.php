@@ -11,17 +11,17 @@
   <body>
 
     <div class="list-flat">
-      @foreach ($flats as $flats)
+      @foreach ($flats as $flat)
       <div class="flat-box">
-        <img src="{{$flats -> detail -> img }}" alt="">
-        <h1>{{$flats -> detail -> title }}</h1>
-        <h1>{{$flats -> detail -> bed }}</h1>
-        <h1>{{$flats -> detail -> bathroom }}</h1>
-        <h1>{{$flats -> address -> state }}</h1>
-        <h1>{{$flats -> address -> city }}</h1>
-        <h1>{{$flats -> address -> road }}</h1>
-        <h1>{{$flats -> rate}}</h1>
-        <p>{{$flats -> views}}</p>
+        <img src="{{$flat -> detail -> img }}" alt="">
+        <h1>{{$flat -> detail -> title }}</h1>
+        <h1>{{$flat -> detail -> bed }}</h1>
+        <h1>{{$flat -> detail -> bathroom }}</h1>
+        <h1>{{$flat -> address -> state }}</h1>
+        <h1>{{$flat -> address -> city }}</h1>
+        <h1>{{$flat -> address -> road }}</h1>
+        <h1>{{$flat -> rate}}</h1>
+        <p>{{$flat -> views}}</p>
       </div>
       @endforeach
     </div>

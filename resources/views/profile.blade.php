@@ -11,5 +11,7 @@
     <h1>{{Auth::user()->surname}}</h1>
     <h1>{{Auth::user()->email}}</h1>
 
+    <h1>{{Auth::user()->flat ->id }}</h1>
+
   </body>
 </html>
