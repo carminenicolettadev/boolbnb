@@ -4,10 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class payment extends Model
+class Payment extends Model
 {
-    protected $fillable = [
-      "price",
-      "time"
-    ]
+  protected $fillable = [
+      'price',
+      'time'
+
+    ];
+
+  public function flats() {
+
+      return $this -> belongsToMany(Payment::class);
+  }
 }
