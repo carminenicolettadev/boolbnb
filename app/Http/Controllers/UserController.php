@@ -12,10 +12,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showProfile($id)
     {
-        $users = User::all();
-        return view('allUsersPage', compact('users'));
+        $user = User::findOrFail($id);
+        return view('profile', compact('user'));
     }
 
     /**
