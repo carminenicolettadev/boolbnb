@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -68,7 +70,31 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                      {{-- link menu nella home se sei loggato  --}}
+                        <a href="{{ url('/') }}">Home</a>
+                        <a href="{{ url('/home') }}">Flat</a>
+                        <a href="{{ route('profile', Auth::user()->id ) }}">Profile</a>
+                        <p>{{ Auth::user()->id }}</p>
+
+                        {{-- logout button --}}
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                          {{-- fine logout button --}}
+                        {{-- fine link menu nella home se sei loggato  --}}
+
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
