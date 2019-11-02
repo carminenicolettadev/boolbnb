@@ -9,6 +9,6 @@ use App\Payment;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
       'price' => $faker -> randomFloat(1, 1, 5),
-      'time' => $faker -> dateTimeThisYear($max = 'now', $timezone = it)
+      'time' => $faker -> dateTimeThisYear($max = 'now', $timezone = null)
     ];
 });

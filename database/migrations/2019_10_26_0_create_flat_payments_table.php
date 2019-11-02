@@ -16,6 +16,7 @@ class CreateFlatPaymentsTable extends Migration
         Schema::create('flat_payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             
+
         });
     }
 

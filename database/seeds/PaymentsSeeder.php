@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Flat;
 use App\Payment;
+use App\Flat;
 
 class PaymentsSeeder extends Seeder
 {
@@ -18,8 +18,8 @@ class PaymentsSeeder extends Seeder
         -> each(function ($payment){
 
           $flats = Flat::inRandomOrder()->take(rand(0, 200))->get();
-          $payment = flats() -> attach($flats);
-          $payment = save();
-        }
+          $payment -> flats() -> attach($flats);
+          $payment -> save();
+        });
     }
 }
