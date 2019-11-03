@@ -49517,14 +49517,9 @@ throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/app.scss */"./resources/sass/app.scss");
 module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/profile.scss */"./resources/sass/profile.scss");
-=======
-__webpack_require__(/*! C:\Users\Utente\Desktop\airbnbproject\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\airbnbproject\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 83a7b44bf7ae4ec351c8ba9891bc7c9ccfb8f729
 
 
 /***/ })
