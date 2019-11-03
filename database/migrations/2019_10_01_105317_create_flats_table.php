@@ -15,8 +15,8 @@ class CreateFlatsTable extends Migration
     {
         Schema::create('flats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('views');
-            $table->decimal('rate',2 ,1);
+            $table->bigInteger('views')->default(0);
+            $table->decimal('rate',2 ,1)->default(0);
             $table->timestamps();
         });
     }

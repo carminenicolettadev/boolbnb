@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);* {
+  font-family: Roboto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-container {
+  display: -webkit-box;
+  display: flex;
+}
+
+.profile-container .sidebar {
+  width: 20%;
+  padding: 30px;
+  background: #d5d5d5;
+}
+
+.profile-container .sidebar ul li {
+  margin-bottom: 30px;
+}
+
+.profile-container .content {
+  width: 80%;
+  height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  padding: 50px;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-container .content .box {
+  width: 450px;
+  background: #ededed;
+  margin: 40px;
+  height: auto;
+}
+
+.profile-container .content .box .box-sections {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-container .content .box .box-sections .details-section {
+  background: orange;
+  width: 100%;
+  padding: 15px;
+}
+
+.profile-container .content .box .box-sections .address-section {
+  background: #fffeaa;
+  width: 100%;
+  padding: 15px;
+}
+
