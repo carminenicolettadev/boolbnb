@@ -11104,6 +11104,10 @@ a.text-dark:focus {
   font-family: Roboto;
 }
 
+.box-at-center {
+  margin: 0 auto;
+}
+
 .list-flat {
   display: -webkit-box;
   display: flex;
@@ -11146,5 +11150,38 @@ a.text-dark:focus {
   border: none;
   padding: 10px 20px;
   letter-spacing: 2px;
+}
+
+.login {
+  height: 100vh;
+  background-image: url(/images/background-login.jpg?023f99915191e2cfa44ef9b782a0543d);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login .box-login {
+  margin-top: 100px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.login .box-login .box-top {
+  background: black;
+  padding: 10px 0;
+  color: white;
+  text-align: center;
+}
+
+.login .box-login .box-body {
+  padding: 40px 5px;
+}
+
+.login .box-login .box-body .btnlogin {
+  background: #ff5b60;
+  border-color: #ff5b60;
+}
+
+.login .box-login .box-body .btnforgot {
+  color: black;
 }
 
