@@ -30,7 +30,14 @@
         </ul>
         <div class="btn-sidebar">
           <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
+          @guest
+            @else
+            <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat ->id)}}">Delete Flat</a><br>
+          @endguest
           <a href="{{ URL::previous() }}" class="mb-5">Back</a>
+
+          {{--  --}}
+
         </div>
       </div>
 
@@ -75,12 +82,14 @@
             <p>{{$singleFlat -> rate }}</p>
           </div>
         </div>
+        {{-- mappa  --}}
+        <div id="map" class="mappa map" style=""></div>
+
+
       </div>
     </div>
 
-    <div id="map" class="mappa map" style="">
 
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
 

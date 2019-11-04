@@ -164,8 +164,12 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteFlat($id)
     {
-        //
+        $flat = Flat::findOrFail($id);
+
+        $flat -> delete();
+
+
     }
 }

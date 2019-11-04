@@ -1,5 +1,6 @@
 function init() {
-    $("button#bottone").click(function() {
+    $("button#bottone").click(function(e) {
+        e.preventDefault();
         getlatlon();
     })
 }

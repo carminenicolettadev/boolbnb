@@ -107,7 +107,7 @@
 
               </div>
               <button id="bottone" class="btn btn-dark mt-2">Add cordinate</button>
-              <button  type="submit" class="btn btn-primary mt-2">Add Flat</button>
+              <button  class="btn btn-primary mt-2">Add Flat</button>
           </form>
         </div>
       </div>
