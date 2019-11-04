@@ -49509,7 +49509,7 @@ function init() {
 
     setTimeout(function () {
       $("#form-flat").submit();
-    }, 300);
+    }, 500);
   });
 }
 

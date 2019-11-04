@@ -17,4 +17,4 @@ Route::get('/addFlat', 'FlatController@addFlat')->name('addFlat')->middleware('a
 Route::post('/', 'FlatController@storeFlat')->name('storeFlat')->middleware('auth');
 Route::get('/flat/{id}', 'FlatController@showFlat')->name('showFlat');
 
-Route::get('/delete/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware('auth');
+Route::get('/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware('auth');

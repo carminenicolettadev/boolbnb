@@ -7,6 +7,7 @@ use App\Flat;
 use App\Address;
 use App\Service;
 use App\Detail;
+use App\User;
 
 
 
@@ -129,6 +130,7 @@ class FlatController extends Controller
         $addressFlat = Address::where('flat_id', $id)->get();
 
 
+
         return view('singleFlat')->with('singleFlat', $singleFlat)
                                   ->with('detailFlat', $detailFlat)
                                   ->with('addressFlat', $addressFlat);
@@ -168,7 +170,15 @@ class FlatController extends Controller
     {
         $flat = Flat::findOrFail($id);
 
-        $flat -> delete();
+        $flat->detail->delete();
+        $flat->address->delete();
+        $flat->delete();
+
+        $log = $flat->user_id;
+
+
+
+        return redirect("profile/$log");
 
 
     }
