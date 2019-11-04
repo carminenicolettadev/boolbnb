@@ -48,5 +48,36 @@
       letter-spacing: 2px;
     }
   }
-
 }
+
+  .login {
+    .box-at-center {
+    margin: 0 auto;
+    }
+    height: 100vh;
+    background-image: url("../img/background-login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .box-login {
+        margin-top: 100px;
+        background: rgba(white, 0.7);
+        .box-top {
+            background: black;
+            padding: 10px 0;
+            color: white;
+            text-align: center;
+        }
+        .box-body {
+            padding: 40px 5px;
+            .btnlogin {
+                background: #ff5b60;
+                border-color: #ff5b60;
+            }
+            .btnforgot {
+                color: black;
+            }
+        }
+    }
+
+  }

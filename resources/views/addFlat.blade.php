@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label>beds</label>
+                  <label>bathroom</label>
                   <input type="number" class="form-control" name="bathroom"  placeholder="bathroom">
                 </div>
 
