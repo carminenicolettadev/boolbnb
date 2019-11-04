@@ -49497,19 +49497,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 function init() {
-  // $("#bottone").click(function(e) {
-  //     e.preventDefault();
-  //     getlatlon();
-  // })
   $('#bottone').click(function (e) {
-    var val1 = $("#lat").val();
-    var val2 = $("#lon").val();
+    var latitude;
+    var longitude;
     e.preventDefault();
     getlatlon(); //perform some operations
-
-    setTimeout(function () {
-      $("#form-flat").submit();
-    }, 300);
   });
 }
 
@@ -49517,9 +49509,6 @@ function getlatlon() {
   var road = $("#road").val();
   var cap = $("#cap").val();
   var civ_num = $("#civ_num").val();
-  console.log(road);
-  console.log(cap);
-  console.log(civ_num);
   var parametri;
   $.ajax({
     url: "https://api.tomtom.com/search/2/structuredGeocode.json",
@@ -49534,12 +49523,14 @@ function getlatlon() {
     },
     success: function success(data) {
       parametri = data["results"][0]["position"];
-      console.log(data);
-      console.log("parametri", parametri);
-      var lat = parametri.lat;
-      var lon = parametri.lon;
-      $("#lat").val(lat);
-      $("#lon").val(lon);
+      latitude = parametri.lat;
+      longitude = parametri.lon;
+      $("#lat").val(latitude);
+      $("#lon").val(longitude);
+
+      if (data) {
+        $("#form-flat").submit();
+      }
     },
     error: function error(err) {
       console.log("err");
@@ -49591,10 +49582,10 @@ $(document).ready(init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/singleFlat.scss */"./resources/sass/singleFlat.scss");
-module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/profile.scss */"./resources/sass/profile.scss");
+__webpack_require__(/*! C:\Users\Utente\Desktop\Airbnb\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Utente\Desktop\Airbnb\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Utente\Desktop\Airbnb\progetto-finale-airbnb\resources\sass\singleFlat.scss */"./resources/sass/singleFlat.scss");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Airbnb\progetto-finale-airbnb\resources\sass\profile.scss */"./resources/sass/profile.scss");
 
 
 /***/ })

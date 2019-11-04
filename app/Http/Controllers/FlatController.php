@@ -165,11 +165,14 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function deleteFlat($id)
-    {
-        $flat = Flat::findOrFail($id);
-
-        $flat -> delete();
-
+    {   
+      $detailsflat = Detail::findOrFail($id);
+      $address = Address::findOrFail($id);
+      $flat = Flat::findOrFail($id);
+      $detailsflat -> delete();
+      $address -> delete();
+      $flat -> delete();
+      return redirect('/');
 
     }
 }

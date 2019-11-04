@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('sdk/map.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
@@ -36,7 +36,7 @@
           @endguest
           <a href="{{ URL::previous() }}" class="mb-5">Back</a>
 
-          {{--  --}}
+          
 
         </div>
       </div>
@@ -72,18 +72,27 @@
 
           <h3 class="section-title">Address</h3>
           <ul class="address">
-            <li><p>{{$addressFlat[0] ->city}}</p></li>
-            <li><p>{{$addressFlat[0] ->road}}</p></li>
-
-            <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}">
-            <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}">
+            <li>
+              <h2>City</h2>
+              <p>{{$addressFlat[0] ->city}}</p>
+            </li>
+            <li>
+              <h2>Road</h2>
+              <p>{{$addressFlat[0] ->road}}</p>
+            </li>
+            <!--input text for get value for script js style=display:none-->
+            <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}"style="display:none">
+            <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}"style="display:none">
+            <input type="text"id="addrss" value="{{$addressFlat[0]->road}}"style="display:none">
+            <input type="text"id="city" value="{{$addressFlat[0]->city}}"style="display:none">
+            <input type="text"id="civ_num"value="{{$addressFlat[0]->civ_num}}"style="display:none">
           </ul>
-          <div class="rate">
+          <!-- <div class="rate">
             <p>{{$singleFlat -> rate }}</p>
-          </div>
+          </div> -->
         </div>
         {{-- mappa  --}}
-        <div id="map" class="mappa map" style=""></div>
+        <div id="map" class="mappa map" ></div>
 
 
       </div>
@@ -97,20 +106,28 @@
 
       $(document).ready(function(){
         console.log("init");
+        //get value for marker info
         var latiVal = $("#lat").val();
         var longVal = $("#lon").val();
+        var address= $("#addrss").val();
+        var city = $("#city").val();
+        var civ_num = $("#civ_num").val();
+        
+        
 
-        console.log(latiVal);
-        console.log(longVal);
-
-
+        //create a map 
         var map = tomtom.L.map('map', {
         key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
         basePath: 'sdk/',
         zoom: 40,
         center: [latiVal, longVal]
         });
-
+        //add marker in position[latiVal,longVal]
+        
+        var marker = tomtom.L.marker([latiVal,longVal]).addTo(map);
+        marker.bindPopup("<b>MY Home</b><br/>" +city + " " +address + " " +
+        "N" + civ_num );
+       
       });
     </script>
 
