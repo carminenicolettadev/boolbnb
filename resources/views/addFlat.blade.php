@@ -24,7 +24,7 @@
 
       <div class="row">
         <div class="col-12">
-          <form  action="{{ route('storeFlat')}}"  method="post" >
+          <form  action="{{ route('storeFlat')}}"  method="post" id="form-flat" >
             @csrf
             @method('POST')
               <div class="form-row">
@@ -95,19 +95,19 @@
                   <input type="text" id="civ_num" class="form-control" name="civ_num"  placeholder="civic number">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group d-none col-md-6">
                   <label>latitudine</label>
                   <input type="text" id="lat" class="form-control" name="lat"  value="">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group d-none col-md-6">
                   <label>longitudine</label>
                   <input type="text" id="lon" class="form-control" name="lon"  value="">
                 </div>
 
 
               </div>
-              <button id="bottone" class="btn btn-dark mt-2">Add cordinate</button>
-              <button  class="btn btn-primary mt-2">Add Flat</button>
+              {{-- <p id="bottone" class="">Add cordinate</p> --}}
+              <button id="bottone" type="submit"  class="btn btn-primary mt-2">Add Flat</button>
           </form>
         </div>
       </div>

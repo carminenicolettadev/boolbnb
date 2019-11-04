@@ -1,9 +1,26 @@
 function init() {
-    $("button#bottone").click(function(e) {
-        e.preventDefault();
-        getlatlon();
-    })
+    // $("#bottone").click(function(e) {
+    //     e.preventDefault();
+    //     getlatlon();
+    // })
+
+
+    $('#bottone').click(function (e) {
+
+            var val1 = $("#lat").val();
+            var val2 = $("#lon").val();
+            e.preventDefault();
+            getlatlon(); //perform some operations
+
+            setTimeout(function(){
+              $("#form-flat").submit();
+            }, 500);
+
+
+
+          });
 }
+
 function getlatlon() {
     var road = $("#road").val();
     var cap = $("#cap").val();

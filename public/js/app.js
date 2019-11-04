@@ -49371,7 +49371,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 //     el: '#app',
 // });
 
-__webpack_require__(/*! ./map */ "./resources/js/map.js"); // require('./showMap');
+__webpack_require__(/*! ./getCordinate */ "./resources/js/getCordinate.js"); // require('./showMap');
 
 /***/ }),
 
@@ -49489,16 +49489,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/map.js":
-/*!*****************************!*\
-  !*** ./resources/js/map.js ***!
-  \*****************************/
+/***/ "./resources/js/getCordinate.js":
+/*!**************************************!*\
+  !*** ./resources/js/getCordinate.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 function init() {
-  $("button#bottone").click(function () {
-    getlatlon();
+  // $("#bottone").click(function(e) {
+  //     e.preventDefault();
+  //     getlatlon();
+  // })
+  $('#bottone').click(function (e) {
+    var val1 = $("#lat").val();
+    var val2 = $("#lon").val();
+    e.preventDefault();
+    getlatlon(); //perform some operations
+
+    setTimeout(function () {
+      $("#form-flat").submit();
+    }, 300);
   });
 }
 
