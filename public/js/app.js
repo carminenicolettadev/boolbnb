@@ -48030,7 +48030,7 @@ function isDirectChildOfTemplateFor (node) {
   }
   return false
 }
-<<<<<<< HEAD
+
 
 /*  */
 
@@ -48258,7 +48258,6 @@ function genElement (el, state) {
     el.pre = el.pre || el.parent.pre;
   }
 
-=======
 
 /*  */
 
@@ -48486,7 +48485,6 @@ function genElement (el, state) {
     el.pre = el.pre || el.parent.pre;
   }
 
->>>>>>> master
   if (el.staticRoot && !el.staticProcessed) {
     return genStatic(el, state)
   } else if (el.once && !el.onceProcessed) {
@@ -48979,7 +48977,7 @@ function genProps (props) {
       dynamicProps += (prop.name) + "," + value + ",";
     } else {
       staticProps += "\"" + (prop.name) + "\":" + value + ",";
-<<<<<<< HEAD
+
     }
   }
   staticProps = "{" + (staticProps.slice(0, -1)) + "}";
@@ -49041,7 +49039,6 @@ function checkNode (node, warn) {
         }
       }
     }
-=======
     }
   }
   staticProps = "{" + (staticProps.slice(0, -1)) + "}";
@@ -49103,7 +49100,6 @@ function checkNode (node, warn) {
         }
       }
     }
->>>>>>> master
     if (node.children) {
       for (var i = 0; i < node.children.length; i++) {
         checkNode(node.children[i], warn);
@@ -49822,15 +49818,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
+
 __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/singleFlat.scss */"./resources/sass/singleFlat.scss");
 module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/profile.scss */"./resources/sass/profile.scss");
->>>>>>> master
 
 
 /***/ })
