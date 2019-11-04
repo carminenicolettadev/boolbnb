@@ -23,8 +23,8 @@ class CreateAddressesTable extends Migration
             $table->string('road');
             $table->string('civ_num');
             $table->string('cap');
-            $table->string('lati');
-            $table->string('long');
+            $table->string('lat');
+            $table->string('lon');
             $table->timestamps();
         });
     }

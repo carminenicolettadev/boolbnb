@@ -14,7 +14,7 @@ $factory->define(Address::class, function (Faker $faker) {
       'road'=> $faker -> streetName,
       'civ_num'=> rand(1, 300) ,
       'cap'=> rand(1000, 4000) ,
-      'lati'=> $faker -> latitude(-90, 90),
-      'long'=> $faker -> longitude( -180, 180),
+      'lat'=> $faker -> latitude(-90, 90),
+      'lon'=> $faker -> longitude( -180, 180),
     ];
 });

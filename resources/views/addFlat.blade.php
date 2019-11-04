@@ -6,6 +6,9 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <script src="{{ asset('js/app.js') }}" charset="utf-8"></script>
+
+
   </head>
   <body>
 
@@ -69,36 +72,47 @@
 
                 <div class="form-group col-md-6">
                   <label>state</label>
-                  <input type="text" class="form-control" name="state"  placeholder="State">
+                  <input type="text" id="state" class="form-control" name="state"  placeholder="State">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>city</label>
-                  <input type="text" class="form-control" name="city"  placeholder="city">
+                  <input type="text" id="city" class="form-control" name="city"  placeholder="city">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>CAP</label>
-                  <input type="number" class="form-control" name="cap"  placeholder="CAP">
+                  <input type="number" id="cap" class="form-control" name="cap"  placeholder="CAP">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>road</label>
-                  <input type="text" class="form-control" name="road"  placeholder="road">
+                  <input type="text" id="road" class="form-control" name="road"  placeholder="road">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>civic number</label>
-                  <input type="text" class="form-control" name="civ_num"  placeholder="civic number">
+                  <input type="text" id="civ_num" class="form-control" name="civ_num"  placeholder="civic number">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>latitudine</label>
+                  <input type="text" id="lat" class="form-control" name="lat"  value="">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>longitudine</label>
+                  <input type="text" id="lon" class="form-control" name="lon"  value="">
                 </div>
 
 
               </div>
-            <button type="submit" class="btn btn-dark mt-2">Add Post</button>
+              <button id="bottone" class="btn btn-dark mt-2">Add cordinate</button>
+              <button  type="submit" class="btn btn-primary mt-2">Add Flat</button>
           </form>
         </div>
       </div>
     </div>
+
 
 
 

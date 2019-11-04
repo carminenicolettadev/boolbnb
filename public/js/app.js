@@ -48031,234 +48031,6 @@ function isDirectChildOfTemplateFor (node) {
   return false
 }
 
-
-/*  */
-
-var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
-var fnInvokeRE = /\([^)]*?\);*$/;
-var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
-
-// KeyboardEvent.keyCode aliases
-var keyCodes = {
-  esc: 27,
-  tab: 9,
-  enter: 13,
-  space: 32,
-  up: 38,
-  left: 37,
-  right: 39,
-  down: 40,
-  'delete': [8, 46]
-};
-
-// KeyboardEvent.key aliases
-var keyNames = {
-  // #7880: IE11 and Edge use `Esc` for Escape key name.
-  esc: ['Esc', 'Escape'],
-  tab: 'Tab',
-  enter: 'Enter',
-  // #9112: IE11 uses `Spacebar` for Space key name.
-  space: [' ', 'Spacebar'],
-  // #7806: IE11 uses key names without `Arrow` prefix for arrow keys.
-  up: ['Up', 'ArrowUp'],
-  left: ['Left', 'ArrowLeft'],
-  right: ['Right', 'ArrowRight'],
-  down: ['Down', 'ArrowDown'],
-  // #9112: IE11 uses `Del` for Delete key name.
-  'delete': ['Backspace', 'Delete', 'Del']
-};
-
-// #4868: modifiers that prevent the execution of the listener
-// need to explicitly return null so that we can determine whether to remove
-// the listener for .once
-var genGuard = function (condition) { return ("if(" + condition + ")return null;"); };
-
-var modifierCode = {
-  stop: '$event.stopPropagation();',
-  prevent: '$event.preventDefault();',
-  self: genGuard("$event.target !== $event.currentTarget"),
-  ctrl: genGuard("!$event.ctrlKey"),
-  shift: genGuard("!$event.shiftKey"),
-  alt: genGuard("!$event.altKey"),
-  meta: genGuard("!$event.metaKey"),
-  left: genGuard("'button' in $event && $event.button !== 0"),
-  middle: genGuard("'button' in $event && $event.button !== 1"),
-  right: genGuard("'button' in $event && $event.button !== 2")
-};
-
-function genHandlers (
-  events,
-  isNative
-) {
-  var prefix = isNative ? 'nativeOn:' : 'on:';
-  var staticHandlers = "";
-  var dynamicHandlers = "";
-  for (var name in events) {
-    var handlerCode = genHandler(events[name]);
-    if (events[name] && events[name].dynamic) {
-      dynamicHandlers += name + "," + handlerCode + ",";
-    } else {
-      staticHandlers += "\"" + name + "\":" + handlerCode + ",";
-    }
-  }
-  staticHandlers = "{" + (staticHandlers.slice(0, -1)) + "}";
-  if (dynamicHandlers) {
-    return prefix + "_d(" + staticHandlers + ",[" + (dynamicHandlers.slice(0, -1)) + "])"
-  } else {
-    return prefix + staticHandlers
-  }
-}
-
-function genHandler (handler) {
-  if (!handler) {
-    return 'function(){}'
-  }
-
-  if (Array.isArray(handler)) {
-    return ("[" + (handler.map(function (handler) { return genHandler(handler); }).join(',')) + "]")
-  }
-
-  var isMethodPath = simplePathRE.test(handler.value);
-  var isFunctionExpression = fnExpRE.test(handler.value);
-  var isFunctionInvocation = simplePathRE.test(handler.value.replace(fnInvokeRE, ''));
-
-  if (!handler.modifiers) {
-    if (isMethodPath || isFunctionExpression) {
-      return handler.value
-    }
-    return ("function($event){" + (isFunctionInvocation ? ("return " + (handler.value)) : handler.value) + "}") // inline statement
-  } else {
-    var code = '';
-    var genModifierCode = '';
-    var keys = [];
-    for (var key in handler.modifiers) {
-      if (modifierCode[key]) {
-        genModifierCode += modifierCode[key];
-        // left/right
-        if (keyCodes[key]) {
-          keys.push(key);
-        }
-      } else if (key === 'exact') {
-        var modifiers = (handler.modifiers);
-        genModifierCode += genGuard(
-          ['ctrl', 'shift', 'alt', 'meta']
-            .filter(function (keyModifier) { return !modifiers[keyModifier]; })
-            .map(function (keyModifier) { return ("$event." + keyModifier + "Key"); })
-            .join('||')
-        );
-      } else {
-        keys.push(key);
-      }
-    }
-    if (keys.length) {
-      code += genKeyFilter(keys);
-    }
-    // Make sure modifiers like prevent and stop get executed after key filtering
-    if (genModifierCode) {
-      code += genModifierCode;
-    }
-    var handlerCode = isMethodPath
-      ? ("return " + (handler.value) + "($event)")
-      : isFunctionExpression
-        ? ("return (" + (handler.value) + ")($event)")
-        : isFunctionInvocation
-          ? ("return " + (handler.value))
-          : handler.value;
-    return ("function($event){" + code + handlerCode + "}")
-  }
-}
-
-function genKeyFilter (keys) {
-  return (
-    // make sure the key filters only apply to KeyboardEvents
-    // #9441: can't use 'keyCode' in $event because Chrome autofill fires fake
-    // key events that do not have keyCode property...
-    "if(!$event.type.indexOf('key')&&" +
-    (keys.map(genFilterCode).join('&&')) + ")return null;"
-  )
-}
-
-function genFilterCode (key) {
-  var keyVal = parseInt(key, 10);
-  if (keyVal) {
-    return ("$event.keyCode!==" + keyVal)
-  }
-  var keyCode = keyCodes[key];
-  var keyName = keyNames[key];
-  return (
-    "_k($event.keyCode," +
-    (JSON.stringify(key)) + "," +
-    (JSON.stringify(keyCode)) + "," +
-    "$event.key," +
-    "" + (JSON.stringify(keyName)) +
-    ")"
-  )
-}
-
-/*  */
-
-function on (el, dir) {
-  if (dir.modifiers) {
-    warn("v-on without argument does not support modifiers.");
-  }
-  el.wrapListeners = function (code) { return ("_g(" + code + "," + (dir.value) + ")"); };
-}
-
-/*  */
-
-function bind$1 (el, dir) {
-  el.wrapData = function (code) {
-    return ("_b(" + code + ",'" + (el.tag) + "'," + (dir.value) + "," + (dir.modifiers && dir.modifiers.prop ? 'true' : 'false') + (dir.modifiers && dir.modifiers.sync ? ',true' : '') + ")")
-  };
-}
-
-/*  */
-
-var baseDirectives = {
-  on: on,
-  bind: bind$1,
-  cloak: noop
-};
-
-/*  */
-
-
-
-
-
-var CodegenState = function CodegenState (options) {
-  this.options = options;
-  this.warn = options.warn || baseWarn;
-  this.transforms = pluckModuleFunction(options.modules, 'transformCode');
-  this.dataGenFns = pluckModuleFunction(options.modules, 'genData');
-  this.directives = extend(extend({}, baseDirectives), options.directives);
-  var isReservedTag = options.isReservedTag || no;
-  this.maybeComponent = function (el) { return !!el.component || !isReservedTag(el.tag); };
-  this.onceId = 0;
-  this.staticRenderFns = [];
-  this.pre = false;
-};
-
-
-
-function generate (
-  ast,
-  options
-) {
-  var state = new CodegenState(options);
-  var code = ast ? genElement(ast, state) : '_c("div")';
-  return {
-    render: ("with(this){return " + code + "}"),
-    staticRenderFns: state.staticRenderFns
-  }
-}
-
-function genElement (el, state) {
-  if (el.parent) {
-    el.pre = el.pre || el.parent.pre;
-  }
-
-
 /*  */
 
 var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
@@ -48977,68 +48749,6 @@ function genProps (props) {
       dynamicProps += (prop.name) + "," + value + ",";
     } else {
       staticProps += "\"" + (prop.name) + "\":" + value + ",";
-
-    }
-  }
-  staticProps = "{" + (staticProps.slice(0, -1)) + "}";
-  if (dynamicProps) {
-    return ("_d(" + staticProps + ",[" + (dynamicProps.slice(0, -1)) + "])")
-  } else {
-    return staticProps
-  }
-}
-
-// #3895, #4268
-function transformSpecialNewlines (text) {
-  return text
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029')
-}
-
-/*  */
-
-
-
-// these keywords should not appear inside expressions, but operators like
-// typeof, instanceof and in are allowed
-var prohibitedKeywordRE = new RegExp('\\b' + (
-  'do,if,for,let,new,try,var,case,else,with,await,break,catch,class,const,' +
-  'super,throw,while,yield,delete,export,import,return,switch,default,' +
-  'extends,finally,continue,debugger,function,arguments'
-).split(',').join('\\b|\\b') + '\\b');
-
-// these unary operators should not be used as property/method names
-var unaryOperatorsRE = new RegExp('\\b' + (
-  'delete,typeof,void'
-).split(',').join('\\s*\\([^\\)]*\\)|\\b') + '\\s*\\([^\\)]*\\)');
-
-// strip strings in expressions
-var stripStringRE = /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`/g;
-
-// detect problematic expressions in a template
-function detectErrors (ast, warn) {
-  if (ast) {
-    checkNode(ast, warn);
-  }
-}
-
-function checkNode (node, warn) {
-  if (node.type === 1) {
-    for (var name in node.attrsMap) {
-      if (dirRE.test(name)) {
-        var value = node.attrsMap[name];
-        if (value) {
-          var range = node.rawAttrsMap[name];
-          if (name === 'v-for') {
-            checkFor(node, ("v-for=\"" + value + "\""), warn, range);
-          } else if (onRE.test(name)) {
-            checkEvent(value, (name + "=\"" + value + "\""), warn, range);
-          } else {
-            checkExpression(value, (name + "=\"" + value + "\""), warn, range);
-          }
-        }
-      }
-    }
     }
   }
   staticProps = "{" + (staticProps.slice(0, -1)) + "}";
@@ -49657,10 +49367,11 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+// const app = new Vue({
+//     el: '#app',
+// });
 
-var app = new Vue({
-  el: '#app'
-});
+__webpack_require__(/*! ./map */ "./resources/js/map.js");
 
 /***/ }),
 
@@ -49778,6 +49489,58 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/map.js":
+/*!*****************************!*\
+  !*** ./resources/js/map.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function init() {
+  $("button#bottone").click(function (e) {
+    e.preventDefault();
+    getlatlon();
+  });
+}
+
+function getlatlon() {
+  var road = $("#road").val();
+  var cap = $("#cap").val();
+  var civ_num = $("#civ_num").val();
+  console.log(road);
+  console.log(cap);
+  console.log(civ_num);
+  var parametri;
+  $.ajax({
+    url: "https://api.tomtom.com/search/2/structuredGeocode.json",
+    method: "GET",
+    data: {
+      countryCode: "ITA",
+      limit: 1,
+      streetNumber: civ_num,
+      streetName: road,
+      postalCode: cap,
+      key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy"
+    },
+    success: function success(data) {
+      parametri = data["results"][0]["position"];
+      console.log(data);
+      console.log("parametri", parametri);
+      var lat = parametri.lat;
+      var lon = parametri.lon;
+      $("#lat").val(lat);
+      $("#lon").val(lon);
+    },
+    error: function error(err) {
+      console.log("err");
+    }
+  });
+}
+
+$(document).ready(init);
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49818,9 +49581,6 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/singleFlat.scss */"./resources/sass/singleFlat.scss");
