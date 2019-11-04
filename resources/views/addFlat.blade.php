@@ -106,7 +106,7 @@
 
 
               </div>
-              {{-- <p id="bottone" class="">Add cordinate</p> --}}
+              
               <button id="bottone" type="submit"  class="btn btn-primary mt-2">Add Flat</button>
           </form>
         </div>
