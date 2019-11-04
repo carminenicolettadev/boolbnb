@@ -4,9 +4,13 @@
     <meta charset="utf-8">
     <title></title>
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('sdk/map.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/singleFlat.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ asset('sdk/tomtom.min.js')}}"></script>
+
 
 
   </head>
@@ -63,6 +67,9 @@
           <ul class="address">
             <li><p>{{$addressFlat[0] ->city}}</p></li>
             <li><p>{{$addressFlat[0] ->road}}</p></li>
+
+            <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}">
+            <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}">
           </ul>
           <div class="rate">
             <p>{{$singleFlat -> rate }}</p>
@@ -70,6 +77,33 @@
         </div>
       </div>
     </div>
+
+    <div id="map" class="mappa map" style="">
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+      $(document).ready(function(){
+        console.log("init");
+        var latiVal = $("#lat").val();
+        var longVal = $("#lon").val();
+
+        console.log(latiVal);
+        console.log(longVal);
+
+
+        var map = tomtom.L.map('map', {
+        key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
+        basePath: 'sdk/',
+        zoom: 40,
+        center: [latiVal, longVal]
+        });
+
+      });
+    </script>
 
 
   </body>

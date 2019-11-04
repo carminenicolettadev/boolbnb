@@ -49371,7 +49371,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 //     el: '#app',
 // });
 
-__webpack_require__(/*! ./map */ "./resources/js/map.js");
+__webpack_require__(/*! ./map */ "./resources/js/map.js"); // require('./showMap');
 
 /***/ }),
 
@@ -49497,8 +49497,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 function init() {
-  $("button#bottone").click(function (e) {
-    e.preventDefault();
+  $("button#bottone").click(function () {
     getlatlon();
   });
 }

@@ -43,5 +43,4 @@ function getlatlon() {
 
 
 
-
 $(document).ready(init);

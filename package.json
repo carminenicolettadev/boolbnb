@@ -22,5 +22,9 @@
         "sass-loader": "7.*",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "@tomtom-international/web-sdk-maps": "^5.38.0",
+        "@tomtom-international/web-sdk-services": "^5.38.0"
     }
 }
