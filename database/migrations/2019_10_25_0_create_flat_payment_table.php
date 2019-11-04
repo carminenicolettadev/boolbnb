@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFlatPaymentsTable extends Migration
+class CreateFlatPaymentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFlatPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('flat_payments', function (Blueprint $table) {
+        Schema::create('flat_payment', function (Blueprint $table) {
             $table->bigIncrements('id');
 
 
@@ -27,6 +27,6 @@ class CreateFlatPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flat_payments');
+        Schema::dropIfExists('flat_payment');
     }
 }

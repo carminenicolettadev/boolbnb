@@ -57,7 +57,7 @@ class AddForeignKey extends Migration
                -> references('id')//colonna
                -> on('services');//tabella
       });
-      Schema::table('flat_payments', function (Blueprint $table) {
+      Schema::table('flat_payment', function (Blueprint $table) {
 
         $table -> bigInteger('flat_id') -> unsigned() -> index();//tabella riferimento
         $table -> foreign('flat_id', 'relationFlatPayment')
@@ -118,7 +118,7 @@ class AddForeignKey extends Migration
         $table -> dropColumn('service_id');
 
       });
-      Schema::table('flat_payments', function (Blueprint $table) {
+      Schema::table('flat_payment', function (Blueprint $table) {
 
         $table -> dropForeign('relationFlatPayment');
         $table -> dropColumn('flat_id');
