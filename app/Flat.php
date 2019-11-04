@@ -21,7 +21,7 @@ class Flat extends Model
       return $this->hasOne(Detail::class);
   }
   public function mesages(){
-    
+
     return $this-> hasMany(Message::class);
   }
 
@@ -34,5 +34,10 @@ class Flat extends Model
 
       return $this->belongsToMany(Service::class);
   }
+  public function payments() {
+
+      return $this->belongsToMany(Payment::class);
+  }
+
 
 }

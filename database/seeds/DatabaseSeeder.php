@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ->call(ServicesSeeder::class)
             ->call(DetailSeeder::class)
             ->call(AddressesSeeder::class)
-            ->call(MessageSeeder::class);
+            ->call(MessageSeeder::class)
+            ->call(PaymentsSeeder::class);
     }
 }
