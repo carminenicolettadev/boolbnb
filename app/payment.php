@@ -14,6 +14,6 @@ class Payment extends Model
 
   public function flats() {
 
-      return $this -> belongsToMany(Payment::class);
+      return $this -> belongsToMany(Flat::class);
   }
 }
