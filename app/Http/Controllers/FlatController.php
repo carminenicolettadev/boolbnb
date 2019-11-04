@@ -90,8 +90,8 @@ class FlatController extends Controller
         'cap'=> 'nullable',
         'num_civ'=> 'nullable',
         'flat_id'=> 'nullable',
-        'lati'=> 'nullable',
-        'long'=> 'nullable',
+        'lat'=> 'nullable',
+        'lon'=> 'nullable',
 
       ]);
 
@@ -104,8 +104,8 @@ class FlatController extends Controller
       $address ->cap = $request ->cap;
       $address ->civ_num = $request ->civ_num;
       $address ->flat_id = $flat_id;
-      $address ->lati = "-3.56";
-      $address ->long = "0.45";
+      $address ->lat = $request ->lat;
+      $address ->lon = $request ->lon;
 
       // dd($detail);
       $address ->save();
