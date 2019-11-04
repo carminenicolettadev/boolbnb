@@ -1,0 +1,70 @@
+*::first-letter {
+  text-transform: capitalize;
+}
+
+.hero {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.intro {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.intro h1 {
+  font-size: 4rem;
+  margin-top: 20px;
+  font-weight: normal;
+}
+
+.intro p {
+  font-size: 2rem;
+  font-weight: lighter;
+  color: #6a6a6a;
+}
+
+.section-title {
+  font-weight: lighter;
+}
+
+.details,
+.address {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  list-style: none;
+}
+
+.details li,
+.address li {
+  float: left;
+  margin-right: 70px;
+}
+
+.details li p,
+.address li p {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.details li p:nth-child(2),
+.address li p:nth-child(2) {
+  font-size: 3rem;
+  font-weight: bolder;
+  color: #ff5b60;
+}
+
+.details li p:nth-child(2) span,
+.address li p:nth-child(2) span {
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+

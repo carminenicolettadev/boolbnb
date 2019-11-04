@@ -3,73 +3,70 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+
 
   </head>
   <body>
     <div class="profile-container">
       <div class="sidebar">
+        <h3>Users</h3>
         <ul>
-          <li><h1>id : {{Auth::user()->id}}</h1></li>
-          <li><h1>name : {{Auth::user()->name}}</h1></li>
-          <li><h1>surname : {{Auth::user()->surname}}</h1></li>
-          <li><h1>email : {{Auth::user()->email}}</h1></li>
+          <li>
+            <p>name</p>
+            <p>{{Auth::user()->name}} {{Auth::user()->surname}}</p>
+          </li>
+          <li>
+            <p>email</p>
+            <p>{{Auth::user()->email}}</p>
+          </li>
         </ul>
-        <a href="{{ route('addFlat')}}">Add Flat</a><br>
-        <a href="{{ URL::previous() }}" class="mb-5">Back</a>
+        <div class="btn-sidebar">
+          <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
+          <a href="/" class="mb-5">Back</a>
+        </div>
       </div>
 
       <div class="content">
+        <h1>My flats</h1>
+        <div class="flats-list">
+          @foreach ($userFlat as $flat)
+            <a href="{{route ('showFlat', $flat ->id)}}" class="box">
+              <img src="https://source.unsplash.com/450x300/?building">
+              <div class="box-sections">
+                  {{-- $arrDetail = array con dentro un oggetto --}}
+                  @foreach ($arrDetail as $key => $details)
+                    @if ($details != "[]" && $details[0] ->flat_id == $flat -> id )
+                      {{-- <h1>flat_id : {{$details[0] ->flat_id}}</h1> --}}
+                      <h1 class="flat-title">{{$details[0] ->title}}</h1>
+                      <div class="details">
+                        <p>rooms : {{$details[0] ->bed}}</p>
+                        <p>bed : {{$details[0] ->bed}}</p>
+                      </div>
 
-        @foreach ($userFlat as $flat)
-          <div class="box">
-            <img src="https://source.unsplash.com/450x300/?house,flat">
-            <div class="box-sections">
-              <div class="details-section">
-                <h1>id user : {{$flat -> user_id}}</h1>
-                {{-- $arrDetail = array con dentro un oggetto --}}
-                @foreach ($arrDetail as $key => $details)
-                  @if ($details != "[]" && $details[0] ->flat_id == $flat -> id )
-                    <p>flat_id : {{$details[0] ->flat_id}}</p>
-                    <p>title : {{$details[0] ->title}}</p>
-                    <p>bed : {{$details[0] ->bed}}</p>
-                    <p>bathroom : {{$details[0] ->bathroom}}</p>
-                  @endif
-                @endforeach
+                    @endif
+                  @endforeach
+                  {{-- $arrDetail = array con dentro un oggetto --}}
+
+                  <div class="address-section">
+                    @foreach ($arrAddress as $key => $address)
+                      @if ($address != "[]" && $address[0] ->flat_id == $flat -> id )
+                        <p>{{$address[0] ->city}}</p>
+                      @endif
+                    @endforeach
+                  </div>
               </div>
-
-              <div class="address-section">
-                {{-- $arrDetail = array con dentro un oggetto --}}
-                @foreach ($arrAddress as $key => $address)
-                  @if ($address != "[]" && $address[0] ->flat_id == $flat -> id )
-                    <p>state : {{$address[0] ->state}}</p>
-                    <p>city : {{$address[0] ->city}}</p>
-                    <p>road : {{$address[0] ->road}}</p>
-                    <p>civic number : {{$address[0] ->civ_num}}</p>
-                  @endif
-                @endforeach
+              <div class="rate">
+                <p>{{$flat -> rate }}</p>
               </div>
-            </div>
-          </div>
-        @endforeach
-
-
-
-        {{-- <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div> --}}
+            </a>
+          @endforeach
+        </div>
       </div>
     </div>
 
-
-
-{{--
-    @if (!empty($userFlat))
-      vuoto
-    @endif --}}
 
 
 

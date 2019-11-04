@@ -87,6 +87,7 @@ class FlatController extends Controller
         'state' => 'nullable',
         'city'=> 'nullable',
         'road'=> 'nullable',
+        'cap'=> 'nullable',
         'num_civ'=> 'nullable',
         'flat_id'=> 'nullable',
         'lati'=> 'nullable',
@@ -100,6 +101,7 @@ class FlatController extends Controller
       $address ->state = $request ->state;
       $address ->city = $request ->city;
       $address ->road = $request ->road;
+      $address ->cap = $request ->cap;
       $address ->civ_num = $request ->civ_num;
       $address ->flat_id = $flat_id;
       $address ->lati = "-3.56";
@@ -118,9 +120,19 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showFlat($id)
     {
-        //
+        $singleFlat = Flat::findOrFail($id);
+
+        $detailFlat = Detail::where('flat_id', $id)->get();
+
+        $addressFlat = Address::where('flat_id', $id)->get();
+
+
+        return view('singleFlat')->with('singleFlat', $singleFlat)
+                                  ->with('detailFlat', $detailFlat)
+                                  ->with('addressFlat', $addressFlat);
+
     }
 
     /**

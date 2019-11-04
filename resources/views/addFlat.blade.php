@@ -78,6 +78,11 @@
                 </div>
 
                 <div class="form-group col-md-6">
+                  <label>CAP</label>
+                  <input type="number" class="form-control" name="cap"  placeholder="CAP">
+                </div>
+
+                <div class="form-group col-md-6">
                   <label>road</label>
                   <input type="text" class="form-control" name="road"  placeholder="road">
                 </div>
