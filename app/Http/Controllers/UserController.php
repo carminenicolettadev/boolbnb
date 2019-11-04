@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Flat;
+use App\Detail;
+use App\Address;
+
 
 use Illuminate\Http\Request;
 
@@ -15,18 +19,33 @@ class UserController extends Controller
     public function showProfile($id)
     {
         $user = User::findOrFail($id);
-        return view('profile', compact('user'));
+        $userFlat = Flat::where('user_id', $id)->get();
+
+        $arrDetail = [];
+        $arrAddress = [];
+
+
+        foreach ($userFlat as $flat) {
+            $detailFlat = Detail::where('flat_id', $flat->id)->get();
+            array_push($arrDetail, $detailFlat);
+        }
+
+        foreach ($userFlat as $address) {
+            $addressFlat = Address::where('flat_id', $address->id)->get();
+            array_push($arrAddress, $addressFlat);
+        }
+
+
+        // dd($arrDetail);
+
+        return view('profile')->with('user', $user)
+                              ->with('arrDetail', $arrDetail)
+                              ->with('arrAddress', $arrAddress)
+                              ->with('userFlat', $userFlat);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.

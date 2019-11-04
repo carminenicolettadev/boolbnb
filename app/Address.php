@@ -11,6 +11,7 @@ class Address extends Model
       'city',
       'road',
       'civ_num',
+      'cap',
       'lati',
       'long',
       'flat_id'

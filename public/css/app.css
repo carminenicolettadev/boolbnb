@@ -11160,6 +11160,10 @@ a.text-dark:focus {
   background-size: cover;
 }
 
+.login .box-at-center {
+  margin: 0 auto;
+}
+
 .login .box-login {
   margin-top: 100px;
   background: rgba(255, 255, 255, 0.7);
