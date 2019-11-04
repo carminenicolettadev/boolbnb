@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Flat;
 use App\Address;
+use App\Service;
+use App\Detail;
+
 
 
 class FlatController extends Controller
@@ -29,10 +32,11 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+     public function addFlat()
+     {
+         $services = Service::all();
+         return view('addFlat', compact('services'));
+     }
 
     /**
      * Store a newly created resource in storage.
@@ -40,9 +44,74 @@ class FlatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeFlat(Request $request)
     {
-        //
+      $dataTableFlats = $request -> validate([
+        'views' => 'nullable',
+        'rate'=> 'nullable',
+        'user_id'=> 'nullable',
+      ]);
+
+      $flat = Flat::create($dataTableFlats);
+      // prendo l id del flat appena creato
+      $flat_id = $flat -> id;
+
+
+      $dataTableDetails = $request -> validate([
+        'title' => 'nullable',
+        'num_room'=> 'nullable',
+        'bed'=> 'nullable',
+        'bathroom'=> 'nullable',
+        'mq'=> 'nullable',
+        'img'=> 'nullable',
+        'flat_id' => 'nullable',
+
+      ]);
+
+      // creo un nuovo detail e associo ad ogni campo
+      //il valore della request che ha i dati del form
+      $detail = new Detail;
+      $detail ->title = $request ->title;
+      $detail ->num_room = $request ->num_room;
+      $detail ->bed = $request ->bed;
+      $detail ->bathroom = $request ->bathroom;
+      $detail ->mq = $request ->mq;
+      $detail ->img = $request ->img;
+      $detail ->flat_id = $flat_id;
+
+      // dd($detail);
+      $detail ->save();
+
+
+      $dataTableAddresses = $request -> validate([
+        'state' => 'nullable',
+        'city'=> 'nullable',
+        'road'=> 'nullable',
+        'cap'=> 'nullable',
+        'num_civ'=> 'nullable',
+        'flat_id'=> 'nullable',
+        'lati'=> 'nullable',
+        'long'=> 'nullable',
+
+      ]);
+
+      // creo un nuovo detail e associo ad ogni campo
+      //il valore della request che ha i dati del form
+      $address = new Address;
+      $address ->state = $request ->state;
+      $address ->city = $request ->city;
+      $address ->road = $request ->road;
+      $address ->cap = $request ->cap;
+      $address ->civ_num = $request ->civ_num;
+      $address ->flat_id = $flat_id;
+      $address ->lati = "-3.56";
+      $address ->long = "0.45";
+
+      // dd($detail);
+      $address ->save();
+
+
+      return redirect('/');
     }
 
     /**
@@ -51,9 +120,19 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showFlat($id)
     {
-        //
+        $singleFlat = Flat::findOrFail($id);
+
+        $detailFlat = Detail::where('flat_id', $id)->get();
+
+        $addressFlat = Address::where('flat_id', $id)->get();
+
+
+        return view('singleFlat')->with('singleFlat', $singleFlat)
+                                  ->with('detailFlat', $detailFlat)
+                                  ->with('addressFlat', $addressFlat);
+
     }
 
     /**
