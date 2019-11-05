@@ -39,20 +39,22 @@
     }
     a{
       margin: auto;
-      display: block;
-      width:100px;
+      display: inline-block;
+      width:140px;
       background: white;
       color:black;
       padding:15px 28px;
       margin-top: 40px;
       text-decoration: none;
       text-align: center;
+      margin-right: 20px;
     }
   </style>
   <body>
     <div class="">
       <h1>ARE YOU LOST?</h1>
       <a href="/">Go Home</a>
+      <a href="{{ route('profile', Auth::user()->id ) }}">Go to your profile</a>
     </div>
 
   </body>
