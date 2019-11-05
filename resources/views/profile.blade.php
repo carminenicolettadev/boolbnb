@@ -7,7 +7,6 @@
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
-
   </head>
   <body>
     <div class="profile-container">
@@ -63,6 +62,9 @@
               </div>
             </a>
           @endforeach
+        </div>
+        <div class="paginate">
+          {{ $userFlat -> links()}}
         </div>
       </div>
     </div>
