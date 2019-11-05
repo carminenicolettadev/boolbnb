@@ -11,8 +11,6 @@
     <script src="{{ asset('js/app.js')}}" charset="utf-8"></script>
     <script type="text/javascript" src="{{ asset('sdk/tomtom.min.js')}}"></script>
 
-
-
   </head>
   <body>
     <div class="profile-container">
@@ -29,20 +27,18 @@
           </li>
         </ul>
         <div class="btn-sidebar">
-          <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
+          @if(Request::url() === 'profile/*')
+              <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
+          @endif
           @guest
             @else
-            <a class="btn-delete" href="">update Flat</a><br>
+            <a class="btn-update" href="{{ route('editFlat', $singleFlat ->id)}}">Update Flat</a><br>
             <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat ->id)}}">Delete Flat</a><br>
-
-
           @endguest
           <a href="{{ URL::previous() }}" class="mb-5">Back</a>
-
-
-
         </div>
       </div>
+
 
       <div class="content">
         <div class="hero">
