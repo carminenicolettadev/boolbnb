@@ -1,8 +1,7 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return redirect('/homepage');});
+Route::get('/homepage', function () { return view('welcome');});
 
 Auth::routes();
 
