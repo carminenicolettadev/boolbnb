@@ -111,8 +111,9 @@ class FlatController extends Controller
       // dd($detail);
       $address ->save();
 
+      $log = $flat->user_id;
 
-      return redirect('/');
+      return redirect("profile/$log");
     }
 
     /**

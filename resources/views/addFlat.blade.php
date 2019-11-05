@@ -8,7 +8,6 @@
 
     <script src="{{ asset('js/app.js') }}" charset="utf-8"></script>
 
-
   </head>
   <body>
 
@@ -19,9 +18,6 @@
         </div>
       </div>
 
-
-
-
       <div class="row">
         <div class="col-12">
           <form  action="{{ route('storeFlat')}}"  method="post" id="form-flat" >
@@ -30,39 +26,39 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Title</label>
-                  <input type="text" class="form-control" name="title"  placeholder="title">
+                  <input type="text" class="form-control" name="title"  required placeholder="title">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>rooms</label>
-                  <input type="number" class="form-control" name="num_room"  placeholder="room number">
+                  <input type="number" class="form-control" name="num_room" required  placeholder="room number">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>beds</label>
-                  <input type="number" class="form-control" name="bed"  placeholder="beds">
+                  <input type="number" class="form-control" name="bed" required  placeholder="beds">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>bathroom</label>
-                  <input type="number" class="form-control" name="bathroom"  placeholder="bathroom">
+                  <input type="number" class="form-control" name="bathroom" required  placeholder="bathroom">
                 </div>
 
 
                 <div class="form-group col-md-6">
                   <label>space area</label>
-                  <input type="number" class="form-control" name="mq"  placeholder="space area">
+                  <input type="number" class="form-control" name="mq" required  placeholder="space area">
                 </div>
 
 
                 <div class="form-group col-md-6">
                   <label>img</label>
-                  <input type="text" class="form-control" name="img"  placeholder="img">
+                  <input type="text" class="form-control" name="img" required  placeholder="img">
                 </div>
 
                 <div class="form-group col-md-6 d-none">
                   <label>user_id</label>
-                  <input type="text" class="form-control" name="user_id"  value="{{Auth::user()->id}}">
+                  <input type="text" class="form-control" name="user_id" required  value="{{Auth::user()->id}}">
                 </div>
 
                 {{-- Address section  --}}
@@ -72,27 +68,27 @@
 
                 <div class="form-group col-md-6">
                   <label>state</label>
-                  <input type="text" id="state" class="form-control" name="state"  placeholder="State">
+                  <input type="text" id="state" class="form-control" name="state" required  placeholder="State">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>city</label>
-                  <input type="text" id="city" class="form-control" name="city"  placeholder="city">
+                  <input type="text" id="city" class="form-control" name="city" required  placeholder="city">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>CAP</label>
-                  <input type="number" id="cap" class="form-control" name="cap"  placeholder="CAP">
+                  <input type="number" id="cap" class="form-control" name="cap" required  placeholder="CAP">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>road</label>
-                  <input type="text" id="road" class="form-control" name="road"  placeholder="road">
+                  <input type="text" id="road" class="form-control" name="road" required  placeholder="road">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>civic number</label>
-                  <input type="text" id="civ_num" class="form-control" name="civ_num"  placeholder="civic number">
+                  <input type="text" id="civ_num" class="form-control" name="civ_num" required  placeholder="civic number">
                 </div>
 
                 <div class="form-group d-none col-md-6">
@@ -106,8 +102,8 @@
 
 
               </div>
-              
-              <button id="bottone" type="submit"  class="btn btn-primary mt-2">Add Flat</button>
+
+              <button id="bottone" type="submit"  class="btn btn-add mt-2">Add Flat</button>
           </form>
         </div>
       </div>

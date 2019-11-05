@@ -32,11 +32,14 @@
           <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
           @guest
             @else
+            <a class="btn-delete" href="">update Flat</a><br>
             <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat ->id)}}">Delete Flat</a><br>
+
+
           @endguest
           <a href="{{ URL::previous() }}" class="mb-5">Back</a>
 
-          
+
 
         </div>
       </div>
@@ -112,10 +115,10 @@
         var address= $("#addrss").val();
         var city = $("#city").val();
         var civ_num = $("#civ_num").val();
-        
-        
 
-        //create a map 
+
+
+        //create a map
         var map = tomtom.L.map('map', {
         key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
         basePath: 'sdk/',
@@ -123,11 +126,11 @@
         center: [latiVal, longVal]
         });
         //add marker in position[latiVal,longVal]
-        
+
         var marker = tomtom.L.marker([latiVal,longVal]).addTo(map);
         marker.bindPopup("<b>MY Home</b><br/>" +city + " " +address + " " +
         "N" + civ_num );
-       
+
       });
     </script>
 
