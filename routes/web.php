@@ -7,11 +7,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//show profile
 Route::get('/profile/{id}', 'UserController@showProfile')->name('profile')->middleware('auth');
-Route::get('/addFlat', 'FlatController@addFlat')->name('addFlat')->middleware('auth');
-Route::post('/', 'FlatController@storeFlat')->name('storeFlat')->middleware('auth');
+//show single flat
+Route::get('/flat/{id}', 'FlatController@showFlat')->name('showFlat');
 
-Route::get('/flat/{id}', 'FlatController@showFlat')->name('showFlat')->middleware('auth');
+Route::get('/addFlat', 'FlatController@addFlat')->name('addFlat')->middleware('auth');
+Route::post('/store', 'FlatController@storeFlat')->name('storeFlat')->middleware('auth');
 
 Route::get('/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware('auth');
 
