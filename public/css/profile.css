@@ -69,6 +69,17 @@
   font-size: 16px;
 }
 
+.profile-container .sidebar .btn-sidebar .btn-update {
+  color: white;
+  background: #989898;
+  color: white;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  font-size: 15px;
+}
+
 .profile-container .sidebar .btn-sidebar .btn-delete {
   color: white;
   border: solid 2px #989898;
