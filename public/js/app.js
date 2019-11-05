@@ -49502,6 +49502,13 @@ function init() {
     var longitude;
     e.preventDefault();
     getlatlon(); //perform some operations
+<<<<<<< HEAD
+=======
+
+    setTimeout(function () {
+      $("#form-flat").submit();
+    }, 500);
+>>>>>>> 0448f73c365e74fdb7953ef868ffa3b8bc8c1007
   });
 }
 

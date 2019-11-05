@@ -7,6 +7,7 @@ use App\Flat;
 use App\Address;
 use App\Service;
 use App\Detail;
+use App\User;
 
 
 
@@ -127,6 +128,7 @@ class FlatController extends Controller
         $detailFlat = Detail::where('flat_id', $id)->get();
 
         $addressFlat = Address::where('flat_id', $id)->get();
+
 
 
         return view('singleFlat')->with('singleFlat', $singleFlat)
