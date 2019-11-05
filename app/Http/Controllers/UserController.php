@@ -24,7 +24,10 @@ class UserController extends Controller
           return redirect("profile/$log");
         }
         $user = User::findOrFail($id);
-        $userFlat = Flat::where('user_id', Auth::user()->id)->get();
+        // $userFlat = Flat::where('user_id', Auth::user()->id)->get();
+
+        $userFlat = Flat::where('user_id', Auth::user()->id)->paginate(4);
+
 
 
         $arrDetail = [];
