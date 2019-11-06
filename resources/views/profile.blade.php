@@ -4,19 +4,34 @@
     <meta charset="utf-8">
     <title></title>
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
+
   </head>
   <body>
-    <div class="profile-container">
-      @include('layouts.sidebar')
+    @include('layouts.menu2')
 
-      @yield('sidebar')
+    @yield('menu')
+
+    <div class="profile-container">
+
+      {{-- @include('layouts.sidebar')
+
+      @yield('sidebar') --}}
 
 
       <div class="content">
-        <h1>My flats</h1>
+        <div class="user">
+            <h1>{{Auth::user()->name}}'s flats</h1>
+            <div class="btn">
+              <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
+              <a class="btn-add" href="{{ route('edit', $user -> id) }}">Edit Profile</a><br>
+              <a class="btn-add" href="{{ route('destroy', $user -> id) }}">Delete Profile</a><br>
+            </div>
+        </div>
+
         <div class="flats-list">
           @foreach ($userFlat as $flat)
             <a href="{{route ('showFlat', $flat ->id)}}" class="box">
