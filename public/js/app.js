@@ -49367,11 +49367,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-// const app = new Vue({
-//     el: '#app',
-// });
 
-__webpack_require__(/*! ./getCordinate */ "./resources/js/getCordinate.js"); // require('./showMap');
+var app = new Vue({
+  el: '#app'
+});
 
 /***/ }),
 
@@ -49489,59 +49488,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/getCordinate.js":
-/*!**************************************!*\
-  !*** ./resources/js/getCordinate.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function init() {
-  $('#bottone').click(function (e) {
-    var latitude;
-    var longitude;
-    e.preventDefault();
-    getlatlon(); //perform some operations
-  });
-}
-
-function getlatlon() {
-  var road = $("#road").val();
-  var cap = $("#cap").val();
-  var civ_num = $("#civ_num").val();
-  var parametri;
-  $.ajax({
-    url: "https://api.tomtom.com/search/2/structuredGeocode.json",
-    method: "GET",
-    data: {
-      countryCode: "ITA",
-      limit: 1,
-      streetNumber: civ_num,
-      streetName: road,
-      postalCode: cap,
-      key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy"
-    },
-    success: function success(data) {
-      parametri = data["results"][0]["position"];
-      latitude = parametri.lat;
-      longitude = parametri.lon;
-      $("#lat").val(latitude);
-      $("#lon").val(longitude);
-
-      if (data) {
-        $("#form-flat").submit();
-      }
-    },
-    error: function error(err) {
-      console.log("err");
-    }
-  });
-}
-
-$(document).ready(init);
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49553,39 +49499,15 @@ $(document).ready(init);
 
 /***/ }),
 
-/***/ "./resources/sass/profile.scss":
-/*!*************************************!*\
-  !*** ./resources/sass/profile.scss ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/singleFlat.scss":
-/*!****************************************!*\
-  !*** ./resources/sass/singleFlat.scss ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!****************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/singleFlat.scss ./resources/sass/profile.scss ***!
-  \****************************************************************************************************************************/
+/*!*************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/singleFlat.scss */"./resources/sass/singleFlat.scss");
-module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/sass/profile.scss */"./resources/sass/profile.scss");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

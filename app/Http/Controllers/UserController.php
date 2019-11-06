@@ -86,7 +86,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('editProfile', compact('user'));
     }
 
     /**
@@ -98,7 +100,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request -> validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'birthday' => 'required'
+        ]);
+        User::whereId($id) -> update($validatedData);
+
+        return redirect('/');
     }
 
     /**
@@ -109,6 +120,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id) -> delete();
+
+        return redirect('/');
     }
 }
