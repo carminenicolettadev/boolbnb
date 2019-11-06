@@ -2,7 +2,10 @@
   <div class="menu">
     @if (Route::has('login'))
         <div class="nav">
+
             @auth
+              <img class="logo"  src="img/logo.png" alt="">
+
               <div class="menu-links">
                 {{-- link menu nella home se sei loggato  --}}
                   <a  class="{{ (request()->is('homepage')) ? 'active' : '' }}"  href="{{ url('/') }}">Home</a>
@@ -24,7 +27,7 @@
                   {{-- fine link menu nella home se sei loggato  --}}
               </div>
             @else
-
+              <img class="logo"  src="img/logo.png" alt="">
 
                 <div class="menu-links">
                   {{-- link menu nella home se NON sei loggato  --}}

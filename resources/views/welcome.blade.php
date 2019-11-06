@@ -6,7 +6,7 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="stylesheet" href="/css/menu.css">
+        <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
 
         <title>Laravel</title>
 
@@ -20,14 +20,8 @@
       @include('layouts.menu2')
 
       @yield('menu')
-        <div class="flex-center position-ref full-height">
 
 
-            <div class="content">
-                <div class="title m-b-md">
-                    AirBnB
-                </div>
-            </div>
-        </div>
+
     </body>
 </html>

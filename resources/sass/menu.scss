@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
-
+body{
+  margin:0;
+}
 .menu{
   width: 100%;
   box-shadow: 2px 3px 6px rgb(224, 224, 224);
+  position: relative;
+  padding-top: 10px;
   .nav{
     font-family: Roboto;
     width: 100%;
@@ -14,9 +18,17 @@
     background: white;
     height: 90px;
     box-sizing: border-box;
-
     max-width: 1700px;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
+    .logo{
+      position: absolute;
+      left: 50px;
+      top: 15px;
+      width: 70px;
+      height: 70px;
+    }
     .menu-links{
       display: flex;
       justify-content: flex-end;
@@ -34,6 +46,7 @@
           border-bottom: solid 2px red;
         }
       }
+
     }
   }
 }
