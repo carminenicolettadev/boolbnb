@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Flat;
 use App\Detail;
@@ -18,8 +19,16 @@ class UserController extends Controller
      */
     public function showProfile($id)
     {
+        $log = Auth::user()->id;
+        if ($id != Auth::user()->id ) {
+          return redirect("profile/$log");
+        }
         $user = User::findOrFail($id);
-        $userFlat = Flat::where('user_id', $id)->get();
+        // $userFlat = Flat::where('user_id', Auth::user()->id)->get();
+
+        $userFlat = Flat::where('user_id', Auth::user()->id)->paginate(4);
+
+
 
         $arrDetail = [];
         $arrAddress = [];

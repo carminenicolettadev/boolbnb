@@ -109,8 +109,6 @@
                 <div class="title m-b-md">
                     AirBnB
                 </div>
-
-
             </div>
         </div>
     </body>

@@ -144,9 +144,19 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editFlat($id)
     {
-        //
+      $singleFlat = Flat::findOrFail($id);
+
+      $detailFlat = Detail::where('flat_id', $id)->get();
+
+      $addressFlat = Address::where('flat_id', $id)->get();
+
+
+
+      return view('editFlat')->with('singleFlat', $singleFlat)
+                                ->with('detailFlat', $detailFlat)
+                                ->with('addressFlat', $addressFlat);
     }
 
     /**
@@ -156,9 +166,58 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateFlat(Request $request, $id)
     {
-        //
+
+      $flat = Flat::findOrFail($id);
+
+
+      $detailData = $request -> validate([
+          'title'=> 'required',
+          'num_room'=> 'required',
+          'bed'=> 'required',
+          'bathroom'=> 'required',
+          'mq'=> 'required',
+          'img'=> 'required',
+      ]);
+
+
+
+      $detail = Detail::where('flat_id', $id)->get();
+
+      // dd($request->title, $detail[0]);
+
+      $detail[0]->update([
+        'title'=> $request->title,
+        'num_room'=> $request->num_room,
+        'bed'=> $request->bed,
+        'bathroom'=> $request->bathroom,
+        'mq'=> $request->mq,
+        'img'=> $request->img,
+      ]);
+
+      //address
+      $addressData = $request -> validate([
+          'state'=> 'required',
+          'city'=> 'required',
+          'road'=> 'required',
+          'civ_num'=> 'required'
+      ]);
+
+      $address = Address::where('flat_id', $id)->get();
+      $address[0]->update([
+        'state'=> $request->state,
+        'city'=> $request->city,
+        'road'=> $request->road,
+        'civ_num'=> $request->civ_num,
+      ]);
+
+      // dd($detail,$address,$detailData,$addressData);
+
+
+      $log = $flat->user_id;
+
+      return redirect("profile/$log");
     }
 
     /**

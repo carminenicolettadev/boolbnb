@@ -69,6 +69,17 @@
   font-size: 16px;
 }
 
+.profile-container .sidebar .btn-sidebar .btn-update {
+  color: white;
+  background: #989898;
+  color: white;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  font-size: 15px;
+}
+
 .profile-container .sidebar .btn-sidebar .btn-delete {
   color: white;
   border: solid 2px #989898;
@@ -165,5 +176,57 @@
   font-size: 15px;
   font-weight: bolder;
   border: 2px solid #ff5b60;
+}
+
+.profile-container .content .paginate {
+  display: -webkit-box;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin-bottom: 70px;
+}
+
+.profile-container .content .paginate .pagination {
+  list-style: none;
+}
+
+.profile-container .content .paginate .pagination .page-item {
+  float: left;
+  border: solid 2px #ff5b60;
+  margin: 10px;
+  height: 20px;
+  width: 20px;
+  padding: 20px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  font-size: 18px;
+}
+
+.profile-container .content .paginate .pagination .page-item .page-link {
+  padding: 20px;
+  font-weight: lighter;
+  color: #737373;
+}
+
+.profile-container .content .paginate .pagination .page-item.disabled {
+  display: none;
+}
+
+.profile-container .content .paginate .pagination .page-item.active {
+  background: #ff5b60;
+  color: white !important;
+  font-weight: bolder;
+}
+
+.profile-container .content .paginate .pagination .page-item.active .page-link {
+  font-weight: bolder;
+  color: white;
 }
 
