@@ -10,25 +10,10 @@
   </head>
   <body>
     <div class="profile-container">
-      <div class="sidebar">
-        <h3>Users</h3>
-        <ul>
-          <li>
-            <p>name</p>
-            <p>{{Auth::user()->name}} {{Auth::user()->surname}}</p>
-          </li>
-          <li>
-            <p>email</p>
-            <p>{{Auth::user()->email}}</p>
-          </li>
-        </ul>
-        <div class="btn-sidebar">
-          <a class="btn-add" href="{{ route('addFlat') }}">Add Flat</a><a>
-          <a class="btn-add" href="{{ route('edit', $user -> id) }}">Edit Profile</a><br>
-          <a class="btn-add" href="{{ route('destroy', $user -> id) }}">Delete Profile</a><br>
-          <a href="/" class="mb-5">Back</a>
-        </div>
-      </div>
+      @include('layouts.sidebar')
+
+      @yield('sidebar')
+
 
       <div class="content">
         <h1>My flats</h1>

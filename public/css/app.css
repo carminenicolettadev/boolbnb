@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -11098,5 +11098,102 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+* {
+  font-family: Roboto;
+}
+
+.box-at-center {
+  margin: 0 auto;
+}
+
+.list-flat {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-flat .flat-box {
+  width: 400px;
+  border: solid 2px blue;
+  margin: 15px;
+  padding: 30px;
+}
+
+.registrazione {
+  height: 100vh;
+  width: 100%;
+  background-image: url(/images/background-register.jpg?a306cb57b0cdff4ce21f9062d7b5b7fd);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.registrazione .form-group {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.registrazione .form-group .col-form-label {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.registrazione .form-group .btn-send {
+  width: 30%;
+  float: right;
+  background: #ff5b60;
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  border: none;
+  padding: 10px 20px;
+  letter-spacing: 2px;
+}
+
+.login {
+  height: 100vh;
+  background-image: url(/images/background-login.jpg?023f99915191e2cfa44ef9b782a0543d);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login .box-at-center {
+  margin: 0 auto;
+}
+
+.login .box-login {
+  margin-top: 100px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.login .box-login .box-top {
+  background: black;
+  padding: 10px 0;
+  color: white;
+  text-align: center;
+}
+
+.login .box-login .box-body {
+  padding: 40px 5px;
+}
+
+.login .box-login .box-body .btnlogin {
+  background: #ff5b60;
+  border-color: #ff5b60;
+}
+
+.login .box-login .box-body .btnforgot {
+  color: black;
+}
+
+.btn-add {
+  background: #ff5b60;
+  margin-top: 30px;
+  padding: 8px 16px;
+  color: white;
+  font-size: 18px;
 }
 
