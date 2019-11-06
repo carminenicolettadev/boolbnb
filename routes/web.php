@@ -2,6 +2,7 @@
 
 Route::get('/', function () { return redirect('/homepage');});
 Route::get('/homepage', function () { return view('welcome');});
+Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
 
 Auth::routes();
 
