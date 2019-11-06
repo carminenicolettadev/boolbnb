@@ -17,11 +17,6 @@
 
     <div class="profile-container">
 
-      {{-- @include('layouts.sidebar')
-
-      @yield('sidebar') --}}
-
-
       <div class="content">
         <div class="user">
             <h1>{{Auth::user()->name}}'s flats</h1>

@@ -1,4 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/profile.css": "/css/profile.css",
+    "/css/singleFlat.css": "/css/singleFlat.css",
+    "/css/menu.css": "/css/menu.css",
+    "/css/app.css": "/css/app.css",
+    "/js/getCordinate.js": "/js/getCordinate.js",
+    "/js/showMap.js": "/js/showMap.js"
 }

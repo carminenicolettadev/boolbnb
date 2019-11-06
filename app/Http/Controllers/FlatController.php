@@ -18,14 +18,29 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAllFlats()
     {
-      $flats = Flat::all();
-      $addresses = Address::all();
 
-      return view('allFlatsPage')
-                  -> with('flats',$flats)
-                  -> with('addresses',$addresses);
+      $flats = Flat::orderBy('created_at', 'desc')->paginate(6);
+      $arrDetail = [];
+      $arrAddress = [];
+
+
+      foreach ($flats as $flat) {
+          $detailFlat = Detail::where('flat_id', $flat->id)->get();
+          array_push($arrDetail, $detailFlat);
+      }
+
+      foreach ($flats as $address) {
+          $addressFlat = Address::where('flat_id', $address->id)->get();
+          array_push($arrAddress, $addressFlat);
+      }
+
+
+
+      return view('allFlatsPage')->with('flats', $flats)
+                            ->with('arrDetail', $arrDetail)
+                            ->with('arrAddress', $arrAddress);
     }
 
     /**

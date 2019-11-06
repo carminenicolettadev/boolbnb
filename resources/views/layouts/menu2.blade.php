@@ -6,7 +6,7 @@
               <div class="menu-links">
                 {{-- link menu nella home se sei loggato  --}}
                   <a  class="{{ (request()->is('homepage')) ? 'active' : '' }}"  href="{{ url('/') }}">Home</a>
-                  <a class="{{ (request()->is('')) ? 'active' : '' }}" href="{{ url('/') }}">Flats</a>
+                  <a class="{{ (request()->is('flats')) ? 'active' : '' }}" href="{{ url('/flats') }}">Flats</a>
                   <a class="{{ (request()->is('profile/*')) ? 'active' : '' }}" href="{{ route('profile', Auth::user()->id ) }}">Profile</a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -29,7 +29,7 @@
                 <div class="menu-links">
                   {{-- link menu nella home se NON sei loggato  --}}
                     <a class="{{ (request()->is('homepage')) ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
-                    <a class="{{ (request()->is('flats')) ? 'active' : '' }}"href="{{ url('/') }}">Flats</a>
+                    <a class="{{ (request()->is('flats')) ? 'active' : '' }}"href="{{ url('/flats') }}">Flats</a>
                     <a class="{{ (request()->is('login')) ? 'active' : '' }}"href="{{ route('login') }}">Login</a>
                     <a class="{{ (request()->is('register')) ? 'active' : '' }}"href="{{ route('register') }}">Register</a>
 
