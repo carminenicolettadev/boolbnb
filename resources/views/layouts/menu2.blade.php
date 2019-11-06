@@ -5,14 +5,9 @@
             @auth
               <div class="menu-links">
                 {{-- link menu nella home se sei loggato  --}}
-                  <a href="{{ url('/') }}">Home</a>
-                  <a href="{{ url('/') }}">Flat</a>
-                  <a href="{{ route('profile', Auth::user()->id ) }}">Profile</a>
-
-                  {{-- logout button --}}
-                  {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                      {{ Auth::user()->name }} <span class="caret"></span>
-                  </a> --}}
+                  <a  class="{{ (request()->is('homepage')) ? 'active' : '' }}"  href="{{ url('/') }}">Home</a>
+                  <a class="{{ (request()->is('')) ? 'active' : '' }}" href="{{ url('/') }}">Flats</a>
+                  <a class="{{ (request()->is('profile/*')) ? 'active' : '' }}" href="{{ route('profile', Auth::user()->id ) }}">Profile</a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="{{ route('logout') }}"
@@ -33,10 +28,10 @@
 
                 <div class="menu-links">
                   {{-- link menu nella home se NON sei loggato  --}}
-                    <a href="{{ url('/') }}">Home</a>
-                    <a href="{{ url('/') }}">Flat</a>
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
+                    <a class="{{ (request()->is('homepage')) ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
+                    <a class="{{ (request()->is('flats')) ? 'active' : '' }}"href="{{ url('/') }}">Flats</a>
+                    <a class="{{ (request()->is('login')) ? 'active' : '' }}"href="{{ route('login') }}">Login</a>
+                    <a class="{{ (request()->is('register')) ? 'active' : '' }}"href="{{ route('register') }}">Register</a>
 
                     {{-- fine link menu nella home se NON sei loggato  --}}
                 </div>
@@ -44,4 +39,5 @@
         </div>
     @endif
   </div>
+
 @endsection

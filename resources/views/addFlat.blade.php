@@ -91,11 +91,11 @@
                   <input type="text" id="civ_num" class="form-control" name="civ_num" required  placeholder="civic number">
                 </div>
 
-                <div class="form-group d-none col-md-6">
+                <div class="form-group  col-md-6">
                   <label>latitudine</label>
                   <input type="text" id="lat" class="form-control" name="lat"  value="">
                 </div>
-                <div class="form-group d-none col-md-6">
+                <div class="form-group  col-md-6">
                   <label>longitudine</label>
                   <input type="text" id="lon" class="form-control" name="lon"  value="">
                 </div>
