@@ -1,6 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);.menu {
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);body {
+  margin: 0;
+}
+
+.menu {
   width: 100%;
   box-shadow: 2px 3px 6px #e0e0e0;
+  position: relative;
+  padding-top: 10px;
 }
 
 .menu .nav {
@@ -16,6 +22,18 @@
   box-sizing: border-box;
   max-width: 1700px;
   margin: auto;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
+.menu .nav .logo {
+  position: absolute;
+  left: 50px;
+  top: 15px;
+  width: 70px;
+  height: 70px;
 }
 
 .menu .nav .menu-links {
