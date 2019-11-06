@@ -31,23 +31,23 @@
 
                 <div class="form-group col-md-6">
                   <label>rooms</label>
-                  <input type="number" class="form-control" name="num_room" required  placeholder="room number">
+                  <input type="number" min="0" step="1" class="form-control" name="num_room" required  placeholder="room number">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>beds</label>
-                  <input type="number" class="form-control" name="bed" required  placeholder="beds">
+                  <input type="number" min="0" step="1" class="form-control" name="bed" required  placeholder="beds">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label>bathroom</label>
-                  <input type="number" class="form-control" name="bathroom" required  placeholder="bathroom">
+                  <input type="number" min="0" step="1" class="form-control" name="bathroom" required  placeholder="bathroom">
                 </div>
 
 
                 <div class="form-group col-md-6">
                   <label>space area</label>
-                  <input type="number" class="form-control" name="mq" required  placeholder="space area">
+                  <input type="number" min="0" step="1" class="form-control" name="mq" required  placeholder="space area">
                 </div>
 
 
