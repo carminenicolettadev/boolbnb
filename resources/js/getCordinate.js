@@ -24,7 +24,7 @@ function getlatlon() {
         url: "https://api.tomtom.com/search/2/structuredGeocode.json",
         method: "GET",
         data: {
-            countryCode: "ITA",
+            countryCode: "GB",
             limit: 1,
             streetNumber: civ_num,
             streetName: road,

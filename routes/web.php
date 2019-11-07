@@ -1,11 +1,11 @@
 <?php
 
 Route::get('/', function () { return redirect('/homepage');});
-Route::get('/homepage', function () { return view('welcome');});
+Route::get('/homepage', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 // Profile
 Route::get('/profile/{id}', 'UserController@showProfile')->name('profile')->middleware('auth');

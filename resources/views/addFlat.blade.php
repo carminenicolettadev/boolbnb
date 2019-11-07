@@ -53,7 +53,7 @@
 
                 <div class="form-group col-md-6">
                   <label>img</label>
-                  <input type="text" class="form-control" name="img" required  placeholder="img">
+                  <input type="text" class="form-control" name="img" value=""required  placeholder="img">
                 </div>
 
                 <div class="form-group col-md-6 d-none">

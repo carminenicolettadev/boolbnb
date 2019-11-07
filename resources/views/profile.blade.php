@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
@@ -17,9 +17,7 @@
 
     <div class="profile-container">
 
-      {{-- @include('layouts.sidebar')
-
-      @yield('sidebar') --}}
+      
 
 
       <div class="content">

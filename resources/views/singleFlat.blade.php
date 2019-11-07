@@ -100,7 +100,7 @@
         var address= $("#addrss").val();
         var city = $("#city").val();
         var civ_num = $("#civ_num").val();
-
+        console.log(latiVal,longVal);
 
 
         //create a map

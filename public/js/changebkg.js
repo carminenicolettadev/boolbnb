@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/showMap.js":
-/*!*********************************!*\
-  !*** ./resources/js/showMap.js ***!
-  \*********************************/
+/***/ "./resources/js/changebkg.js":
+/*!***********************************!*\
+  !*** ./resources/js/changebkg.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//todo inserire script per mostrare la mappa
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\Utente\\Desktop\\Nuova cartella\\progetto-finale-airbnb\\resources\\js\\changebkg.js'");
 
 /***/ }),
 
-/***/ 2:
-/*!***************************************!*\
-  !*** multi ./resources/js/showMap.js ***!
-  \***************************************/
+/***/ 3:
+/*!*****************************************!*\
+  !*** multi ./resources/js/changebkg.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\js\showMap.js */"./resources/js/showMap.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\js\changebkg.js */"./resources/js/changebkg.js");
 
 
 /***/ })
