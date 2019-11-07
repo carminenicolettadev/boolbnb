@@ -22,6 +22,7 @@ div.mainhomepage .search .searchbox {
   width: 550px;
   background: white;
   border-radius: 5px;
+  height: 200px;
 }
 
 div.mainhomepage .search .searchbox h1 {
@@ -35,10 +36,11 @@ div.mainhomepage .search .searchbox .searchform {
 }
 
 div.mainhomepage .search .searchbox .searchform input {
-  width: 80%;
+  width: 100%;
   padding-left: 7px;
   font-size: 16px;
   font-weight: 100;
+  height: 40px;
 }
 
 div.mainhomepage .search .searchbox .searchform a {

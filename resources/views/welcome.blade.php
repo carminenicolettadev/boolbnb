@@ -8,8 +8,11 @@
 
         <script src="{{ asset('js/app.js')}}" charset="utf-8"></script>
 
+        <link href="{{ asset('sdk/poi.css') }}" rel="stylesheet">
         <link href="{{ asset('sdk/map.css') }}" rel="stylesheet">
+        <link href="{{ asset('sdk/search-markers.css') }}" rel="stylesheet">
 
+        <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/1.0.6/SearchBox.css'>
 
         <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
         <link rel="stylesheet" href="{{asset('css/12bool.css')}}">
@@ -28,6 +31,8 @@
 
       @yield('menu')
 
+      {{-- <div id="map" style="height:80vh;position:relative"></div> --}}
+
       <div class="mainhomepage">
 
         <div class="container search "id="background-1">
@@ -35,12 +40,12 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="row">
                 <div class="col-lg-offset-1 col-lg-11 col-md-offset-1 col-md-11 col-sm-offset-1 col-sm-11 ">
-                  <div class="searchbox">
+                  <div class="searchbox" style="position:relative">
                     <h1 >Cerca alloggi unici al mondo</h1>
-                    <form class="searchform" action="index.html" method="post">
-                        <input type="text" name="place" value="" placeholder="Ovunque">
-                        <a class="search-go" href="#">CERCA</a>
-                    </form>
+                    <div class="searchform" id="map" style="height: 200px;width:100%">
+                        {{-- <input type="text" class="tt-search-box-input" name="place" value="" placeholder="Ovunque"> --}}
+                        {{-- <a class="search-go" href="#">CERCA</a> --}}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -118,18 +123,52 @@
         </div>
 
     </div>
+
+
+
+
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/services/services-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/maps/maps-web.min.js"></script>
+
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/1.0.6/SearchBox-web.js"></script>
     <script type="text/javascript" src="{{ asset('sdk/tomtom.min.js')}}"></script>
 
+    <script type="text/javascript" src="{{ asset('sdk/marker.js')}}"></script>
+
+    <script type="text/javascript" src="{{ asset('sdk/marker-manager.js')}}"></script>
+
+    <style media="screen">
+      .mapboxgl-canvas{
+        display: none;
+      }
+      .mapboxgl-ctrl-top-right{
+        display: none;
+      }
+      .mapboxgl-ctrl-bottom-right{
+        display: none;
+      }
+      .tt-search-box-result-list-container{
+        z-index: 10;
+      }
+      .mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+        width: 96%;
+      }
+
+    </style>
     <script type="text/javascript">
       console.log("ok funziono");
 
 
-           var markers = [];
+           // var markers = [];
 
            var map = tt.map({
                key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
                container: 'map',
                style: 'tomtom://vector/1/basic-main',
+               options : {
+                 showZoom: false,
+                 showPitch: false
+               }
            });
 
            var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
@@ -172,15 +211,15 @@
                searchMarkersManager.clear();
            });
 
-           ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
-               searchMarkersManager.draw(resp.data.results);
-               fitToViewport(resp.data.results);
-           });
+           // ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
+           //     searchMarkersManager.draw(resp.data.results);
+           //     fitToViewport(resp.data.results);
+           // });
 
-           ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
-               searchMarkersManager.draw([resp.data.result]);
-               fitToViewport(resp.data.result);
-           });
+           // ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
+           //     searchMarkersManager.draw([resp.data.result]);
+           //     fitToViewport(resp.data.result);
+           // });
 
       </script>
     </body>
