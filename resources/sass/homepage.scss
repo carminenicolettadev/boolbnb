@@ -23,6 +23,7 @@ div.mainhomepage{
       width:550px;
       background:white;
       border-radius:5px;
+      height: 200px;
       h1{
         text-align: left;
         margin-bottom: 20px;
@@ -30,10 +31,11 @@ div.mainhomepage{
       .searchform{
         display: flex;
           input{
-            width: 80%;
+            width: 100%;
             padding-left:7px;
             font-size: 16px;
             font-weight: 100;
+            height: 40px;
           }
           a{
             display: inline-block;
