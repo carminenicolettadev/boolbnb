@@ -92,6 +92,7 @@
 .profile-container .content .flats-list .box {
   position: relative;
   width: 450px;
+  max-height: 600px;
   background: #f2f2f2;
   margin: 30px;
   height: auto;
@@ -102,6 +103,8 @@
 }
 
 .profile-container .content .flats-list .box img {
+  width: 100%;
+  height: auto;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
