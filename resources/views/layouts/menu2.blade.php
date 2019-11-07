@@ -4,7 +4,7 @@
         <div class="nav">
 
             @auth
-              <img class="logo"  src="img/logo.png" alt="">
+              <img class="logo"  src={{asset('img/logo.png')}} alt="">
 
               <div class="menu-links">
                 {{-- link menu nella home se sei loggato  --}}
