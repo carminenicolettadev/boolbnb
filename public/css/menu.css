@@ -32,6 +32,9 @@
   position: absolute;
   left: 50px;
   top: 15px;
+}
+
+.menu .nav .logo img {
   width: 70px;
   height: 70px;
 }

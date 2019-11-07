@@ -20,7 +20,8 @@
 
       <div class="row">
         <div class="col-12">
-          <form  action="{{ route('updateFlat', $singleFlat->id)}}"  method="post" id="form-flat" >
+          <form  action="{{ route('updateFlat', $singleFlat->id)}}"  method="post" id="form-flat" accept-charset="UTF-8"
+        enctype="multipart/form-data" >
             @csrf
             @method('POST')
               <div class="form-row">
@@ -53,7 +54,7 @@
 
                 <div class="form-group col-md-6">
                   <label>img</label>
-                  <input type="text" class="form-control" value="{{$detailFlat[0]->img}}" name="img" required  placeholder="img">
+                  <input type="file" name="img"  accept="image/*">
                 </div>
 
                 <div class="form-group col-md-6 d-none">

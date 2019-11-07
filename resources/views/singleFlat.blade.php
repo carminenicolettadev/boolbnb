@@ -31,7 +31,7 @@
 
       <div class="content">
         <div class="hero">
-            <img src="https://source.unsplash.com/random?house">
+            <img src="../img/{{$detailFlat[0] ->img}}">
         </div>
         <div class="flats-list">
           <div class="intro">

@@ -84,6 +84,18 @@ class FlatController extends Controller
 
       ]);
 
+
+      $file = $request -> file('img');
+        if ($file) {
+
+          $folder = 'img';
+          $nameImg = 'flat-' . $flat_id  . '.' . $file -> getClientOriginalExtension();
+
+          $file -> move($folder, $nameImg);
+          $dataTableDetails['img'] = $nameImg;
+
+      }
+
       // creo un nuovo detail e associo ad ogni campo
       //il valore della request che ha i dati del form
       $detail = new Detail;
@@ -92,7 +104,7 @@ class FlatController extends Controller
       $detail ->bed = $request ->bed;
       $detail ->bathroom = $request ->bathroom;
       $detail ->mq = $request ->mq;
-      $detail ->img = $request ->img;
+      $detail ->img = $nameImg;
       $detail ->flat_id = $flat_id;
 
       // dd($detail);
@@ -201,6 +213,16 @@ class FlatController extends Controller
       $detail = Detail::where('flat_id', $id)->get();
 
       // dd($request->title, $detail[0]);
+      $file = $request -> file('img');
+        if ($file) {
+
+          $folder = 'img';
+          $nameImg = 'flat-' . $flat->id . '.' . $file -> getClientOriginalExtension();
+
+          $file -> move($folder, $nameImg);
+          $dataTableDetails['img'] = $nameImg;
+
+      }
 
       $detail[0]->update([
         'title'=> $request->title,
@@ -208,7 +230,7 @@ class FlatController extends Controller
         'bed'=> $request->bed,
         'bathroom'=> $request->bathroom,
         'mq'=> $request->mq,
-        'img'=> $request->img,
+        'img'=> $nameImg,
       ]);
 
       //address

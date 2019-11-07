@@ -81,30 +81,32 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/showMap.js":
-/*!*********************************!*\
-  !*** ./resources/js/showMap.js ***!
-  \*********************************/
+/***/ "./resources/js/autocomplete.js":
+/*!**************************************!*\
+  !*** ./resources/js/autocomplete.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//todo inserire script per mostrare la mappa
+function init() {}
+
+$(document).ready(init);
 
 /***/ }),
 
-/***/ 2:
-/*!***************************************!*\
-  !*** multi ./resources/js/showMap.js ***!
-  \***************************************/
+/***/ 3:
+/*!********************************************!*\
+  !*** multi ./resources/js/autocomplete.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/showMap.js */"./resources/js/showMap.js");
+module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/autocomplete.js */"./resources/js/autocomplete.js");
 
 
 /***/ })

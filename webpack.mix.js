@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/getCordinate.js', 'public/js')
     .js('resources/js/showMap.js', 'public/js')
+    .js('resources/js/autocomplete.js', 'public/js')
     .sass('resources/sass/profile.scss', 'public/css')
     .sass('resources/sass/singleFlat.scss', 'public/css')
     .sass('resources/sass/menu.scss', 'public/css')

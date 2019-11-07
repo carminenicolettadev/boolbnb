@@ -33,3 +33,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 require('./getCordinate');
 require('./showMap');
+require('./autocomplete');

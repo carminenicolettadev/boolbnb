@@ -4,7 +4,10 @@
         <div class="nav">
 
             @auth
-              <img class="logo"  src={{asset('img/logo.png')}} alt="">
+              <a href="/" class="logo">
+                <img  src={{asset('img/logo.png')}} alt="">
+              </a>
+
 
               <div class="menu-links">
                 {{-- link menu nella home se sei loggato  --}}
@@ -27,7 +30,9 @@
                   {{-- fine link menu nella home se sei loggato  --}}
               </div>
             @else
-              <img class="logo"  src="img/logo.png" alt="">
+              <a href="/" class="logo">
+                <img  src={{asset('img/logo.png')}} alt="">
+              </a>
 
                 <div class="menu-links">
                   {{-- link menu nella home se NON sei loggato  --}}

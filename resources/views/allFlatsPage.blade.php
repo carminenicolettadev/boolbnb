@@ -26,7 +26,7 @@
         <div class="flats-list">
           @foreach ($flats as $flat)
             <a href="{{route ('showFlat', $flat ->id)}}" class="box">
-              <img src="https://source.unsplash.com/450x300/?building">
+              <img src="../img/{{$flat ->detail -> img}}" >
               <div class="box-sections">
                   {{-- $arrDetail = array con dentro un oggetto --}}
                   @foreach ($arrDetail as $key => $details)
