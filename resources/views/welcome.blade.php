@@ -36,17 +36,11 @@
               <div class="row">
                 <div class="col-lg-offset-1 col-lg-11 col-md-offset-1 col-md-11 col-sm-offset-1 col-sm-11 ">
                   <div class="searchbox">
-                    <h1 >Cerca Alloggi</h1>
+                    <h1 >Cerca alloggi unici al mondo</h1>
                     <form class="searchform" action="index.html" method="post">
-                      <div class="place-element">
-                        <label for="place">DOVE</label>
-                        <br>
                         <input type="text" name="place" value="" placeholder="Ovunque">
-                      </div>
+                        <a class="search-go" href="#">CERCA</a>
                     </form>
-                    <div class="search-go">
-                      <a href="#">CERCA</a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -69,20 +63,21 @@
                   <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">
-                        <img src="{{$flat -> detail -> img }}')}}" alt="">
-                      </a>
+                        <img src="../img/{{$flat ->detail -> img}}" alt="">
                       <div class="flex-rate">
-                        <p>{{$flat -> address -> city}}</p>
-                        <p >{{$flat -> rate}}<span><i class="fas fa-star rate"></i></span></p>
-
+                        <div class="">
+                          <h3>{{$flat -> address -> city}}</h3>
+                          <p>Appartamento - {{$flat -> detail -> bed}}
+                            @if ($flat -> detail -> bed === 1)
+                              letto
+                            @else
+                              letti
+                            @endif
+                          </p>
+                        </div>
+                        <p>{{$flat -> rate}}<span><i class="fas fa-star rate"></i></span></p>
                       </div>
-                      <p>Appartamento - {{$flat -> detail -> bed}}
-                        @if ($flat -> detail -> bed === 1)
-                          letto
-                        @else
-                          letti
-                        @endif
-                      </p>
+                      </a>
                     </div>
                   </div>
                 @endforeach
@@ -107,7 +102,7 @@
                   <div class="col-lg-2 col-md-4 col-sm-6">
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">
-                        <img src="{{$flat -> detail -> img }}')}}" alt="">
+                        <img src="../img/{{$flat ->detail -> img}}" alt="">
                       </a>
                       <div class="flex-rate">
                         <p>{{$flat -> address -> city}}</p>

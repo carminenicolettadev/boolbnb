@@ -16,7 +16,12 @@ class HomeController extends Controller
      public function index()
      {
 
-         $flatsevidency = Flat::orderBy("id", "asc")->take(8)->get();
+         $flatsevidency = Flat::orderBy('created_at', 'desc')
+         ->take(8)
+         ->get();
+
+
+
          $flatsrates = Flat::orderBy("rate","desc")->take(6)->get();
          return view('welcome',compact('flatsevidency','flatsrates'));
 

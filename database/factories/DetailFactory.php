@@ -14,6 +14,6 @@ $factory->define(Detail::class, function (Faker $faker) {
       'bed' => rand(1,30),
       'bathroom' => rand(1,8),
       'mq' => rand(1,1230),
-      'img' => $faker -> imageUrl(400 , 400)
+      'img' => "default.jpg"
     ];
 });

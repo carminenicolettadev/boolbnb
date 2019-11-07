@@ -1,71 +1,52 @@
-h3,
-p,
-a {
-  font-family: "Nunito", sans-serif;
-  font-weight: 200;
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);* {
+  font-family: Roboto !important;
 }
 
 div.mainhomepage #background-1 {
-  background-image: url("/img/background-1.jpg");
+  background-image: url("/img/hero.jpg");
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-}
-
-div.mainhomepage #background-2 {
-  background-image: url("/img/background-2.jpg");
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-}
-
-div.mainhomepage #background-3 {
-  background-image: url("/img/background-3.jpg");
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
+  height: 70vh;
 }
 
 div.mainhomepage .search {
   padding: 200px 0 300px 0;
-  background-image: url("/img/background-headerin.jpg");
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
 }
 
 div.mainhomepage .search .searchbox {
-  padding: 20px 25px 50px 25px;
-  width: 450px;
+  padding: 30px;
+  width: 550px;
   background: white;
   border-radius: 5px;
 }
 
 div.mainhomepage .search .searchbox h1 {
-  text-align: center;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 div.mainhomepage .search .searchbox .searchform {
-  line-height: 2;
-}
-
-div.mainhomepage .search .searchbox .searchform label {
-  font-weight: 600;
+  display: -webkit-box;
+  display: flex;
 }
 
 div.mainhomepage .search .searchbox .searchform input {
-  width: 100%;
-  padding: 15px 5px;
+  width: 80%;
+  padding-left: 7px;
+  font-size: 16px;
+  font-weight: 100;
 }
 
-div.mainhomepage .search .searchbox .search-go {
-  padding-top: 40px;
+div.mainhomepage .search .searchbox .searchform a {
+  display: inline-block;
   text-align: end;
-}
-
-div.mainhomepage .search .searchbox .search-go a {
+  margin-left: 20px;
   text-decoration: none;
-  padding: 15px;
+  padding: 10px 15px;
   background-color: #ff5b60;
   color: white;
   border-radius: 5px;
@@ -111,30 +92,44 @@ div.mainhomepage .showflatsrates .showflatsrates {
 
 div.mainhomepage .showflats .flat,
 div.mainhomepage .showflatsrates .flat {
-  padding-bottom: 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   width: 96%;
+  margin-bottom: 40px;
+  background: #f2f2f2;
 }
 
-div.mainhomepage .showflats .flat img,
-div.mainhomepage .showflatsrates .flat img {
+div.mainhomepage .showflats .flat a,
+div.mainhomepage .showflatsrates .flat a {
+  text-decoration: none;
+  color: black;
+}
+
+div.mainhomepage .showflats .flat a img,
+div.mainhomepage .showflatsrates .flat a img {
   width: 100%;
   height: auto;
   border-radius: 5px;
 }
 
-div.mainhomepage .showflats .flat div.flex-rate,
-div.mainhomepage .showflatsrates .flat div.flex-rate {
+div.mainhomepage .showflats .flat a div.flex-rate,
+div.mainhomepage .showflatsrates .flat a div.flex-rate {
+  padding: 20px;
   display: -webkit-box;
   display: flex;
+  flex-wrap: wrap;
   -webkit-box-pack: justify;
           justify-content: space-between;
   -webkit-box-align: center;
           align-items: center;
 }
 
-div.mainhomepage .showflats .flat div.flex-rate i.rate,
-div.mainhomepage .showflatsrates .flat div.flex-rate i.rate {
+div.mainhomepage .showflats .flat a div.flex-rate div h3,
+div.mainhomepage .showflatsrates .flat a div.flex-rate div h3 {
+  margin-bottom: 8px;
+}
+
+div.mainhomepage .showflats .flat a div.flex-rate i.rate,
+div.mainhomepage .showflatsrates .flat a div.flex-rate i.rate {
   color: #ff5b60;
   font-size: 15px;
   margin-left: 2px;
