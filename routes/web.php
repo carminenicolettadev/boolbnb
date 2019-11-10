@@ -23,4 +23,3 @@ Route::get('/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware
 Route::get('edit/{id}', 'FlatController@editFlat')->name('editFlat')->middleware('auth');
 Route::post('{id}', 'FlatController@updateFlat')->name('updateFlat')->middleware('auth');
 // message
-// Route::get('/flat/{id}', 'MessageController@index')->name('index');
