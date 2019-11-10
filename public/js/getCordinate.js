@@ -146,7 +146,7 @@ $(document).ready(init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\js\getCordinate.js */"./resources/js/getCordinate.js");
+module.exports = __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\js\getCordinate.js */"./resources/js/getCordinate.js");
 
 
 /***/ })
