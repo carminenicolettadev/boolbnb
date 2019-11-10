@@ -138,6 +138,14 @@ class FlatController extends Controller
       // dd($detail);
       $address ->save();
 
+
+      //Services add
+      foreach ($request -> checkboxvar  as $value ) {
+        $service = Service::findOrFail($value);
+        $service->flats()->attach($flat_id);
+        $service->save();
+      }
+      
       $log = $flat->user_id;
 
       return redirect("profile/$log");

@@ -54,7 +54,7 @@
 
                 <div class="form-group col-md-6">
                   <label>img</label>
-                  <input type="file" name="img" accept="image/*">                
+                  <input type="file" name="img" accept="image/*">
                 </div>
 
                 <div class="form-group col-md-6 d-none">
@@ -101,6 +101,19 @@
                   <input type="text" id="lon" class="form-control" name="lon"  value="">
                 </div>
 
+
+                <div class="form-group col-md-12 mt-5">
+                  <h4>Services</h4>
+                </div>
+                <div class="service-control col-md-12">
+
+                @foreach($services as $service)
+                  <label for="{{$service -> name}}">{{$service ->name}}</label>
+                  <input type="checkbox"   name="checkboxvar[]" value="{{$service ->id}}">
+
+                @endforeach
+
+                </div>
 
               </div>
 

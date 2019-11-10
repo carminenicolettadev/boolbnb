@@ -91,3 +91,16 @@
   color: white;
   font-size: 18px;
 }
+.service-control{
+  padding-bottom:30px;
+  label{
+    font-size:20px;
+
+  }
+  label::first-letter{
+    text-transform: uppercase;
+  }
+  input{
+    margin-right:15px;
+  }
+}
