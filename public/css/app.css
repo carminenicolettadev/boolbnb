@@ -11197,3 +11197,19 @@ a.text-dark:focus {
   font-size: 18px;
 }
 
+.service-control {
+  padding-bottom: 30px;
+}
+
+.service-control label {
+  font-size: 20px;
+}
+
+.service-control label::first-letter {
+  text-transform: uppercase;
+}
+
+.service-control input {
+  margin-right: 15px;
+}
+
