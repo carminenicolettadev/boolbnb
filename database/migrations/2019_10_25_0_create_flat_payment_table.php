@@ -15,8 +15,7 @@ class CreateFlatPaymentTable extends Migration
     {
         Schema::create('flat_payment', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-
+            $table->dateTime('expiration')->nullable();
         });
     }
 
