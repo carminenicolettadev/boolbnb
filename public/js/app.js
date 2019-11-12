@@ -49644,6 +49644,7 @@ $(document).ready(init);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\profile.scss */"./resources/sass/profile.scss");
 __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\singleFlat.scss */"./resources/sass/singleFlat.scss");
@@ -49659,6 +49660,15 @@ __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-a
 __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\sass\12bool.scss */"./resources/sass/12bool.scss");
 __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\sass\homepage.scss */"./resources/sass/homepage.scss");
 module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> master
+=======
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\profile.scss */"./resources/sass/profile.scss");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\singleFlat.scss */"./resources/sass/singleFlat.scss");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\menu.scss */"./resources/sass/menu.scss");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\12bool.scss */"./resources/sass/12bool.scss");
+__webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\homepage.scss */"./resources/sass/homepage.scss");
+module.exports = __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> master
 
 

@@ -5,9 +5,12 @@ Route::get('/homepage','HomeController@index');
 Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
 Route::post('/storemesg/{id}', 'MessageController@messageStore')->name('sendmessage');
 
+// Payment
+Route::get('/payment/{id}', 'PaymentsController@index')->name('indexPayment');
+Route::get('/payment/make', 'PaymentsController@make')->name('payment.make');
+
+// Auth
 Auth::routes();
-
-
 
 // Profile
 Route::get('/profile/{id}', 'UserController@showProfile')->name('profile')->middleware('auth');
@@ -22,4 +25,8 @@ Route::post('/store', 'FlatController@storeFlat')->name('storeFlat')->middleware
 Route::get('/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware('auth');
 Route::get('edit/{id}', 'FlatController@editFlat')->name('editFlat')->middleware('auth');
 Route::post('{id}', 'FlatController@updateFlat')->name('updateFlat')->middleware('auth');
+<<<<<<< HEAD
 // message
+=======
+
+>>>>>>> master
