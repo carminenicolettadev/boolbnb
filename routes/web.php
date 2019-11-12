@@ -5,7 +5,7 @@ Route::get('/homepage','HomeController@index');
 Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
 
 // Payment
-Route::get('/payment', 'PaymentsController@index');
+Route::get('/payment/{id}', 'PaymentsController@index')->name('indexPayment');
 Route::get('/payment/make', 'PaymentsController@make')->name('payment.make');
 
 // Auth
