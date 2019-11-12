@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Braintree_Transaction;
+use Braintree_Gateway;
 use App\Flat;
 use App\User;
 
@@ -20,17 +21,30 @@ class PaymentsController extends Controller
 
         return view('payment', compact('singleFlat', 'user'));
     }
-    
-    public function make(Request $request) {
-        $payload = $request->input('payload', false);
-        $nonce = $payload['nonce'];
-        $status = Braintree_Transaction::sale([
-                                'amount' => '12.50',
-                                'paymentMethodNonce' => $nonce,
-                                'options' => [
-                                        'submitForSettlement' => True
-                                            ]
-                ]);
-        return response()->json($status);
+
+    /*  Function is to process payment on braintree */
+    public function make(Request $request)
+    {
+      $payload = $request->input('payload', false);
+      $nonce = $payload['nonce'];
+      $gateway = $this->brainConfig();
+      $status = $gateway->transaction()->sale([
+                      'amount' => '10.00',
+                      'paymentMethodNonce' => $nonce,
+                      'options' => [
+                          'submitForSettlement' => True
+                    ]
+                  ]);
+      return response()->json($status);
+    }
+
+    public function brainConfig()
+    {
+      return $gateway = new Braintree_Gateway([
+                        'environment' => env('BRAINTREE_ENV'),
+                        'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+                        'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+                        'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+                    ]);
     }
 }

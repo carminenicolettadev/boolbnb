@@ -1,0 +1,89 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+.centrone {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
+}
+
+.centrone .search-bar {
+  padding: 40px 20px;
+  background: #c1cbe6;
+  width: 100%;
+}
+
+.centrone .sidebar {
+  width: 40%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.mappa {
+  width: 60%;
+  height: 550px;
+}
+
+canvas.mapboxgl-canvas {
+  width: 100%;
+}
+
+.paginate {
+  display: -webkit-box;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin-bottom: 70px;
+}
+
+.paginate .pagination {
+  list-style: none;
+}
+
+.paginate .pagination .page-item {
+  float: left;
+  border: solid 2px #ff5b60;
+  margin: 10px;
+  height: 20px;
+  width: 20px;
+  padding: 20px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  font-size: 18px;
+}
+
+.paginate .pagination .page-item .page-link {
+  padding: 20px;
+  font-weight: lighter;
+  color: #737373;
+}
+
+.paginate .pagination .page-item.disabled {
+  display: none;
+}
+
+.paginate .pagination .page-item.active {
+  background: #ff5b60;
+  color: white !important;
+  font-weight: bolder;
+}
+
+.paginate .pagination .page-item.active .page-link {
+  font-weight: bolder;
+  color: white;
+}
+
