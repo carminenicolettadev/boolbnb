@@ -25,8 +25,3 @@ Route::post('/store', 'FlatController@storeFlat')->name('storeFlat')->middleware
 Route::get('/{id}', 'FlatController@deleteFlat')->name('deleteFlat')->middleware('auth');
 Route::get('edit/{id}', 'FlatController@editFlat')->name('editFlat')->middleware('auth');
 Route::post('{id}', 'FlatController@updateFlat')->name('updateFlat')->middleware('auth');
-<<<<<<< HEAD
-// message
-=======
-
->>>>>>> master
