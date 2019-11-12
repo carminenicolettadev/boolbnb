@@ -30,12 +30,24 @@ div.mainhomepage .search .searchbox h1 {
   margin-bottom: 20px;
 }
 
-div.mainhomepage .search .searchbox .searchform {
+div.mainhomepage .search .searchbox .cerca {
   display: -webkit-box;
   display: flex;
 }
 
-div.mainhomepage .search .searchbox .searchform input {
+div.mainhomepage .search .searchbox .cerca .bottone-invia {
+  background: red;
+  height: 50px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+div.mainhomepage .search .searchbox .cerca .searchform {
+  display: -webkit-box;
+  display: flex;
+}
+
+div.mainhomepage .search .searchbox .cerca .searchform input {
   width: 100%;
   padding-left: 7px;
   font-size: 16px;
@@ -43,7 +55,7 @@ div.mainhomepage .search .searchbox .searchform input {
   height: 40px;
 }
 
-div.mainhomepage .search .searchbox .searchform a {
+div.mainhomepage .search .searchbox .cerca .searchform a {
   display: inline-block;
   text-align: end;
   margin-left: 20px;
