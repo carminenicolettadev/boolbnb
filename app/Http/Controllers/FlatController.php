@@ -22,26 +22,102 @@ class FlatController extends Controller
     {
 
       $flats = Flat::orderBy('created_at', 'desc')->paginate(6);
-      $arrDetail = [];
-      $arrAddress = [];
-
-
-      foreach ($flats as $flat) {
-          $detailFlat = Detail::where('flat_id', $flat->id)->get();
-          array_push($arrDetail, $detailFlat);
-      }
-
-      foreach ($flats as $address) {
-          $addressFlat = Address::where('flat_id', $address->id)->get();
-          array_push($arrAddress, $addressFlat);
-      }
-
+      $services = Service::all();
 
 
       return view('allFlatsPage')->with('flats', $flats)
-                            ->with('arrDetail', $arrDetail)
-                            ->with('arrAddress', $arrAddress);
+                                 ->with('services', $services);
     }
+
+
+
+  public function filters(Request $request)
+    {
+
+      $services = Service::all();
+
+
+
+      $arrForm = [
+        'wifi'=> false,
+        'piscina'=> false,
+        'spa'=> false,
+        'balcone'=> false,
+        'giardino'=> false,
+        'mare'=> false,
+      ];
+
+      $arrServices = [];
+
+      foreach ($request -> checkboxvar  as $value ) {
+        array_push($arrServices,$value);
+      }
+
+      // var_dump(array_keys($arrForm));
+
+      for ($i=0; $i < count($arrServices); $i++) {
+        foreach ($arrForm as $key => $value) {
+          // var_dump($key, $value);
+          if ($arrServices[$i] === $key) {
+            // var_dump($arrServices[$i]);
+           $arrForm[$key] = true;
+          }
+        }
+      }
+
+
+
+      $flats = new Flat;
+      $services = Service::all();
+
+
+      var_dump($arrForm);
+
+      //Flat:: non va bene dovrebbe essere $flat
+      if ($arrForm['wifi']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','wifi');
+        })->get();
+      }
+
+      if ($arrForm['balcone']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','balcone');
+        })->get();
+      }
+
+      if ($arrForm['mare']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','mare');
+        })->get();
+      }
+
+      if ($arrForm['spa']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','spa');
+        })->get();
+      }
+
+      if ($arrForm['piscina']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','piscina');
+        })->get();
+      }
+
+      if ($arrForm['giardino']) {
+        $flats = Flat::whereHas('services', function($query){
+            $query->where('name','giardino');
+        })->get();
+      }
+
+
+      return view('allFlatsPage')->with('flats', $flats)
+                                 ->with('services', $services);
+
+
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -145,7 +221,7 @@ class FlatController extends Controller
         $service->flats()->attach($flat_id);
         $service->save();
       }
-      
+
       $log = $flat->user_id;
 
       return redirect("profile/$log");

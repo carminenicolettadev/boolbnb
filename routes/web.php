@@ -3,6 +3,7 @@
 Route::get('/', function () { return redirect('/homepage');});
 Route::get('/homepage','HomeController@index');
 Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
+Route::post('/flats', 'FlatController@filters')->name('filters');
 
 Auth::routes();
 

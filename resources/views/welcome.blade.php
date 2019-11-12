@@ -27,7 +27,7 @@
 
       @yield('menu')
 
-      
+
       <div class="mainhomepage">
 
         <div class="container search "id="background-1">
@@ -37,8 +37,11 @@
                 <div class="col-lg-offset-1 col-lg-11 col-md-offset-1 col-md-11 col-sm-offset-1 col-sm-11 ">
                   <div class="searchbox" style="position:relative">
                     <h1 >Cerca alloggi unici al mondo</h1>
+                    <form class="" action="index.html" method="post">
+                      <input type="text" class="place" name="" value="">
+                    </form>
                     <div class="searchform" id="map" style="height: 200px;width:100%">
-                       
+
                     </div>
                   </div>
                 </div>
@@ -121,8 +124,10 @@
 
 
 
+
+
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/services/services-web.min.js"></script>
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/maps/maps-web.min.js"></script> -->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/maps/maps-web.min.js"></script>
 
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/1.0.6/SearchBox-web.js"></script>
     <script type="text/javascript" src="{{ asset('sdk/tomtom.min.js')}}"></script>
@@ -145,7 +150,7 @@
         z-index: 10;
         width:100%;
         max-height:188px !important;
-        
+
       }
       .tt-search-box-search-icon{
         padding-right:20px;
@@ -153,40 +158,52 @@
       .tt-search-box-result-list:hover{
        background:rgb(60,179,113);
        color:red;
-        
+
       }
-      
+
       .tt-search-box{
-        
+
         width:490px !important;
       }
     </style>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
     <script type="text/javascript">
       console.log("ok funziono");
 
-
-           
-
-           var map = tt.map({
-               key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
-               container: 'map',
-               style: 'tomtom://vector/1/basic-main',
-               options : {
-                 showZoom: false,
-                 showPitch: false
-               }
+      $(document).ready(function(){
+        $(".tt-search-box-result-list-container").click(function(e){
+             $('input.place').val($('.tt-search-box-input').val()) ;
+             console.log($('input.place').val());
            });
+        });
 
-           var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
-               searchOptions: {
-                   key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
-               }
-           });
 
-        
-           map.addControl(ttSearchBox, 'top-left');
 
-          
+
+
+         var map = tt.map({
+             key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+             container: 'map',
+             style: 'tomtom://vector/1/basic-main',
+             options : {
+               showZoom: false,
+               showPitch: false
+             }
+         });
+
+         var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+             searchOptions: {
+                 key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+             }
+         });
+
+
+         map.addControl(ttSearchBox, 'top-left');
+
+
       </script>
     </body>
 </html>

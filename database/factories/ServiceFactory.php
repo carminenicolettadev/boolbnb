@@ -8,6 +8,6 @@ use App\Service;
 
 $factory->define(Service::class, function (Faker $faker) {
     return [
-        'name' => $faker-> word
+        'name' => $faker->unique()->randomElement($array = array ('wifi','spa','piscina','giardino','balcone','mare'))
     ];
 });
