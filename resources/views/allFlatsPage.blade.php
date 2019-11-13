@@ -25,6 +25,8 @@
     @include('layouts.menu2')
 
     @yield('menu')
+    {{-- <input type="text" name="" id="city" value="{{ $city}}"> --}}
+    <button type="submit" name="button">udiysfbsdifk dbsifdsb fjhsdbf sdjhfbsd kf</button>
 
     <div class="centrone">
       <div class="search-bar">
@@ -72,13 +74,15 @@
           </div>
         </div>
       </div>
-      <div class="mappa" id="map">
+      {{-- <div class="mappa" id="map">
+      </div> --}}
+      <div class="mappa2" id="map2">
       </div>
 
 
 
-    </div>
 
+    </div>
 
 
 
@@ -117,59 +121,152 @@
         width:490px !important;
       }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
     <script type="text/javascript">
       console.log("ok funziono");
-           // var markers = [];
-           var map = tt.map({
-               key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
-               container: 'map',
-               style: 'tomtom://vector/1/basic-main',
-               options : {
-                 showZoom: false,
-                 showPitch: false
-               }
-           });
-           var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
-               searchOptions: {
-                   key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
-               }
-           });
-           map.addControl(new tt.FullscreenControl());
-           map.addControl(new tt.NavigationControl());
-           map.addControl(ttSearchBox, 'top-left');
-           var searchMarkersManager = new SearchMarkersManager(map);
-           function getBounds(data) {
-               if (data.viewport) {
-                   var btmRight = [data.viewport.btmRightPoint.lng, data.viewport.btmRightPoint.lat];
-                   var topLeft = [data.viewport.topLeftPoint.lng, data.viewport.topLeftPoint.lat];
-               }
-               return [btmRight, topLeft];
-           }
-           function fitToViewport(markerData) {
-               if (!markerData || (markerData instanceof Array && !markerData.length)) {
-                   return;
-               }
-               var bounds = new tt.LngLatBounds();
-               if (markerData instanceof Array) {
-                   markerData.forEach(function(marker) {
-                       bounds.extend(getBounds(marker));
-                   });
-               } else {
-                   bounds.extend(getBounds(markerData));
-               }
-               map.fitBounds(bounds, { padding: 100, linear: true });
-           }
-           ttSearchBox.on('tomtom.searchbox.resultscleared', function() {
-               searchMarkersManager.clear();
-           });
-           ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
-               searchMarkersManager.draw(resp.data.results);
-               fitToViewport(resp.data.results);
-           });
-           ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
-               searchMarkersManager.draw([resp.data.result]);
-               fitToViewport(resp.data.result);
-           });
+
+      $(document).ready(function(){
+        $('.tt-search-box-input').val($('#city').val());
+        var posto = $('#city').val();
+        //create a map
+        $.ajax({
+         url:"/getCoordi",
+         method:"GET",
+         success:function(data){
+           console.log(data);
+
+
+           getRadius(45.00002,9.10000);
+         },
+         error:function(err){
+           console.log(err);
+         }
+       });
+
+
+      function getRadius(lat2,lon2){
+        var latitude1 =45.46362;
+        var longitude1 =9.18812;
+        var latitude2 =lat2;
+        var longitude2 = lon2;
+        raggio = get_meters_between_points(latitude1,longitude1,latitude2,longitude2);
+        // console.log("raggio",raggio);
+        function get_meters_between_points(latitude1, longitude1, latitude2, longitude2) {
+           if ((latitude1 == latitude2) && (longitude1 == longitude2)) { return 0; } // distance is zero because they're the same point
+            let p1 = deg2rad(latitude1);
+             let p2 = deg2rad(latitude2);
+              let dp = deg2rad(latitude2 - latitude1);
+               let dl = deg2rad(longitude2 - longitude1);
+               console.log(Math.sin(dp/2)*2);
+               console.log( Math.sin(dp/2));
+                let a = ( Math.sin(dp/2) * Math.sin(dp/2)) + (Math.cos(p1) * Math.cos(p2) * Math.sin(dl/2) * Math.sin(dl/2));
+                 let c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+                  let r = 6371008; // Earth's average radius, in meters
+                   let d = r * c;
+                   let km = Math.round(d/1000);
+                   console.log("raggio",km);
+                   //test
+                   // (x - center_x)^2 + (y - center_y)^2 < radius^2
+                   // var test = (Math.pow((longitude2 - latitude1), 2)) + (Math.pow((longitude2 - longitude1), 2)) < (Math.pow(km, 2));
+                   // console.log("test",test);
+
+                   //
+                   // if (test) {}
+
+                   //
+
+                   if(km <20){
+                     console.log("flat trovato");
+                   }
+                    return km; // distance, in meters
+                  }
+                function deg2rad(x){
+                  var pi = Math.PI;
+                  return x * (pi/180);
+                }
+      }
+
+
+
+
+
+      });//end jquery
+
+
+
+
+      //
+      //
+      //
+      //
+      //  // //
+      //  // var markers = [];
+      //
+      //
+      //  var map = tt.map({
+      //      key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+      //      container: 'map',
+      //      style: 'tomtom://vector/1/basic-main',
+      //      options : {
+      //        showZoom: false,
+      //        showPitch: false
+      //      }
+      //  });
+      //
+      //
+      //
+      //  var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+      //      searchOptions: {
+      //          key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+      //      }
+      //  });
+      //  map.addControl(new tt.FullscreenControl());
+      //  map.addControl(new tt.NavigationControl());
+      //  map.addControl(ttSearchBox, 'top-left');
+      //  var searchMarkersManager = new SearchMarkersManager(map);
+      //  function getBounds(data) {
+      //      if (data.viewport) {
+      //          var btmRight = [data.viewport.btmRightPoint.lng, data.viewport.btmRightPoint.lat];
+      //          var topLeft = [data.viewport.topLeftPoint.lng, data.viewport.topLeftPoint.lat];
+      //      }
+      //      return [btmRight, topLeft];
+      //  }
+      //
+      //  function fitToViewport(markerData) {
+      //      if (!markerData || (markerData instanceof Array && !markerData.length)) {
+      //          return;
+      //      }
+      //      var bounds = new tt.LngLatBounds();
+      //      if (markerData instanceof Array) {
+      //          markerData.forEach(function(marker) {
+      //              bounds.extend(getBounds(marker));
+      //          });
+      //      } else {
+      //          bounds.extend(getBounds(markerData));
+      //      }
+      //      map.fitBounds(bounds, { padding: 100, linear: true });
+      //  }
+      //  ttSearchBox.on('tomtom.searchbox.resultscleared', function() {
+      //      searchMarkersManager.clear();
+      //  });
+      //  ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
+      //    console.log(resp);
+      //      searchMarkersManager.draw(resp.data.results);
+      //      fitToViewport(resp.data.results);
+      //  });
+      //  ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
+      //      searchMarkersManager.draw([resp.data.result]);
+      //      fitToViewport(resp.data.result);
+      //  });
+
+
+
+
+
+
+
       </script>
 
   </body>

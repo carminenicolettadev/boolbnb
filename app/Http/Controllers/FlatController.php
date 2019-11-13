@@ -6,6 +6,7 @@ use App\Address;
 use App\Service;
 use App\Detail;
 use App\User;
+
 class FlatController extends Controller
 {
     /**
@@ -20,6 +21,70 @@ class FlatController extends Controller
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('services', $services);
     }
+
+    public function getCity(Request $request)
+    {
+      $city = $request-> place;
+
+      $flats = [];
+
+      $unit = "K";
+      $lat1= 45.46362;
+      $lon1= 9.18812;
+      $raggio = 50;
+      $addresses = Address::all();
+
+      function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+          if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+            return 0;
+          }
+          else {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+            $unit = strtoupper($unit);
+
+            if ($unit == "K") {
+              $kilometri = round($miles * 1.609344);
+              return $kilometri;
+            } else if ($unit == "N") {
+              return ($miles * 0.8684);
+            } else {
+              return $miles;
+            }
+          }
+        }
+
+      foreach ($addresses as $address) {
+        $lat = $address -> lat;
+        $lon = $address -> lon;
+        $center_x= $lat1;
+        $center_y= $lon1;
+
+        $unit = "K";
+        $km = distance($center_x, $center_y, $lat, $lon, $unit);
+        if ($km < $raggio) {
+
+          $flat_id = $address -> flat_id;
+          $flat = Flat::findOrFail($flat_id);
+          $flats[]=$flat;
+        }
+
+      }
+
+
+      $services = Service::all();
+      return view('allFlatsPage')->with('flats', $flats)
+                                 ->with('city', $city)
+                                 ->with('services', $services);
+
+    }
+
+
+
+
   public function filters(Request $request)
     {
       $services = Service::all();
@@ -50,35 +115,37 @@ class FlatController extends Controller
       var_dump($arrForm);
       //Flat:: non va bene dovrebbe essere $flat
       if ($arrForm['wifi']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','wifi');
-        })->get();
+        });
       }
       if ($arrForm['balcone']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','balcone');
-        })->get();
+        });
       }
       if ($arrForm['mare']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','mare');
-        })->get();
+        });
       }
       if ($arrForm['spa']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','spa');
-        })->get();
+        });
       }
       if ($arrForm['piscina']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','piscina');
-        })->get();
+        });
       }
       if ($arrForm['giardino']) {
-        $flats = Flat::whereHas('services', function($query){
+        $flats = $flats->whereHas('services', function($query){
             $query->where('name','giardino');
-        })->get();
+        });
       }
+
+      $flats = $flats->get();
 
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('services', $services);
