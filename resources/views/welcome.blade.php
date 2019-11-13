@@ -39,9 +39,16 @@
                     <h1 >Cerca alloggi unici al mondo</h1>
                     <div class="cerca">
                       <div class="searchform" id="map" style="height: 200px;width:70%"></div>
-                      <button type="submit" class="bottone-invia"name="button">invia</button>
+
                     </div>
-                    <input type="text" class="place" value="">
+                    <form  action="{{ route('getCity')}}"  method="get"  accept-charset="UTF-8">
+                      @csrf
+                      @method('GET')
+                    <input type="text" class="place" name="place" value="">
+                    <button type="submit" class="bottone-invia" >invia</button>
+
+
+                  </form>
 
 
                   </div>

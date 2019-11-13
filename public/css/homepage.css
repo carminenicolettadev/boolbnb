@@ -40,6 +40,7 @@ div.mainhomepage .search .searchbox .cerca .bottone-invia {
   height: 50px;
   width: 70%;
   margin: 0 auto;
+  margin-top: 15px;
 }
 
 div.mainhomepage .search .searchbox .cerca .searchform {
