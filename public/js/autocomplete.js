@@ -106,7 +106,7 @@ $(document).ready(init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\js\autocomplete.js */"./resources/js/autocomplete.js");
+module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\js\autocomplete.js */"./resources/js/autocomplete.js");
 
 
 /***/ })

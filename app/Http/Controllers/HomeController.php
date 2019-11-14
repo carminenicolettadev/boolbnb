@@ -20,9 +20,8 @@ class HomeController extends Controller
          ->take(8)
          ->get();
 
-
-
          $flatsrates = Flat::orderBy("rate","desc")->take(6)->get();
+         
          return view('welcome',compact('flatsevidency','flatsrates'));
 
 

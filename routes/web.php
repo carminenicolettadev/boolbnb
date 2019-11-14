@@ -2,12 +2,17 @@
 
 Route::get('/', function () { return redirect('/homepage');});
 Route::get('/homepage','HomeController@index');
-Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
+// Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
+Route::post('', 'FlatController@filters')->name('filters');
+Route::get('/flats', 'FlatController@getCity')->name('getCity');
+
+
+
 Route::post('/storemesg/{id}', 'MessageController@messageStore')->name('sendmessage');
 
 // Payment
 Route::get('/payment/{id}', 'PaymentsController@index')->name('indexPayment');
-Route::get('/payment/make', 'PaymentsController@make')->name('payment.make');
+Route::get('/payment', 'PaymentsController@make')->name('paymentMake');
 
 // Auth
 Auth::routes();
