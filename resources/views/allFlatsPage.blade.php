@@ -25,8 +25,7 @@
     @include('layouts.menu2')
 
     @yield('menu')
-    {{-- <input type="text" name="" id="city" value="{{ $city}}"> --}}
-    <button type="submit" name="button">udiysfbsdifk dbsifdsb fjhsdbf sdjhfbsd kf</button>
+    <input type="text" name="" id="city" value="{{ $city}}">
 
     <div class="centrone">
       <div class="search-bar">
@@ -74,9 +73,18 @@
           </div>
         </div>
       </div>
-      {{-- <div class="mappa" id="map">
-      </div> --}}
-      <div class="mappa2" id="map2">
+        <div class="flats">
+
+
+        @foreach ($flats as $flat)
+        <div class="valflat"style="Hidden" rif="{{$flat->id}}">
+          <input id=titleflat type="hidden" value="{{$flat ->detail ->title}}"></input>
+          <input id="latval"type="hidden" value="{{$flat -> address ->lat}}"></input>
+          <input id="lonval"type="hidden" value="{{$flat -> address ->lon}}"></input>
+        </div>
+        @endforeach
+      </div>
+      <div class="mappa2" id="map">
       </div>
 
 
@@ -128,71 +136,56 @@
       console.log("ok funziono");
 
       $(document).ready(function(){
-        $('.tt-search-box-input').val($('#city').val());
+
         var posto = $('#city').val();
-        //create a map
-        $.ajax({
-         url:"/getCoordi",
-         method:"GET",
-         success:function(data){
-           console.log(data);
+        console.log(posto);
+
+        createmapmarker();
 
 
-           getRadius(45.00002,9.10000);
-         },
-         error:function(err){
-           console.log(err);
-         }
-       });
 
 
-      function getRadius(lat2,lon2){
-        var latitude1 =45.46362;
-        var longitude1 =9.18812;
-        var latitude2 =lat2;
-        var longitude2 = lon2;
-        raggio = get_meters_between_points(latitude1,longitude1,latitude2,longitude2);
-        // console.log("raggio",raggio);
-        function get_meters_between_points(latitude1, longitude1, latitude2, longitude2) {
-           if ((latitude1 == latitude2) && (longitude1 == longitude2)) { return 0; } // distance is zero because they're the same point
-            let p1 = deg2rad(latitude1);
-             let p2 = deg2rad(latitude2);
-              let dp = deg2rad(latitude2 - latitude1);
-               let dl = deg2rad(longitude2 - longitude1);
-               console.log(Math.sin(dp/2)*2);
-               console.log( Math.sin(dp/2));
-                let a = ( Math.sin(dp/2) * Math.sin(dp/2)) + (Math.cos(p1) * Math.cos(p2) * Math.sin(dl/2) * Math.sin(dl/2));
-                 let c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-                  let r = 6371008; // Earth's average radius, in meters
-                   let d = r * c;
-                   let km = Math.round(d/1000);
-                   console.log("raggio",km);
-                   //test
-                   // (x - center_x)^2 + (y - center_y)^2 < radius^2
-                   // var test = (Math.pow((longitude2 - latitude1), 2)) + (Math.pow((longitude2 - longitude1), 2)) < (Math.pow(km, 2));
-                   // console.log("test",test);
+        // var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+        //     searchOptions: {
+        //         key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+        //     }
+        // });
+        // map.addControl(ttSearchBox, 'top-left');
 
-                   //
-                   // if (test) {}
 
-                   //
+        function createmapmarker(){
+          var divflats = $('div.flats >div').length;
+          var divflatselement = $('div.flats >div');
+          var map = tomtom.L.map('map', {
+          key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
+          basePath: 'sdk/',
+          zoom: 10,
+          center: [45.46362,9.18812],//center sarà il valore preso da input
+          });
 
-                   if(km <20){
-                     console.log("flat trovato");
-                   }
-                    return km; // distance, in meters
-                  }
-                function deg2rad(x){
-                  var pi = Math.PI;
-                  return x * (pi/180);
-                }
+        for (var i = 0; i < divflats; i++) {
+          let title = divflatselement[i].children[0].value;//titleflat
+          let lat = divflatselement[i].children[1].value;//lat
+          let lon = divflatselement[i].children[2].value;//long
+
+
+          var marker = tomtom.L.marker([lat,lon]).addTo(map);
+          marker.bindPopup(title);
+          console.log(i,marker);
+
+        }
       }
 
 
 
 
 
+
+
+
+
       });//end jquery
+
 
 
 

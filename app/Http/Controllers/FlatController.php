@@ -16,7 +16,7 @@ class FlatController extends Controller
      */
     public function showAllFlats()
     {
-      $flats = Flat::orderBy('created_at', 'desc')->paginate(6);
+      $flats = Flat::orderBy('created_at', 'desc')->get();
       $services = Service::all();
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('services', $services);
@@ -24,6 +24,7 @@ class FlatController extends Controller
 
     public function getCity(Request $request)
     {
+
       $city = $request-> place;
 
       $flats = [];
@@ -31,7 +32,7 @@ class FlatController extends Controller
       $unit = "K";
       $lat1= 45.46362;
       $lon1= 9.18812;
-      $raggio = 50;
+      $raggio = 20;
       $addresses = Address::all();
 
       function distance($lat1, $lon1, $lat2, $lon2, $unit) {
@@ -69,6 +70,7 @@ class FlatController extends Controller
 
           $flat_id = $address -> flat_id;
           $flat = Flat::findOrFail($flat_id);
+
           $flats[]=$flat;
         }
 
@@ -76,9 +78,12 @@ class FlatController extends Controller
 
 
       $services = Service::all();
+
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('city', $city)
                                  ->with('services', $services);
+
+
 
     }
 
