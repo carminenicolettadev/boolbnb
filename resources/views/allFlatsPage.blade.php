@@ -25,7 +25,7 @@
     @include('layouts.menu2')
 
     @yield('menu')
-    <input type="text" name="" id="city" value="{{ $city}}">
+    <input type="hidden" name="" id="city" value="{{ $city}}">
 
     <div class="centrone">
       <div class="search-bar">
@@ -77,13 +77,16 @@
 
 
         @foreach ($flats as $flat)
-        <div class="valflat"style="Hidden" rif="{{$flat->id}}">
+        <div class="valflat"style="display:none" rif="{{$flat->id}}">
           <input id=titleflat type="hidden" value="{{$flat ->detail ->title}}"></input>
           <input id="latval"type="hidden" value="{{$flat -> address ->lat}}"></input>
           <input id="lonval"type="hidden" value="{{$flat -> address ->lon}}"></input>
         </div>
         @endforeach
       </div>
+      <input id="centerx"type="hidden" name="" value="{{$latin}}">
+      <input id="centery" type="hidden" name="" value="{{$lonin}}">
+
       <div class="mappa2" id="map">
       </div>
 
@@ -130,27 +133,21 @@
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+    </script>
     <script type="text/javascript">
-      console.log("ok funziono");
-
       $(document).ready(function(){
 
         var posto = $('#city').val();
-        console.log(posto);
-
+        
+        var centerx=$('#centerx').val();
+        var centery=$('#centery').val();
+        if(centerx ==="" || centery ===""){//set default values ​​without location search for map
+          centerx = 45.46362;
+          centery = 9.18812;
+        };
         createmapmarker();
-
-
-
-
-        // var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
-        //     searchOptions: {
-        //         key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
-        //     }
-        // });
-        // map.addControl(ttSearchBox, 'top-left');
 
 
         function createmapmarker(){
@@ -160,107 +157,21 @@
           key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
           basePath: 'sdk/',
           zoom: 10,
-          center: [45.46362,9.18812],//center sarà il valore preso da input
+          center: [centerx,centery],
           });
 
-        for (var i = 0; i < divflats; i++) {
-          let title = divflatselement[i].children[0].value;//titleflat
-          let lat = divflatselement[i].children[1].value;//lat
-          let lon = divflatselement[i].children[2].value;//long
+          for (var i = 0; i < divflats; i++) {
+            let title = divflatselement[i].children[0].value;//titleflat
+            let lat = divflatselement[i].children[1].value;//lat
+            let lon = divflatselement[i].children[2].value;//long
+            var marker = tomtom.L.marker([lat,lon]).addTo(map);
+            marker.bindPopup(title);
 
-
-          var marker = tomtom.L.marker([lat,lon]).addTo(map);
-          marker.bindPopup(title);
-          console.log(i,marker);
-
+          }
         }
-      }
-
-
-
-
-
-
-
-
-
       });//end jquery
 
-
-
-
-
-      //
-      //
-      //
-      //
-      //  // //
-      //  // var markers = [];
-      //
-      //
-      //  var map = tt.map({
-      //      key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
-      //      container: 'map',
-      //      style: 'tomtom://vector/1/basic-main',
-      //      options : {
-      //        showZoom: false,
-      //        showPitch: false
-      //      }
-      //  });
-      //
-      //
-      //
-      //  var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
-      //      searchOptions: {
-      //          key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
-      //      }
-      //  });
-      //  map.addControl(new tt.FullscreenControl());
-      //  map.addControl(new tt.NavigationControl());
-      //  map.addControl(ttSearchBox, 'top-left');
-      //  var searchMarkersManager = new SearchMarkersManager(map);
-      //  function getBounds(data) {
-      //      if (data.viewport) {
-      //          var btmRight = [data.viewport.btmRightPoint.lng, data.viewport.btmRightPoint.lat];
-      //          var topLeft = [data.viewport.topLeftPoint.lng, data.viewport.topLeftPoint.lat];
-      //      }
-      //      return [btmRight, topLeft];
-      //  }
-      //
-      //  function fitToViewport(markerData) {
-      //      if (!markerData || (markerData instanceof Array && !markerData.length)) {
-      //          return;
-      //      }
-      //      var bounds = new tt.LngLatBounds();
-      //      if (markerData instanceof Array) {
-      //          markerData.forEach(function(marker) {
-      //              bounds.extend(getBounds(marker));
-      //          });
-      //      } else {
-      //          bounds.extend(getBounds(markerData));
-      //      }
-      //      map.fitBounds(bounds, { padding: 100, linear: true });
-      //  }
-      //  ttSearchBox.on('tomtom.searchbox.resultscleared', function() {
-      //      searchMarkersManager.clear();
-      //  });
-      //  ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
-      //    console.log(resp);
-      //      searchMarkersManager.draw(resp.data.results);
-      //      fitToViewport(resp.data.results);
-      //  });
-      //  ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
-      //      searchMarkersManager.draw([resp.data.result]);
-      //      fitToViewport(resp.data.result);
-      //  });
-
-
-
-
-
-
-
-      </script>
+    </script>
 
   </body>
 </html>

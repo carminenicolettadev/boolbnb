@@ -26,12 +26,17 @@ class FlatController extends Controller
     {
 
       $city = $request-> place;
-
+      $latin = $request -> latinput;//lat Request in search
+      $lonin = $request -> loninput;//lon Request in search
+      if ($latin ===null|| $lonin ===null) {//set default values ​​without location search
+        $latin = 45.46362;//lat Milan
+        $lonin = 9.18812;//lon Milan
+      }
       $flats = [];
 
       $unit = "K";
-      $lat1= 45.46362;
-      $lon1= 9.18812;
+      $lat1= $latin;
+      $lon1= $lonin;
       $raggio = 20;
       $addresses = Address::all();
 
@@ -81,6 +86,8 @@ class FlatController extends Controller
 
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('city', $city)
+                                 ->with('latin',$latin)
+                                 ->with('lonin',$lonin)
                                  ->with('services', $services);
 
 

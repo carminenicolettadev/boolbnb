@@ -2,7 +2,7 @@
 
 Route::get('/', function () { return redirect('/homepage');});
 Route::get('/homepage','HomeController@index');
-Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
+// Route::get('/flats', 'FlatController@showAllFlats')->name('allFlats');
 Route::post('', 'FlatController@filters')->name('filters');
 Route::get('/flats', 'FlatController@getCity')->name('getCity');
 

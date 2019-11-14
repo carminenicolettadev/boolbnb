@@ -41,11 +41,13 @@
                       <div class="searchform" id="map" style="height: 200px;width:70%"></div>
 
                     </div>
-                    <form  action="{{ route('getCity')}}"  method="get"  accept-charset="UTF-8">
+                    <form  action="{{ route('getCity')}}" id="formparametri" method="get"  accept-charset="UTF-8">
                       @csrf
                       @method('GET')
-                    <input type="text" class="place" name="place" value="">
-                    <button type="submit" class="bottone-invia" >invia</button>
+                    <input type="hidden" class="place" name="place" value="">
+                    <input type="hidden" name="latinput" id="latinput" value="">
+                    <input type="hidden" name="loninput" id="loninput" value="">
+                    <button type="submit" id="bottone-invia" style="display:none">invia</button>
 
 
                   </form>
@@ -126,7 +128,11 @@
             </div>
           </div>
         </div>
+        <form class="" action="index.html" method="post">
 
+
+
+        </form>
     </div>
 
 
@@ -138,9 +144,7 @@
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/1.0.6/SearchBox-web.js"></script>
     <script type="text/javascript" src="{{ asset('sdk/tomtom.min.js')}}"></script>
 
-    <!-- <script type="text/javascript" src="{{ asset('sdk/marker.js')}}"></script>
 
-    <script type="text/javascript" src="{{ asset('sdk/marker-manager.js')}}"></script> -->
 
     <style media="screen">
       .mapboxgl-canvas{
@@ -168,42 +172,45 @@
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+    </script>
     <script type="text/javascript">
       console.log("ok funziono");
-
       $(document).ready(function(){
-
         $(".tt-search-box-result-list-container").click(function(e){
-          var valInput = $('.tt-search-box-input').val();
-             $('input.place').val(valInput) ;
-           });
-        });
-
-
-
-
-           var map = tt.map({
-               key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
-               container: 'map',
-               style: 'tomtom://vector/1/basic-main',
-               options : {
-                 showZoom: false,
-                 showPitch: false
-               }
-           });
-
-           var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
-               searchOptions: {
-                   key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
-               }
-           });
-
-
-           map.addControl(ttSearchBox, 'top-left');
-
-
-      </script>
-    </body>
+          let valInput = $('.tt-search-box-input').val();
+          $('input.place').val(valInput) ;
+            $.ajax({
+              url: 'https://api.tomtom.com/search/2/search/' + $('.tt-search-box-input').val() + '.json?key=i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy&typeahead=true&language=en-GB&lat=0&lon=0&minFuzzyLevel=1&maxFuzzyLevel=2&limit=1',
+              method : 'GET',
+              success : function(data){
+                if(data){
+                  var inputlat = $('input#latinput').val(data.results[0].position.lat);
+                  var inputlon =$('input#loninput').val(data.results[0].position.lon);
+                  if (inputlat != "" && inputlon != "" ){
+                    document.getElementById('bottone-invia').click();
+                  }
+                }
+              }
+              })
+            });
+          });
+          var map = tt.map({
+            key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+            container: 'map',
+            style: 'tomtom://vector/1/basic-main',
+            options : {
+              showZoom: false,
+              showPitch: false
+            }
+          });
+          var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+            searchOptions: {
+              key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+            }
+          });
+          map.addControl(ttSearchBox, 'top-left');
+        </script>
+      </body>
 </html>
