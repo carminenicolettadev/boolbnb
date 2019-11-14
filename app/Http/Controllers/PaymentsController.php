@@ -14,18 +14,18 @@ class PaymentsController extends Controller
 
         $singleFlat = Flat::findOrFail($id);
 
-        $userID = $singleFlat -> user_id;
-        $user = User::where('id', $userID)->get();
-        $user = $user[0];
+        // $userID = $singleFlat -> user_id;
+        // $user = User::where('id', $userID)->get();
+        // $user = $user[0];
 
         return view('payment', compact('singleFlat', 'user'));
     }
-    
+
     public function make(Request $request) {
         $payload = $request->input('payload', false);
         $nonce = $payload['nonce'];
         $status = Braintree_Transaction::sale([
-                                'amount' => '12.50',
+                                'amount' => '10.00',
                                 'paymentMethodNonce' => $nonce,
                                 'options' => [
                                         'submitForSettlement' => True

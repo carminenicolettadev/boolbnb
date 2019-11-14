@@ -24,6 +24,7 @@
               <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
               <a class="btn-add" href="{{ route('edit', $user -> id) }}">Edit Profile</a><br>
               <a class="btn-add" href="{{ route('destroy', $user -> id) }}">Delete Profile</a><br>
+              <a class="btn-add" href="{{ route('messageshow', $user -> id) }}">Message</a><br>
             </div>
         </div>
 

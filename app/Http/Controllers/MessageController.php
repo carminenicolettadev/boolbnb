@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Message;
 use App\Flat;
+use App\Detail;
+use DB;
 
 
 class MessageController extends Controller
@@ -29,7 +31,18 @@ class MessageController extends Controller
 
       return redirect('flat/' . $id)->with('il messaggio è stato inviato');
     }
+    public function messageShow($id)
+    {
 
+      $messages = DB::table('flats')
+      ->join('messages','flat_id', '=', 'flats.id')
+      ->where('user_id', '=', $id)
+      ->orderBy('messages.created_at')
+      ->get();
+
+      // dd($name);
+      return view('mymesg', compact('messages'));
+    }
 
 
 
