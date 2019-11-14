@@ -25,7 +25,8 @@
     @include('layouts.menu2')
 
     @yield('menu')
-    <input type="hidden" name="" id="city" value="{{ $city}}">
+    <input type="text" name="" id="city" value="{{ $city}}">
+    <button type="submit" name="button">udiysfbsdifk dbsifdsb fjhsdbf sdjhfbsd kf</button>
 
     <div class="centrone">
       <div class="search-bar">
@@ -73,21 +74,9 @@
           </div>
         </div>
       </div>
-        <div class="flats">
-
-
-        @foreach ($flats as $flat)
-        <div class="valflat"style="display:none" rif="{{$flat->id}}">
-          <input id=titleflat type="hidden" value="{{$flat ->detail ->title}}"></input>
-          <input id="latval"type="hidden" value="{{$flat -> address ->lat}}"></input>
-          <input id="lonval"type="hidden" value="{{$flat -> address ->lon}}"></input>
-        </div>
-        @endforeach
+      <div class="mappa" id="map">
       </div>
-      <input id="centerx"type="hidden" name="" value="{{$latin}}">
-      <input id="centery" type="hidden" name="" value="{{$lonin}}">
-
-      <div class="mappa2" id="map">
+      <div class="mappa2" id="map2">
       </div>
 
 
@@ -109,6 +98,7 @@
 
     <style media="screen">
       .mapboxgl-canvas{
+        display: none;
       }
       .mapboxgl-ctrl-top-right{
         display: none;
@@ -133,45 +123,115 @@
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous">
-    </script>
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
     <script type="text/javascript">
+      console.log("ok funziono");
+
       $(document).ready(function(){
-
+        $('.tt-search-box-input').val($('#city').val());
         var posto = $('#city').val();
-        
-        var centerx=$('#centerx').val();
-        var centery=$('#centery').val();
-        if(centerx ==="" || centery ===""){//set default values ​​without location search for map
-          centerx = 45.46362;
-          centery = 9.18812;
-        };
-        createmapmarker();
+        //create a map
 
 
-        function createmapmarker(){
-          var divflats = $('div.flats >div').length;
-          var divflatselement = $('div.flats >div');
-          var map = tomtom.L.map('map', {
-          key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
-          basePath: 'sdk/',
-          zoom: 10,
-          center: [centerx,centery],
-          });
 
-          for (var i = 0; i < divflats; i++) {
-            let title = divflatselement[i].children[0].value;//titleflat
-            let lat = divflatselement[i].children[1].value;//lat
-            let lon = divflatselement[i].children[2].value;//long
-            var marker = tomtom.L.marker([lat,lon]).addTo(map);
-            marker.bindPopup(title);
+        $.ajax({
+          url:'https://api.tomtom.com/search/2/search/' + posto + '.json?key=i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy&typeahead=true&language=en-GB&lat=0&lon=0&minFuzzyLevel=1&maxFuzzyLevel=2',
+          method: 'GET',
+          success: function(data){
+            console.log("data",data);
+            var latiVal = data.results[0].position.lat;
+            var longVal = data.results[0].position.lon;
 
+
+
+
+            var map = tomtom.L.map('map2', {
+            key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
+            basePath: 'sdk/',
+            zoom: 20,
+            center: [latiVal, longVal]
+            });
+
+            var marker = tomtom.L.marker([latiVal,longVal]).addTo(map);
+            marker.bindPopup("<b>MY Home</b><br/>");
+          },
+          error: function(err){
+            console.log(err);
           }
-        }
-      });//end jquery
+        })
+      })
 
-    </script>
+
+
+
+       // //
+       // var markers = [];
+
+
+       var map = tt.map({
+           key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+           container: 'map',
+           style: 'tomtom://vector/1/basic-main',
+           options : {
+             showZoom: false,
+             showPitch: false
+           }
+       });
+
+
+
+       var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+           searchOptions: {
+               key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+           }
+       });
+       map.addControl(new tt.FullscreenControl());
+       map.addControl(new tt.NavigationControl());
+       map.addControl(ttSearchBox, 'top-left');
+       var searchMarkersManager = new SearchMarkersManager(map);
+       function getBounds(data) {
+           if (data.viewport) {
+               var btmRight = [data.viewport.btmRightPoint.lng, data.viewport.btmRightPoint.lat];
+               var topLeft = [data.viewport.topLeftPoint.lng, data.viewport.topLeftPoint.lat];
+           }
+           return [btmRight, topLeft];
+       }
+
+       function fitToViewport(markerData) {
+           if (!markerData || (markerData instanceof Array && !markerData.length)) {
+               return;
+           }
+           var bounds = new tt.LngLatBounds();
+           if (markerData instanceof Array) {
+               markerData.forEach(function(marker) {
+                   bounds.extend(getBounds(marker));
+               });
+           } else {
+               bounds.extend(getBounds(markerData));
+           }
+           map.fitBounds(bounds, { padding: 100, linear: true });
+       }
+       ttSearchBox.on('tomtom.searchbox.resultscleared', function() {
+           searchMarkersManager.clear();
+       });
+       ttSearchBox.on('tomtom.searchbox.resultsfound', function(resp) {
+         console.log(resp);
+           searchMarkersManager.draw(resp.data.results);
+           fitToViewport(resp.data.results);
+       });
+       ttSearchBox.on('tomtom.searchbox.resultselected', function(resp) {
+           searchMarkersManager.draw([resp.data.result]);
+           fitToViewport(resp.data.result);
+       });
+
+
+
+
+
+
+
+      </script>
 
   </body>
 </html>

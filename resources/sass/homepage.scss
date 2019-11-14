@@ -26,26 +26,40 @@ div.mainhomepage {
                 text-align: left;
                 margin-bottom: 20px;
             }
-            .searchform {
-                display: flex;
-                input {
-                    width: 100%;
-                    padding-left: 7px;
-                    font-size: 16px;
-                    font-weight: 100;
-                    height: 40px;
-                }
-                a {
-                    display: inline-block;
-                    text-align: end;
-                    margin-left: 20px;
-                    text-decoration: none;
-                    padding: 10px 15px;
-                    background-color: #ff5b60;
-                    color: white;
-                    border-radius: 5px;
-                }
+            .cerca{
+              display: flex;
+              .bottone-invia{
+                background: red;
+                height: 50px;
+                width: 70%;
+                margin:0 auto;
+                margin-top: 15px;
+
+              }
+              .searchform {
+                  display: flex;
+                  input {
+                      width: 100%;
+                      padding-left: 7px;
+                      font-size: 16px;
+                      font-weight: 100;
+                      height: 40px;
+                  }
+
+                  a {
+                      display: inline-block;
+                      text-align: end;
+                      margin-left: 20px;
+                      text-decoration: none;
+                      padding: 10px 15px;
+                      background-color: #ff5b60;
+                      color: white;
+                      border-radius: 5px;
+                  }
+
+              }
             }
+
         }
     }
     .showflats,

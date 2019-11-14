@@ -1,15 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Flat;
 use App\Address;
 use App\Service;
 use App\Detail;
 use App\User;
-
-
 
 class FlatController extends Controller
 {
@@ -20,29 +16,152 @@ class FlatController extends Controller
      */
     public function showAllFlats()
     {
-
-      $flats = Flat::orderBy('created_at', 'desc')->paginate(6);
-      $arrDetail = [];
-      $arrAddress = [];
-
-
-      foreach ($flats as $flat) {
-          $detailFlat = Detail::where('flat_id', $flat->id)->get();
-          array_push($arrDetail, $detailFlat);
-      }
-
-      foreach ($flats as $address) {
-          $addressFlat = Address::where('flat_id', $address->id)->get();
-          array_push($arrAddress, $addressFlat);
-      }
-
-
-
+      $flats = Flat::orderBy('created_at', 'desc')->get();
+      $services = Service::all();
       return view('allFlatsPage')->with('flats', $flats)
-                            ->with('arrDetail', $arrDetail)
-                            ->with('arrAddress', $arrAddress);
+                                 ->with('services', $services);
     }
 
+    public function getCity(Request $request)
+    {
+
+      $city = $request-> place;
+      $latin = $request -> latinput;//lat Request in search
+      $lonin = $request -> loninput;//lon Request in search
+      if ($latin ===null|| $lonin ===null) {//set default values ​​without location search
+        $latin = 45.46362;//lat Milan
+        $lonin = 9.18812;//lon Milan
+      }
+      $flats = [];
+
+      $unit = "K";
+      $lat1= $latin;
+      $lon1= $lonin;
+      $raggio = 20;
+      $addresses = Address::all();
+
+      function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+          if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+            return 0;
+          }
+          else {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+            $unit = strtoupper($unit);
+
+            if ($unit == "K") {
+              $kilometri = round($miles * 1.609344);
+              return $kilometri;
+            } else if ($unit == "N") {
+              return ($miles * 0.8684);
+            } else {
+              return $miles;
+            }
+          }
+        }
+
+      foreach ($addresses as $address) {
+        $lat = $address -> lat;
+        $lon = $address -> lon;
+        $center_x= $lat1;
+        $center_y= $lon1;
+
+        $unit = "K";
+        $km = distance($center_x, $center_y, $lat, $lon, $unit);
+        if ($km < $raggio) {
+
+          $flat_id = $address -> flat_id;
+          $flat = Flat::findOrFail($flat_id);
+
+          $flats[]=$flat;
+        }
+
+      }
+
+
+      $services = Service::all();
+
+      return view('allFlatsPage')->with('flats', $flats)
+                                 ->with('city', $city)
+                                 ->with('latin',$latin)
+                                 ->with('lonin',$lonin)
+                                 ->with('services', $services);
+
+
+
+    }
+
+
+
+
+  public function filters(Request $request)
+    {
+      $services = Service::all();
+      $arrForm = [
+        'wifi'=> false,
+        'piscina'=> false,
+        'spa'=> false,
+        'balcone'=> false,
+        'giardino'=> false,
+        'mare'=> false,
+      ];
+      $arrServices = [];
+      foreach ($request -> checkboxvar  as $value ) {
+        array_push($arrServices,$value);
+      }
+      // var_dump(array_keys($arrForm));
+      for ($i=0; $i < count($arrServices); $i++) {
+        foreach ($arrForm as $key => $value) {
+          // var_dump($key, $value);
+          if ($arrServices[$i] === $key) {
+            // var_dump($arrServices[$i]);
+           $arrForm[$key] = true;
+          }
+        }
+      }
+      $flats = new Flat;
+      $services = Service::all();
+      var_dump($arrForm);
+      //Flat:: non va bene dovrebbe essere $flat
+      if ($arrForm['wifi']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','wifi');
+        });
+      }
+      if ($arrForm['balcone']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','balcone');
+        });
+      }
+      if ($arrForm['mare']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','mare');
+        });
+      }
+      if ($arrForm['spa']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','spa');
+        });
+      }
+      if ($arrForm['piscina']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','piscina');
+        });
+      }
+      if ($arrForm['giardino']) {
+        $flats = $flats->whereHas('services', function($query){
+            $query->where('name','giardino');
+        });
+      }
+
+      $flats = $flats->get();
+
+      return view('allFlatsPage')->with('flats', $flats)
+                                 ->with('services', $services);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -53,7 +172,6 @@ class FlatController extends Controller
          $services = Service::all();
          return view('addFlat', compact('services'));
      }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -67,12 +185,9 @@ class FlatController extends Controller
         'rate'=> 'nullable',
         'user_id'=> 'nullable',
       ]);
-
       $flat = Flat::create($dataTableFlats);
       // prendo l id del flat appena creato
       $flat_id = $flat -> id;
-
-
       $dataTableDetails = $request -> validate([
         'title' => 'nullable',
         'num_room'=> 'nullable',
@@ -81,21 +196,14 @@ class FlatController extends Controller
         'mq'=> 'nullable',
         'img'=> 'nullable',
         'flat_id' => 'nullable',
-
       ]);
-
-
       $file = $request -> file('img');
         if ($file) {
-
           $folder = 'img';
           $nameImg = 'flat-' . $flat_id  . '.' . $file -> getClientOriginalExtension();
-
           $file -> move($folder, $nameImg);
           $dataTableDetails['img'] = $nameImg;
-
       }
-
       // creo un nuovo detail e associo ad ogni campo
       //il valore della request che ha i dati del form
       $detail = new Detail;
@@ -106,11 +214,8 @@ class FlatController extends Controller
       $detail ->mq = $request ->mq;
       $detail ->img = $nameImg;
       $detail ->flat_id = $flat_id;
-
       // dd($detail);
       $detail ->save();
-
-
       $dataTableAddresses = $request -> validate([
         'state' => 'nullable',
         'city'=> 'nullable',
@@ -120,9 +225,7 @@ class FlatController extends Controller
         'flat_id'=> 'nullable',
         'lat'=> 'nullable',
         'lon'=> 'nullable',
-
       ]);
-
       // creo un nuovo detail e associo ad ogni campo
       //il valore della request che ha i dati del form
       $address = new Address;
@@ -134,23 +237,17 @@ class FlatController extends Controller
       $address ->flat_id = $flat_id;
       $address ->lat = $request ->lat;
       $address ->lon = $request ->lon;
-
       // dd($detail);
       $address ->save();
-
-
       //Services add
       foreach ($request -> checkboxvar  as $value ) {
         $service = Service::findOrFail($value);
         $service->flats()->attach($flat_id);
         $service->save();
       }
-      
       $log = $flat->user_id;
-
       return redirect("profile/$log");
     }
-
     /**
      * Display the specified resource.
      *
@@ -160,19 +257,12 @@ class FlatController extends Controller
     public function showFlat($id)
     {
         $singleFlat = Flat::findOrFail($id);
-
         $detailFlat = Detail::where('flat_id', $id)->get();
-
         $addressFlat = Address::where('flat_id', $id)->get();
-
-
-
         return view('singleFlat')->with('singleFlat', $singleFlat)
                                   ->with('detailFlat', $detailFlat)
                                   ->with('addressFlat', $addressFlat);
-
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -182,18 +272,12 @@ class FlatController extends Controller
     public function editFlat($id)
     {
       $singleFlat = Flat::findOrFail($id);
-
       $detailFlat = Detail::where('flat_id', $id)->get();
-
       $addressFlat = Address::where('flat_id', $id)->get();
-
-
-
       return view('editFlat')->with('singleFlat', $singleFlat)
                                 ->with('detailFlat', $detailFlat)
                                 ->with('addressFlat', $addressFlat);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -203,10 +287,7 @@ class FlatController extends Controller
      */
     public function updateFlat(Request $request, $id)
     {
-
       $flat = Flat::findOrFail($id);
-
-
       $detailData = $request -> validate([
           'title'=> 'required',
           'num_room'=> 'required',
@@ -215,23 +296,15 @@ class FlatController extends Controller
           'mq'=> 'required',
           'img'=> 'required',
       ]);
-
-
-
       $detail = Detail::where('flat_id', $id)->get();
-
       // dd($request->title, $detail[0]);
       $file = $request -> file('img');
         if ($file) {
-
           $folder = 'img';
           $nameImg = 'flat-' . $flat->id . '.' . $file -> getClientOriginalExtension();
-
           $file -> move($folder, $nameImg);
           $dataTableDetails['img'] = $nameImg;
-
       }
-
       $detail[0]->update([
         'title'=> $request->title,
         'num_room'=> $request->num_room,
@@ -240,7 +313,6 @@ class FlatController extends Controller
         'mq'=> $request->mq,
         'img'=> $nameImg,
       ]);
-
       //address
       $addressData = $request -> validate([
           'state'=> 'required',
@@ -248,7 +320,6 @@ class FlatController extends Controller
           'road'=> 'required',
           'civ_num'=> 'required'
       ]);
-
       $address = Address::where('flat_id', $id)->get();
       $address[0]->update([
         'state'=> $request->state,
@@ -256,15 +327,10 @@ class FlatController extends Controller
         'road'=> $request->road,
         'civ_num'=> $request->civ_num,
       ]);
-
       // dd($detail,$address,$detailData,$addressData);
-
-
       $log = $flat->user_id;
-
       return redirect("profile/$log");
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -278,8 +344,6 @@ class FlatController extends Controller
       $flat->detail->delete();
       $flat->address->delete();
       $flat->delete();
-
       return redirect("profile/$log");
-
     }
 }
