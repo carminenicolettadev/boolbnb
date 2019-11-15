@@ -174,3 +174,19 @@
     }
   }
 }
+
+
+.list-message{
+  max-width: 1140px;
+  font-display: flex;
+  margin:auto;
+  padding-top: 60px;
+  .single-message{
+    width: 30%;
+    padding: 40px;
+    box-shadow: 2px 3px 10px rgb(215, 215, 215);
+    line-height: 2rem;
+
+
+  }
+}

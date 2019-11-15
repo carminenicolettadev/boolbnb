@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Message;
 use App\Flat;
 use App\Detail;
@@ -31,6 +33,8 @@ class MessageController extends Controller
 
       return redirect('flat/' . $id)->with('il messaggio è stato inviato');
     }
+
+
     public function messageShow($id)
     {
       $log = Auth::user()->id;
