@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+
+* {
+    font-family: Roboto;
+}
+
 img{
   width: 100%;
   height: auto;
@@ -32,10 +38,39 @@ img{
 }
 canvas.mapboxgl-canvas{
   width: 100%;
-
 }
 
-
+.box{
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  width: 90%;
+  margin:auto;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  box-shadow: 2px 3px 10px rgb(224, 224, 224);
+  .box-sections{
+    padding:15px 30px;
+    display: inline-block;
+    color: black;
+    *:first-letter{
+      text-transform: capitalize;
+    }
+    .flat-title{
+      font-size: 2.5rem;
+    }
+    .address-section h3{
+      font-size: 1.7rem;
+      // font-weight: lighter;
+    }
+    .details , .services-section{
+      display: flex;
+      *{
+        margin-right: 10px;
+      }
+    }
+  }
+}
 
 
 .paginate{
@@ -78,4 +113,23 @@ canvas.mapboxgl-canvas{
         }
       }
   }
+}
+
+
+@media all and (max-width: 950px) {
+  .mappa2{
+    display: none;
+  }
+  .centrone .sidebar {
+    width: 100%;
+  }
+  .flats-results{
+    display: flex;
+    flex-wrap: wrap;
+    .box{
+      width: 50%
+    }
+  }
+
+
 }
