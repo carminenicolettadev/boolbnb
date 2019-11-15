@@ -93,12 +93,10 @@
                 </div>
 
                 <div class="form-group  col-md-6">
-                  <label>latitudine</label>
-                  <input type="text" id="lat" class="form-control" name="lat"  value="">
+                  <input type="hidden" id="lat" class="form-control" name="lat"  value="">
                 </div>
                 <div class="form-group  col-md-6">
-                  <label>longitudine</label>
-                  <input type="text" id="lon" class="form-control" name="lon"  value="">
+                  <input type="hidden" id="lon" class="form-control" name="lon"  value="">
                 </div>
 
 
@@ -117,14 +115,30 @@
 
               </div>
 
-              <button id="bottone" type="submit"  class="btn btn-add mt-2">Add Flat</button>
+              <button id="bottone" type="submit"  class="btn btn-add mt-2" disabled >Add Flat</button>
           </form>
         </div>
       </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
 
+    {{-- <script type="text/javascript">
 
+    $(window).hover(function(){
+      $( "input").each(function( index ) {
+        // console.log( index + ": " + $( this ).val() );
+        if ($( this ).val() === '' && index == 14 &&  index == 15 ) {
+          $('.btn-add').prop('disabled',true);
+        }
+        else {
+          $('.btn-add').prop('disabled',false);
+        }
+      });
+
+    })
+
+    </script> --}}
 
   </body>
 </html>

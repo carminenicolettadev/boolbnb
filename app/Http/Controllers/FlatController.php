@@ -37,7 +37,7 @@ class FlatController extends Controller
       $unit = "K";
       $lat1= $latin;
       $lon1= $lonin;
-      $raggio = 20;
+      $raggio = 200;
       $addresses = Address::all();
 
       function distance($lat1, $lon1, $lat2, $lon2, $unit) {
@@ -80,17 +80,14 @@ class FlatController extends Controller
         }
 
       }
-
-
       $services = Service::all();
+
 
       return view('allFlatsPage')->with('flats', $flats)
                                  ->with('city', $city)
                                  ->with('latin',$latin)
                                  ->with('lonin',$lonin)
                                  ->with('services', $services);
-
-
 
     }
 
@@ -99,6 +96,19 @@ class FlatController extends Controller
 
   public function filters(Request $request)
     {
+
+
+      $city = null;
+      $latin = null;//lat Request in search
+      $lonin = null;//lon Request in search
+      if ($latin ===null|| $lonin ===null || $city ===null) {//set default values ​​without location search
+        $latin = 45.46362;//lat Milan
+        $lonin = 9.18812;//lon Milan
+        $city = 'milan';
+      }
+
+
+
       $services = Service::all();
       $arrForm = [
         'wifi'=> false,
@@ -160,8 +170,17 @@ class FlatController extends Controller
       $flats = $flats->get();
 
       return view('allFlatsPage')->with('flats', $flats)
+                                 ->with('latin', $latin)
+                                 ->with('lonin', $lonin)
+                                 ->with('city', $flats)
                                  ->with('services', $services);
     }
+
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -180,22 +199,23 @@ class FlatController extends Controller
      */
     public function storeFlat(Request $request)
     {
+      // dd($request);
       $dataTableFlats = $request -> validate([
         'views' => 'nullable',
         'rate'=> 'nullable',
-        'user_id'=> 'nullable',
+        'user_id'=> 'required',
       ]);
       $flat = Flat::create($dataTableFlats);
       // prendo l id del flat appena creato
       $flat_id = $flat -> id;
       $dataTableDetails = $request -> validate([
-        'title' => 'nullable',
-        'num_room'=> 'nullable',
-        'bed'=> 'nullable',
-        'bathroom'=> 'nullable',
-        'mq'=> 'nullable',
-        'img'=> 'nullable',
-        'flat_id' => 'nullable',
+        'title' => 'required',
+        'num_room'=> 'required',
+        'bed'=> 'required',
+        'bathroom'=> 'required',
+        'mq'=> 'required',
+        'img'=> 'required',
+        'flat_id' => 'required',
       ]);
       $file = $request -> file('img');
         if ($file) {
@@ -217,14 +237,14 @@ class FlatController extends Controller
       // dd($detail);
       $detail ->save();
       $dataTableAddresses = $request -> validate([
-        'state' => 'nullable',
-        'city'=> 'nullable',
-        'road'=> 'nullable',
-        'cap'=> 'nullable',
-        'num_civ'=> 'nullable',
-        'flat_id'=> 'nullable',
-        'lat'=> 'nullable',
-        'lon'=> 'nullable',
+        'state' => 'required',
+        'city'=> 'required',
+        'road'=> 'required',
+        'cap'=> 'required',
+        'num_civ'=> 'required',
+        'flat_id'=> 'required',
+        'lat'=> 'required',
+        'lon'=> 'required',
       ]);
       // creo un nuovo detail e associo ad ogni campo
       //il valore della request che ha i dati del form
