@@ -13,7 +13,19 @@
 
     @yield('menu')
 
-
+    <div class="list-message">
+      <div class="single-message">
+        @auth
+          @for ($i=0; $i < count($flat); $i++)
+            <p>{{$flat[$i]->detail ->title}}</p>
+            @for ($j=$i; $j<=$i ; $j++)
+              <p>Email: {{$messages [$j] -> email}}</p>
+              <p>Messaggio: {{$messages[$j] -> msg}}</p>
+            @endfor
+          @endfor
+        @endauth
+      </div>
+    </div>
 
 
   </body>
