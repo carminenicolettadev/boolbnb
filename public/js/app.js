@@ -49654,6 +49654,16 @@ $(document).ready(init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\profile.scss */"./resources/sass/profile.scss");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\allFlats.scss */"./resources/sass/allFlats.scss");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\singleFlat.scss */"./resources/sass/singleFlat.scss");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\menu.scss */"./resources/sass/menu.scss");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\12bool.scss */"./resources/sass/12bool.scss");
+__webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\homepage.scss */"./resources/sass/homepage.scss");
+module.exports = __webpack_require__(/*! C:\Users\Enrico\Desktop\boolean\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
 __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\profile.scss */"./resources/sass/profile.scss");
 __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\allFlats.scss */"./resources/sass/allFlats.scss");
@@ -49662,6 +49672,7 @@ __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-
 __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\12bool.scss */"./resources/sass/12bool.scss");
 __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\homepage.scss */"./resources/sass/homepage.scss");
 module.exports = __webpack_require__(/*! C:\Users\Marco\Desktop\Boolean Careers\Laravel\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 2d2bfb14b835b8d8bc362f494876556389388fe1
 
 
 /***/ })
