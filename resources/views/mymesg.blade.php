@@ -10,7 +10,7 @@
       @auth
       @foreach ($messages as $msg)
         <div>
-          {{-- <h3>messaggio relativo a: {{$detail -> name}}</h3> --}}
+          <h3>messaggio relativo a: {{$msg -> flat_id}}</h3>
           <p>Email: {{$msg -> email}}</p>
           <p>Messaggio: {{$msg -> msg}}</p>
         </div>

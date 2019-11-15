@@ -34,11 +34,15 @@ class MessageController extends Controller
     public function messageShow($id)
     {
 
-      $messages = DB::table('flats')
-      ->join('messages','flat_id', '=', 'flats.id')
-      ->where('user_id', '=', $id)
-      ->orderBy('messages.created_at')
-      ->get();
+      // $messages = DB::table('flats')
+      // ->join('messages','flat_id', '=', 'flats.id')
+      // ->where('user_id', '=', $id)
+      // ->orderBy('messages.created_at')
+      // ->get();
+      // dd($messages);
+      $flat_id = Message::select('flat_id');
+      dd($flat_id);
+      // $flats = Flat::where('id', $flat_id)->get();
 
       // dd($name);
       return view('mymesg', compact('messages'));
