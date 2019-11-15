@@ -48,7 +48,6 @@ div#map {
 
 .profile-container .single-flat .flats-list .message-form {
   padding: 50px 0;
-  width: 100%;
 }
 
 .profile-container .single-flat .flats-list .message-form .messaggio {
@@ -70,6 +69,7 @@ div#map {
 .profile-container .single-flat .flats-list .message-form .messaggio textarea[name=msg] {
   width: 100%;
   height: 120px;
+  max-width: 600px;
   padding: 9px;
   font-size: 18px;
   margin-bottom: 15px;

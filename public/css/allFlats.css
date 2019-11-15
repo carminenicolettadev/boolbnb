@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap);* {
+  font-family: Roboto;
+}
+
 img {
   width: 100%;
   height: auto;
@@ -39,6 +43,47 @@ img {
 
 canvas.mapboxgl-canvas {
   width: 100%;
+}
+
+.box {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  box-shadow: 2px 3px 10px #e0e0e0;
+}
+
+.box .box-sections {
+  padding: 15px 30px;
+  display: inline-block;
+  color: black;
+}
+
+.box .box-sections *:first-letter {
+  text-transform: capitalize;
+}
+
+.box .box-sections .flat-title {
+  font-size: 2.5rem;
+}
+
+.box .box-sections .address-section h3 {
+  font-size: 1.7rem;
+}
+
+.box .box-sections .details,
+.box .box-sections .services-section {
+  display: -webkit-box;
+  display: flex;
+}
+
+.box .box-sections .details *,
+.box .box-sections .services-section * {
+  margin-right: 10px;
 }
 
 .paginate {
@@ -91,5 +136,25 @@ canvas.mapboxgl-canvas {
 .paginate .pagination .page-item.active .page-link {
   font-weight: bolder;
   color: white;
+}
+
+@media all and (max-width: 950px) {
+  .mappa2 {
+    display: none;
+  }
+
+  .centrone .sidebar {
+    width: 100%;
+  }
+
+  .flats-results {
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .flats-results .box {
+    width: 50%;
+  }
 }
 

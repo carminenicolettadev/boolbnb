@@ -44,7 +44,6 @@ div#map {
     justify-content: center;
     .message-form{
       padding:50px 0;
-      width: 100%;
       .messaggio{
         width: 100%;
         max-width: 900px;
@@ -61,6 +60,7 @@ div#map {
         textarea[name='msg']{
           width: 100%;
           height: 120px;
+          max-width: 600px;
           padding: 9px;
           font-size: 18px;
           margin-bottom: 15px;
