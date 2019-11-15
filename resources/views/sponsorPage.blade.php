@@ -7,11 +7,18 @@
   <title>Sponsorizzazioni</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
+
 </head>
 
 <body>
 
-  <div>
+  @include('layouts.menu2')
+
+
+  @yield('menu')
+
+  <div style="max-width:1140px;margin:auto;margin-top:70px;">
     <h1>{{$user -> name}} metti in mostra il tuo appartamento "{{$detail -> title}}"!</h1>
     <h3>Sponsorizzazione per 24 ore: costo € 2,99</p>
     <h3>Sponsorizzazione per 72 ore: costo € 5,99</p>

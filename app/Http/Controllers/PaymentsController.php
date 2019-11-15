@@ -16,9 +16,9 @@ class PaymentsController extends Controller
 
         $singleFlat = Flat::findOrFail($id);
 
-        // $userID = $singleFlat -> user_id;
-        // $user = User::where('id', $userID)->get();
-        // $user = $user[0];
+        $userID = $singleFlat -> user_id;
+        $user = User::where('id', $userID)->get();
+        $user = $user[0];
 
         $detail = Detail::where('flat_id', $id)->get();
         $detail = $detail[0];

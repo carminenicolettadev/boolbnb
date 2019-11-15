@@ -8,9 +8,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/menu.css')}}">
+
 </head>
 
 <body>
+  @include('layouts.menu2')
+
+
+  @yield('menu')
+
 
   <div>
     <h3>{{$name}} stai mettendo in evidenza l'appartamento "{{$title}}" per {{$ore}} al costo di {{$costo}} €</h3>
@@ -27,7 +34,7 @@
 
   <script>
     var button = document.querySelector('#submit-button');
-    
+
     braintree.dropin.create({
       authorization: "{{ Braintree_ClientToken::generate() }}",
       container: '#dropin-container'

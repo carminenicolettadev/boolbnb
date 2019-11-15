@@ -23,10 +23,10 @@
       @auth
         @if ($singleFlat -> user_id === Auth::user()->id)
           <div class="sidebar">
-                <a class="btn" href="{{ route('indexPayment', $singleFlat -> id)}}">Sponsor Flat</a><br>
-                <a class="btn-update" href="{{ route('editFlat', $singleFlat -> id)}}">Update Flat</a><br>
-                <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat -> id)}}">Delete Flat</a><br>
-              <a href="{{ URL::previous() }}" class="mb-5">Back</a>
+                {{-- <a class="btn" href="{{ route('indexPayment', $singleFlat -> id)}}">Sponsor Flat</a><br> --}}
+                {{-- <a class="btn-update" href="{{ route('editFlat', $singleFlat -> id)}}">Update Flat</a><br> --}}
+                {{-- <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat -> id)}}">Delete Flat</a><br> --}}
+              <a href="../profile/{{Auth::user()->id}}" class="mb-5">Back</a>
           </div>
         @endif
 
@@ -67,18 +67,18 @@
             <ul class="address">
               <li>
                 <h2>City</h2>
-                <p>{{$addressFlat[0] ->city}}</p>
+                <p>{{$singleFlat -> address ->city}}</p>
               </li>
               <li>
                 <h2>Road</h2>
-                <p>{{$addressFlat[0] ->road}}</p>
+                <p>{{$singleFlat -> address ->road}}</p>
               </li>
               <!--input text for get value for script js style=display:none-->
-              <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}"style="display:none">
-              <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}"style="display:none">
-              <input type="text"id="addrss" value="{{$addressFlat[0]->road}}"style="display:none">
-              <input type="text"id="city" value="{{$addressFlat[0]->city}}"style="display:none">
-              <input type="text"id="civ_num"value="{{$addressFlat[0]->civ_num}}"style="display:none">
+              <input type="text" id="lat" value="{{$singleFlat -> address ->lat}}"style="display:none">
+              <input type="text" id="lon" value="{{$singleFlat -> address ->lon}}"style="display:none">
+              <input type="text"id="addrss" value="{{$singleFlat -> address->road}}"style="display:none">
+              <input type="text"id="city" value="{{$singleFlat -> address->city}}"style="display:none">
+              <input type="text"id="civ_num"value="{{$singleFlat -> address->civ_num}}"style="display:none">
             </ul>
           </div>
 

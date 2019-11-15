@@ -55,26 +55,6 @@
                                 </div>
                             </div>
 
-
-                            {{-- edit password --}}
-                            <div class="form-group row">
-
-                              <div class="col-md-6">
-                                <label for="password" class="col-form-label">{{ __('Password') }}</label>
-                                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" value="{{ $user -> password }}" required autocomplete="new-password">
-                                  @error('password')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
-                              </div>
-
-                                <div class="col-md-6">
-                                    <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required autocomplete="new-password">
-                                </div>
-                            </div>
-
                             {{-- button --}}
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 ">

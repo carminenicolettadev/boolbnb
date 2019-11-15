@@ -291,12 +291,15 @@ class FlatController extends Controller
      */
     public function editFlat($id)
     {
+      $services = Service::all();
+
       $singleFlat = Flat::findOrFail($id);
       $detailFlat = Detail::where('flat_id', $id)->get();
       $addressFlat = Address::where('flat_id', $id)->get();
       return view('editFlat')->with('singleFlat', $singleFlat)
-                                ->with('detailFlat', $detailFlat)
-                                ->with('addressFlat', $addressFlat);
+                             ->with('services', $services)
+                             ->with('detailFlat', $detailFlat)
+                             ->with('addressFlat', $addressFlat);
     }
     /**
      * Update the specified resource in storage.
@@ -325,6 +328,8 @@ class FlatController extends Controller
           $file -> move($folder, $nameImg);
           $dataTableDetails['img'] = $nameImg;
       }
+
+
       $detail[0]->update([
         'title'=> $request->title,
         'num_room'=> $request->num_room,
@@ -347,6 +352,13 @@ class FlatController extends Controller
         'road'=> $request->road,
         'civ_num'=> $request->civ_num,
       ]);
+
+      // $arrServices = [];
+      // foreach ($request -> checkboxvar  as $value ) {
+      //   array_push($arrServices,$value);
+      // }
+
+
       // dd($detail,$address,$detailData,$addressData);
       $log = $flat->user_id;
       return redirect("profile/$log");
@@ -360,9 +372,15 @@ class FlatController extends Controller
     public function deleteFlat($id)
     {
       $flat = Flat::findOrFail($id);
+      $arrServices =$flat->services;
+      for ($i=0; $i < count($arrServices) ; $i++) {
+        $flat->services[$i]->delete();
+      }
       $log = $flat->user_id;
       $flat->detail->delete();
       $flat->address->delete();
+
+
       $flat->delete();
       return redirect("profile/$log");
     }
