@@ -122,8 +122,8 @@ function getlatlon() {
       parametri = data["results"][0]["position"];
       latitude = parametri.lat;
       longitude = parametri.lon;
-      $("#lat").val(latitude);
-      $("#lon").val(longitude);
+      $("input#latitudeflat").val(latitude);
+      $("input#longitudeflat").val(longitude);
 
       if (data) {
         $("#form-flat").submit();

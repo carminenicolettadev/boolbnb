@@ -203,19 +203,19 @@ class FlatController extends Controller
       $dataTableFlats = $request -> validate([
         'views' => 'nullable',
         'rate'=> 'nullable',
-        'user_id'=> 'required',
+        'user_id'=> 'nullable',
       ]);
       $flat = Flat::create($dataTableFlats);
       // prendo l id del flat appena creato
       $flat_id = $flat -> id;
       $dataTableDetails = $request -> validate([
-        'title' => 'required',
-        'num_room'=> 'required',
-        'bed'=> 'required',
-        'bathroom'=> 'required',
-        'mq'=> 'required',
-        'img'=> 'required',
-        'flat_id' => 'required',
+        'title' => 'nullable',
+        'num_room'=> 'nullable',
+        'bed'=> 'nullable',
+        'bathroom'=> 'nullable',
+        'mq'=> 'nullable',
+        'img'=> 'nullable',
+        'flat_id' => 'nullable',
       ]);
       $file = $request -> file('img');
         if ($file) {
@@ -237,14 +237,14 @@ class FlatController extends Controller
       // dd($detail);
       $detail ->save();
       $dataTableAddresses = $request -> validate([
-        'state' => 'required',
-        'city'=> 'required',
-        'road'=> 'required',
-        'cap'=> 'required',
-        'num_civ'=> 'required',
-        'flat_id'=> 'required',
-        'lat'=> 'required',
-        'lon'=> 'required',
+        'state' => 'nullable',
+        'city'=> 'nullable',
+        'road'=> 'nullable',
+        'cap'=> 'nullable',
+        'num_civ'=> 'nullable',
+        'flat_id'=> 'nullable',
+        'lat'=> 'nullable',
+        'lon'=> 'nullable',
       ]);
       // creo un nuovo detail e associo ad ogni campo
       //il valore della request che ha i dati del form
