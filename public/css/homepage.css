@@ -105,12 +105,31 @@ div.mainhomepage .showflatsrates .showflatsrates {
   padding-top: 15px;
 }
 
+div.mainhomepage .showflats .someflats .row,
+div.mainhomepage .showflats .showflatsrates .row,
+div.mainhomepage .showflatsrates .someflats .row,
+div.mainhomepage .showflatsrates .showflatsrates .row {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 div.mainhomepage .showflats .flat,
 div.mainhomepage .showflatsrates .flat {
   border-radius: 8px;
   width: 96%;
   margin-bottom: 40px;
-  background: #f2f2f2;
+  box-shadow: 2px 2px 12px #ececec;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: relative;
+}
+
+div.mainhomepage .showflats .flat:hover,
+div.mainhomepage .showflatsrates .flat:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  box-shadow: 6px 6px 12px #d7d7d7;
 }
 
 div.mainhomepage .showflats .flat a,
@@ -126,8 +145,8 @@ div.mainhomepage .showflatsrates .flat a img {
   border-radius: 5px;
 }
 
-div.mainhomepage .showflats .flat a div.flex-rate,
-div.mainhomepage .showflatsrates .flat a div.flex-rate {
+div.mainhomepage .showflats .flat a .flex-rate,
+div.mainhomepage .showflatsrates .flat a .flex-rate {
   padding: 20px;
   display: -webkit-box;
   display: flex;
@@ -138,15 +157,37 @@ div.mainhomepage .showflatsrates .flat a div.flex-rate {
           align-items: center;
 }
 
-div.mainhomepage .showflats .flat a div.flex-rate div h3,
-div.mainhomepage .showflatsrates .flat a div.flex-rate div h3 {
+div.mainhomepage .showflats .flat a .flex-rate h3,
+div.mainhomepage .showflatsrates .flat a .flex-rate h3 {
   margin-bottom: 8px;
+  width: 100%;
+  font-size: 2.2rem;
+  color: #393939;
 }
 
-div.mainhomepage .showflats .flat a div.flex-rate i.rate,
-div.mainhomepage .showflatsrates .flat a div.flex-rate i.rate {
-  color: #ff5b60;
+div.mainhomepage .showflats .flat a .flex-rate h3::first-letter,
+div.mainhomepage .showflatsrates .flat a .flex-rate h3::first-letter {
+  text-transform: capitalize;
+}
+
+div.mainhomepage .showflats .flat a .rate,
+div.mainhomepage .showflatsrates .flat a .rate {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  height: 40px;
+  width: 40px;
+  color: #7d7d7d;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
   font-size: 15px;
-  margin-left: 2px;
+  font-weight: bolder;
+  border: 2px solid #ff5b60;
 }
 

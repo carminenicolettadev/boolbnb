@@ -35,7 +35,7 @@
 }
 
 /*versione desktop*/
-@media all and (min-width: 992px){
+@media all and (max-width: 2500px){
 
   .col-lg-1{
     width: calc((100% / 12) * 1);
@@ -143,7 +143,7 @@
 
 /*tablet version */
 
-@media all and (min-width: 769px) and (max-width: 991px) {
+@media all and (min-width: 769px) and (max-width: 1300px) {
 
   .col-md-1{
     width: calc((100% / 12) * 1);
@@ -247,7 +247,7 @@
   }
 }
 
-@media all and (min-width: 577px) and (max-width: 768px) {
+@media all and (min-width: 577px) and (max-width: 870px) {
   .col-sm-1{
     width: calc((100% / 12) * 1);
   }

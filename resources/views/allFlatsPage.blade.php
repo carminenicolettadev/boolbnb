@@ -53,7 +53,6 @@
                           <p>rooms : {{$flat -> detail -> num_room}}</p>
                           <p>bed : {{$flat -> detail -> bed}}</p>
                         </div>
-
                     <div class="address-section">
                           <p>{{$flat -> address -> city}}</p>
                     </div>
@@ -140,7 +139,7 @@
       $(document).ready(function(){
 
         var posto = $('#city').val();
-        
+
         var centerx=$('#centerx').val();
         var centery=$('#centery').val();
         if(centerx ==="" || centery ===""){//set default values ​​without location search for map

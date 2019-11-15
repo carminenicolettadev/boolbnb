@@ -29,27 +29,9 @@ class UserController extends Controller
         $userFlat = Flat::where('user_id', Auth::user()->id)->paginate(4);
 
 
-
-        $arrDetail = [];
-        $arrAddress = [];
-
-
-        foreach ($userFlat as $flat) {
-            $detailFlat = Detail::where('flat_id', $flat->id)->get();
-            array_push($arrDetail, $detailFlat);
-        }
-
-        foreach ($userFlat as $address) {
-            $addressFlat = Address::where('flat_id', $address->id)->get();
-            array_push($arrAddress, $addressFlat);
-        }
-
-
         // dd($arrDetail);
 
         return view('profile')->with('user', $user)
-                              ->with('arrDetail', $arrDetail)
-                              ->with('arrAddress', $arrAddress)
                               ->with('userFlat', $userFlat);
 
     }

@@ -83,23 +83,32 @@
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
   padding: 40px;
   padding-top: 0;
+  position: relative;
 }
 
 .profile-container .content .flats-list .box {
   position: relative;
   width: 450px;
   max-height: 600px;
-  background: #f2f2f2;
   margin: 30px;
   height: auto;
   text-decoration: none;
   color: black;
   cursor: pointer;
   border-radius: 8px;
+  box-shadow: 2px 2px 12px #ececec;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.profile-container .content .flats-list .box:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  box-shadow: 6px 6px 12px #d7d7d7;
 }
 
 .profile-container .content .flats-list .box img {
