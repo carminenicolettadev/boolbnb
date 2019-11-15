@@ -8,8 +8,10 @@ Route::post('', 'FlatController@filters')->name('filters');
 Route::post('/storemesg/{id}', 'MessageController@messageStore')->name('sendmessage');
 
 // Payment
-Route::get('/payment/{id}', 'PaymentsController@index')->name('indexPayment');
-Route::get('/payment', 'PaymentsController@make')->name('paymentMake');
+Route::get('/sponsor/{id}', 'PaymentsController@index')->name('indexPayment')->middleware('auth');
+Route::post('/sponsor', 'PaymentsController@pagamento')->name('pagamento')->middleware('auth');
+Route::get('/payment', 'PaymentsController@make')->name('paymentMake')->middleware('auth');
+Route::get('/paymentStore', 'PaymentsController@storeSponsor')->name('storeSponsor')->middleware('auth');
 
 // Auth
 Auth::routes();

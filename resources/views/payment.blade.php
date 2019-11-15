@@ -4,25 +4,30 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Braintree-Demo</title>
+  <title>Sponsorizzazioni</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
   <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
-
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
+
+  <div>
+    <h3>{{$name}} stai mettendo in evidenza l'appartamento "{{$title}}" per {{$ore}} al costo di {{$costo}} €</h3>
+  </div>
+
   <div class="container">
      <div class="row">
        <div class="col-md-8 col-md-offset-2">
          <div id="dropin-container"></div>
-         <button id="submit-button">Request payment method</button>
+         <button id="submit-button">Paga ora</button>
        </div>
      </div>
   </div>
+
   <script>
     var button = document.querySelector('#submit-button');
-
+    
     braintree.dropin.create({
       authorization: "{{ Braintree_ClientToken::generate() }}",
       container: '#dropin-container'
@@ -30,10 +35,11 @@
       button.addEventListener('click', function () {
         instance.requestPaymentMethod(function (err, payload) {
           $.get('{{ route('paymentMake') }}', {payload}, function (response) {
-            console.log(payload);
-            console.log(response);
             if (response.success) {
               alert('Payment successfull!');
+              window.setTimeout(function () {
+                location.href = "{{ route('storeSponsor') }}";
+              }, 100);
             } else {
               alert('Payment failed');
             }
