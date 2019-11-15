@@ -14,6 +14,8 @@ class Payment extends Model
 
   public function flats() {
 
-      return $this -> belongsToMany(Flat::class) -> withPivot('expiration');
+
+      return $this -> belongsToMany(Flat::class) -> withPivot('expiration');;
+
   }
 }
