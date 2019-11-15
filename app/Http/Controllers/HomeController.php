@@ -16,6 +16,9 @@ class HomeController extends Controller
      public function index()
      {
 
+        // Rilevare dalla tabella Flat-Payment il valore di "expiration"
+        // e mostrare se ($expiration > DataEOraDiOggi)
+        
          $flatsevidency = Flat::orderBy('created_at', 'desc')
          ->take(8)
          ->get();
