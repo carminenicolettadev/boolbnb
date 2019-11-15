@@ -19,7 +19,7 @@
 
       <div class="content">
         <div class="user">
-            <h1>{{Auth::user()->name}}'s flats</h1>
+            <h1>Your flats</h1>
             <div class="btn">
               <a class="btn-add" href="{{ route('addFlat')}}">Add Flat</a><br>
               <a class="btn-add" href="{{ route('edit', $user -> id) }}">Edit Profile</a><br>

@@ -16,15 +16,19 @@
 
     <div class="list-message">
       <div class="single-message">
-        @auth
-          @for ($i=0; $i < count($flat); $i++)
-            <p>{{$flat[$i]->detail ->title}}</p>
-            @for ($j=$i; $j<=$i ; $j++)
-              <p>Email: {{$messages [$j] -> email}}</p>
-              <p>Messaggio: {{$messages[$j] -> msg}}</p>
+        @if (count($flat))
+            @for ($i=0; $i < count($flat); $i++)
+              <p>{{$flat[$i]->detail ->title}}</p>
+              @for ($j=$i; $j<=$i ; $j++)
+                <p>Email: {{$messages [$j] -> email}}</p>
+                <p>Messaggio: {{$messages[$j] -> msg}}</p>
+              @endfor
             @endfor
-          @endfor
-        @endauth
+          @else
+        <h1>no message</h1>
+        @endif
+
+
       </div>
     </div>
 
