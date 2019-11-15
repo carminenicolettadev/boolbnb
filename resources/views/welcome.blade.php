@@ -38,7 +38,7 @@
                   <div class="searchbox" style="position:relative">
                     <h1 >Cerca alloggi unici al mondo</h1>
                     <div class="cerca">
-                      <div class="searchform" id="map" style="height: 200px;width:70%"></div>
+                      <div class="searchform" id="map" style="height: 200px;width:100%"></div>
 
                     </div>
                     <form  action="{{ route('getCity')}}" id="formparametri" method="get"  accept-charset="UTF-8">
@@ -72,23 +72,23 @@
               <div class="col-lg-12 col-md-12 col-sm-12 someflats">
                 <div class="row">
                 @foreach ($flatsevidency as $flat)
-                  <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">
                         <img src="../img/{{$flat ->detail -> img}}" alt="">
-                      <div class="flex-rate">
-                        <div class="">
-                          <h3>{{$flat -> address -> city}}</h3>
-                          <p>Appartamento - {{$flat -> detail -> bed}}
-                            @if ($flat -> detail -> bed === 1)
-                              letto
-                            @else
-                              letti
-                            @endif
-                          </p>
+                        <div class="flex-rate">
+                            <h3>{{$flat -> address -> city}}</h3>
+                            <p>Appartamento - {{$flat -> detail -> bed}}
+                              @if ($flat -> detail -> bed === 1)
+                                letto
+                              @else
+                                letti
+                              @endif
+                            </p>
                         </div>
-                        <p>{{$flat -> rate}}<span><i class="fas fa-star rate"></i></span></p>
-                      </div>
+                        <div class="rate">
+                          <p>{{$flat -> rate }}</p>
+                        </div>
                       </a>
                     </div>
                   </div>
@@ -115,11 +115,13 @@
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">
                         <img src="../img/{{$flat ->detail -> img}}" alt="">
+                        <div class="flex-rate">
+                          <p>{{$flat -> address -> city}}</p>
+                        </div>
+                        <div class="rate">
+                          <p>{{$flat -> rate }}</p>
+                        </div>
                       </a>
-                      <div class="flex-rate">
-                        <p>{{$flat -> address -> city}}</p>
-                        <p >{{$flat -> rate}}<span><i class="fas fa-star rate"></i></span></p>
-                      </div>
                     </div>
                   </div>
                 @endforeach
@@ -128,11 +130,6 @@
             </div>
           </div>
         </div>
-        <form class="" action="index.html" method="post">
-
-
-
-        </form>
     </div>
 
 
@@ -147,6 +144,10 @@
 
 
     <style media="screen">
+      .mapboxgl-control-container, .tt-search-box{
+        width: 100%
+      }
+
       .mapboxgl-canvas{
         display: none;
       }
@@ -166,9 +167,8 @@
         padding-right:20px;
       }
       .tt-search-box-result-list:hover{
-       background:rgb(60,179,113);
-       color:red;
-
+       background:rgb(228, 228, 228);
+       cursor: pointer;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"

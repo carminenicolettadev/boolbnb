@@ -33,64 +33,70 @@
       @endauth
 
 
-      <div class="content">
-        <div class="hero">
-            <img src="../img/{{$detailFlat[0] ->img}}">
+      <div class="content single-flat">
+        <div class="hero" style="background-image:url('../img/{{$singleFlat -> detail -> img}}')">
+            {{-- <img src="../img/{{$singleFlat -> detail -> img}}"> --}}
         </div>
         <div class="flats-list">
-          <div class="intro">
-              <h1>{{$detailFlat[0] ->title}}</h1>
-              <p>{{$addressFlat[0] ->city}}</p>
-          </div>
-          <h3 class="section-title">Details</h3>
-          <ul class="details">
-            <li>
-              <p>rooms</p>
-              <p>{{$detailFlat[0] ->num_room}}</p>
-            </li>
-            <li>
-              <p>bed</p>
-              <p>{{$detailFlat[0] ->bed}}</p>
-            </li>
-            <li>
-              <p>bathroom</p>
-              <p>{{$detailFlat[0] ->bathroom}}</p>
-            </li>
-            <li>
-              <p>Area</p>
-              <p>{{$detailFlat[0] ->mq}} <span>m2</span></p>
-            </li>
-          </ul>
+          <div class="">
+            <div class="intro">
+                <h1>{{$singleFlat -> detail -> title}}</h1>
+                <p>{{$singleFlat -> address -> city}}</p>
+            </div>
+            <h3 class="section-title">Details</h3>
+            <ul class="details">
+              <li>
+                <p>rooms</p>
+                <p>{{$singleFlat -> detail -> num_room}}</p>
+              </li>
+              <li>
+                <p>bed</p>
+                <p>{{$singleFlat -> detail -> bed}}</p>
+              </li>
+              <li>
+                <p>bathroom</p>
+                <p>{{$singleFlat -> detail -> bathroom}}</p>
+              </li>
+              <li>
+                <p>Area</p>
+                <p>{{$singleFlat -> detail ->mq}} <span>m2</span></p>
+              </li>
+            </ul>
 
-          <h3 class="section-title">Address</h3>
-          <ul class="address">
-            <li>
-              <h2>City</h2>
-              <p>{{$addressFlat[0] ->city}}</p>
-            </li>
-            <li>
-              <h2>Road</h2>
-              <p>{{$addressFlat[0] ->road}}</p>
-            </li>
-            <!--input text for get value for script js style=display:none-->
-            <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}"style="display:none">
-            <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}"style="display:none">
-            <input type="text"id="addrss" value="{{$addressFlat[0]->road}}"style="display:none">
-            <input type="text"id="city" value="{{$addressFlat[0]->city}}"style="display:none">
-            <input type="text"id="civ_num"value="{{$addressFlat[0]->civ_num}}"style="display:none">
-          </ul>
-          <!-- <div class="rate">
-            <p>{{$singleFlat -> rate }}</p>
-          </div> -->
+            <h3 class="section-title">Address</h3>
+            <ul class="address">
+              <li>
+                <h2>City</h2>
+                <p>{{$addressFlat[0] ->city}}</p>
+              </li>
+              <li>
+                <h2>Road</h2>
+                <p>{{$addressFlat[0] ->road}}</p>
+              </li>
+              <!--input text for get value for script js style=display:none-->
+              <input type="text" id="lat" value="{{$addressFlat[0] ->lat}}"style="display:none">
+              <input type="text" id="lon" value="{{$addressFlat[0] ->lon}}"style="display:none">
+              <input type="text"id="addrss" value="{{$addressFlat[0]->road}}"style="display:none">
+              <input type="text"id="city" value="{{$addressFlat[0]->city}}"style="display:none">
+              <input type="text"id="civ_num"value="{{$addressFlat[0]->civ_num}}"style="display:none">
+            </ul>
+          </div>
+
+
+          @include('layouts.msgform')
+
+          <div id="map" class="mappa map"></div>
+
+
+
         </div>
-        {{-- mappa  --}}
-        <div id="map" class="mappa map" ></div>
+
+
 
 
       </div>
     </div>
-    @include('layouts.msgform')
-    
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
 

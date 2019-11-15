@@ -1,24 +1,15 @@
 function init() {
-
-
-
     $('#bottone').click(function(e) {
-
         let latitude;
         let longitude;
         e.preventDefault();
         getlatlon(); //perform some operations
-
-
-
     });
 }
-
 function getlatlon() {
     var road = $("#road").val();
     var cap = $("#cap").val();
     var civ_num = $("#civ_num").val();
-
     var parametri;
     $.ajax({
         url: "https://api.tomtom.com/search/2/structuredGeocode.json",
@@ -33,11 +24,10 @@ function getlatlon() {
         },
         success: function(data) {
             parametri = data["results"][0]["position"];
-
             latitude = parametri.lat;
             longitude = parametri.lon;
-            $("#lat").val(latitude);
-            $("#lon").val(longitude);
+            $("input#latitudeflat").val(latitude);
+            $("input#longitudeflat").val(longitude);
             if (data) {
                 $("#form-flat").submit();
             }
@@ -47,10 +37,4 @@ function getlatlon() {
         }
     })
 }
-
-
-
-
-
-
 $(document).ready(init);

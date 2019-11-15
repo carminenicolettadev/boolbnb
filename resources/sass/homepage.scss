@@ -83,12 +83,25 @@ div.mainhomepage {
         .someflats,
         .showflatsrates {
             padding-top: 15px;
+            .row{
+              display: flex;
+              flex-wrap: wrap;
+            }
         }
         .flat {
             border-radius: 8px;
             width: 96%;
             margin-bottom: 40px;
-            background: #f2f2f2;
+            box-shadow: 2px 2px 12px #ececec;
+            transition: 0.3s;
+            position: relative;
+
+            &:hover{
+              transform: translateY(-3px);
+              box-shadow: 6px 6px 12px #d7d7d7
+            }
+
+            // background: #f2f2f2;
             a {
                 text-decoration: none;
                 color: black;
@@ -97,22 +110,37 @@ div.mainhomepage {
                     height: auto;
                     border-radius: 5px;
                 }
-                div.flex-rate {
+                .flex-rate {
                     padding: 20px;
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: space-between;
                     align-items: center;
-                    div {
-                        h3 {
-                            margin-bottom: 8px;
-                        }
-                    }
-                    i.rate {
-                        color: #ff5b60;
-                        font-size: 15px;
-                        margin-left: 2px;
-                    }
+                      h3 {
+                          margin-bottom: 8px;
+                          width: 100%;
+                          font-size: 2.2rem;
+                          color: rgb(57, 57, 57);
+                          &::first-letter{
+                            text-transform: capitalize;
+                          }
+                      }
+                }
+                .rate{
+                  position: absolute;
+                  top: 15px;
+                  right: 15px;
+                  background:white;
+                  height: 40px;
+                  width: 40px;
+                  color: rgb(125, 125, 125);
+                  border-radius: 50%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 15px;
+                  font-weight: bolder;
+                  border: 2px solid #ff5b60;
                 }
             }
         }

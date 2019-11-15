@@ -122,8 +122,8 @@ function getlatlon() {
       parametri = data["results"][0]["position"];
       latitude = parametri.lat;
       longitude = parametri.lon;
-      $("#lat").val(latitude);
-      $("#lon").val(longitude);
+      $("input#latitudeflat").val(latitude);
+      $("input#longitudeflat").val(longitude);
 
       if (data) {
         $("#form-flat").submit();
@@ -146,7 +146,7 @@ $(document).ready(init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Desktop\Nuova cartella\progetto-finale-airbnb\resources\js\getCordinate.js */"./resources/js/getCordinate.js");
+module.exports = __webpack_require__(/*! /Users/apple/Desktop/ESERCIZI/laravel/airBnB/resources/js/getCordinate.js */"./resources/js/getCordinate.js");
 
 
 /***/ })
