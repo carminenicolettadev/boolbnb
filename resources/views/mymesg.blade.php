@@ -8,14 +8,14 @@
 
     <div>
       @auth
-      @foreach ($messages as $msg)
-        <div>
-          {{-- <h3>messaggio relativo a: {{$detail -> name}}</h3> --}}
-          <p>Email: {{$msg -> email}}</p>
-          <p>Messaggio: {{$msg -> msg}}</p>
-        </div>
-      @endforeach
-        @endauth
+        @for ($i=0; $i < count($flat); $i++)
+          <p>{{$flat[$i]->detail ->title}}</p>
+          @for ($j=$i; $j<=$i ; $j++)
+            <p>Email: {{$messages [$j] -> email}}</p>
+            <p>Messaggio: {{$messages[$j] -> msg}}</p>
+          @endfor
+        @endfor
+      @endauth
     </div>
 
   </body>
