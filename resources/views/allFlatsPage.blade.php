@@ -25,7 +25,7 @@
     @include('layouts.menu2')
 
     @yield('menu')
-    <input type="hidden" name="" id="city" value="{{ $city}}">
+
 
     <div class="centrone">
       <div class="search-bar">
@@ -36,6 +36,10 @@
             @foreach ($services as $service)
               <input type="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}">{{ $service -> name}}
             @endforeach
+            <input id="centerx"  name="latin" value="{{$latin}}">
+            <input id="centery"  name="lonin" value="{{$lonin}}">
+            <input id="centery"  name="city" value="{{$city}}">
+
             <button type="submit" name="button">invia</button>
 
           </form>
@@ -44,6 +48,8 @@
       <div class="sidebar">
         <div class="results">
           <div class="flats-list">
+            @if ($flats == "vuoto")
+
             @foreach ($flats as $flat)
               <a href="{{route ('showFlat', $flat ->id)}}" class="box">
                 <img src="../img/{{$flat ->detail -> img}}" >
@@ -68,6 +74,36 @@
 
               </a>
             @endforeach
+          @endif
+
+
+            @if (!empty($result))
+
+            @foreach ($result as $flat)
+              <a href="{{route ('showFlat', $flat ->id)}}" class="box">
+                <img src="../img/{{$flat ->detail -> img}}" >
+                <div class="box-sections">
+                    <h1 class="flat-title">{{$flat -> detail -> title}}</h1>
+                    <div class="address-section">
+                      <h3>{{$flat -> address -> city}}</h3>
+                    </div>
+                    <div class="details">
+                      <p>rooms : {{$flat -> detail -> num_room}}</p>
+                      <p>bed : {{$flat -> detail -> bed}}</p>
+                    </div>
+                    <div class="services-section">
+                      @foreach ($flat->services as $service)
+                        <p>{{$service -> name}}</p>
+                      @endforeach
+                    </div>
+                    <div class="rate">
+                      <p>{{$flat -> rate }}</p>
+                    </div>
+                </div>
+
+              </a>
+            @endforeach
+            @endif
 
           </div>
           <div class="paginate">
@@ -86,8 +122,6 @@
         </div>
         @endforeach
       </div>
-      <input id="centerx"type="hidden" name="" value="{{$latin}}">
-      <input id="centery" type="hidden" name="" value="{{$lonin}}">
 
       <div class="mappa2" id="map">
       </div>
