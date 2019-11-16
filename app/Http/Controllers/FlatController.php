@@ -317,6 +317,7 @@ class FlatController extends Controller
      */
     public function updateFlat(Request $request, $id)
     {
+
       $flat = Flat::findOrFail($id);
       $detailData = $request -> validate([
           'title'=> 'required',
@@ -361,11 +362,13 @@ class FlatController extends Controller
       ]);
       $services=DB::table('flat_service')->where('flat_id',$id)->delete();
 
-      $arrServices = [];
+
       foreach ($request -> checkboxvar  as $value ) {
-        array_push($arrServices,$value);
+        $service = Service::findOrFail($value);
+        $service->flats()->attach($id);
+        $service->save();
       }
-      dd($arrServices);
+
 
       // dd($detail,$address,$detailData,$addressData);
       $log = $flat->user_id;
