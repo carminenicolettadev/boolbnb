@@ -48,7 +48,7 @@
       <div class="sidebar">
         <div class="results">
           <div class="flats-list">
-            @if ($flats == "vuoto")
+            @if ($flats != "vuoto")
 
             @foreach ($flats as $flat)
               <a href="{{route ('showFlat', $flat ->id)}}" class="box">
