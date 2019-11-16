@@ -98,159 +98,163 @@ class FlatController extends Controller
 
 
 
-  public function filters(Request $request)
-    {
-
-      $city = $request -> city;
-
-      $latin = $request -> latin;//lat Request in search
-      $lonin = $request -> lonin;//lon Request in search
-      if ($latin ===null|| $lonin ===null || $city ===null) {//set default values ​​without location search
-        $latin = 45.46362;//lat Milan
-        $lonin = 9.18812;//lon Milan
-        $city = 'milan';
-      }
-
-      $flats = [];
-
-      $unit = "K";
-      $lat1= $latin;
-      $lon1= $lonin;
-      $raggio = 500;
-
-      function distance($lat1, $lon1, $lat2, $lon2, $unit) {
-          if (($lat1 == $lat2) && ($lon1 == $lon2)) {
-            return 0;
-          }
-          else {
-            $theta = $lon1 - $lon2;
-            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $miles = $dist * 60 * 1.1515;
-            $unit = strtoupper($unit);
-
-            if ($unit == "K") {
-              $kilometri = round($miles * 1.609344);
-              return $kilometri;
-            } else if ($unit == "N") {
-              return ($miles * 0.8684);
-            } else {
-              return $miles;
-            }
-          }
-        }
-
-
-      $addresses = Address::all();
-
-      foreach ($addresses as $address) {
-        $lat = $address -> lat;
-        $lon = $address -> lon;
-        $center_x= $lat1;
-        $center_y= $lon1;
-
-        $unit = "K";
-        $km = distance($center_x, $center_y, $lat, $lon, $unit);
-        if ($km < $raggio) {
-
-          $flat_id = $address -> flat_id;
-          $flat = Flat::findOrFail($flat_id);
-
-          $flats[]=$flat;
-        }
-
-      }
-
-
-      if (count($flats)> 0) {
-        $flatsFiltrated = $flats;
-      }
-
-      $services = Service::all();
-      $arrForm = [
-        'wifi'=> false,
-        'piscina'=> false,
-        'spa'=> false,
-        'balcone'=> false,
-        'giardino'=> false,
-        'mare'=> false,
-      ];
-      $arrServices = [];
-      foreach ($request -> checkboxvar  as $value ) {
-        array_push($arrServices,$value);
-      }
-      // var_dump(array_keys($arrForm));
-      for ($i=0; $i < count($arrServices); $i++) {
-        foreach ($arrForm as $key => $value) {
-          // var_dump($key, $value);
-          if ($arrServices[$i] === $key) {
-            // var_dump($arrServices[$i]);
-           $arrForm[$key] = true;
-          }
-        }
-      }
-
-      $result = [];
-
-
-      foreach ($flatsFiltrated as $flat) {
-        //Flat:: non va bene dovrebbe essere $flat
-        if ($arrForm['wifi']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','wifi');
-          });
-          $result[] = $flat;
-        }
-        if ($arrForm['balcone']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','balcone');
-          });
-          $result[] = $flat;
-        }
-        if ($arrForm['mare']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','mare');
-          });
-          $result[] = $flat;
-        }
-        if ($arrForm['spa']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','spa');
-          });
-          $result[] = $flat;
-        }
-        if ($arrForm['piscina']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','piscina');
-          });
-          $result[] = $flat;
-        }
-        if ($arrForm['giardino']) {
-          $flat = $flat->whereHas('services', function($query){
-              $query->where('name','giardino');
-          });
-          $result[] = $flat;
-        }
-      }
-
-
-
-
-      $services = Service::all();
-      $flats = "vuoto";
-
-      // dd($result);
-
-
-      return view('allFlatsPage')->with('result', $result)
-                                 ->with('flats', $flats)
-                                 ->with('latin', $latin)
-                                 ->with('lonin', $lonin)
-                                 ->with('city', $city)
-                                 ->with('services', $services);
-    }
-
+  // public function filters(Request $request)
+  //   {
+  //
+  //     $city = $request -> city;
+  //
+  //     $latin = $request -> latin;//lat Request in search
+  //     $lonin = $request -> lonin;//lon Request in search
+  //     if ($latin ===null|| $lonin ===null || $city ===null) {//set default values ​​without location search
+  //       $latin = 45.46362;//lat Milan
+  //       $lonin = 9.18812;//lon Milan
+  //       $city = 'milan';
+  //     }
+  //
+  //     $flats = [];
+  //
+  //     $unit = "K";
+  //     $lat1= $latin;
+  //     $lon1= $lonin;
+  //     $raggio = 500;
+  //
+  //     function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+  //         if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+  //           return 0;
+  //         }
+  //         else {
+  //           $theta = $lon1 - $lon2;
+  //           $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+  //           $dist = acos($dist);
+  //           $dist = rad2deg($dist);
+  //           $miles = $dist * 60 * 1.1515;
+  //           $unit = strtoupper($unit);
+  //
+  //           if ($unit == "K") {
+  //             $kilometri = round($miles * 1.609344);
+  //             return $kilometri;
+  //           } else if ($unit == "N") {
+  //             return ($miles * 0.8684);
+  //           } else {
+  //             return $miles;
+  //           }
+  //         }
+  //       }
+  //
+  //
+  //     $addresses = Address::all();
+  //
+  //     foreach ($addresses as $address) {
+  //       $lat = $address -> lat;
+  //       $lon = $address -> lon;
+  //       $center_x= $lat1;
+  //       $center_y= $lon1;
+  //
+  //       $unit = "K";
+  //       $km = distance($center_x, $center_y, $lat, $lon, $unit);
+  //       if ($km < $raggio) {
+  //
+  //         $flat_id = $address -> flat_id;
+  //         $flat = Flat::findOrFail($flat_id);
+  //
+  //         $flats[]=$flat;
+  //       }
+  //
+  //     }
+  //
+  //
+  //
+  //     if (count($flats)> 0) {
+  //       $flatsFiltrated = $flats;
+  //     }
+  //
+  //     $services = Service::all();
+  //     $arrForm = [
+  //       'wifi'=> false,
+  //       'piscina'=> false,
+  //       'spa'=> false,
+  //       'balcone'=> false,
+  //       'giardino'=> false,
+  //       'mare'=> false,
+  //     ];
+  //     $arrServices = [];
+  //     foreach ($request -> checkboxvar  as $value ) {
+  //       array_push($arrServices,$value);
+  //     }
+  //     // var_dump(array_keys($arrForm));
+  //     for ($i=0; $i < count($arrServices); $i++) {
+  //       foreach ($arrForm as $key => $value) {
+  //         // var_dump($key, $value);
+  //         if ($arrServices[$i] === $key) {
+  //           // var_dump($arrServices[$i]);
+  //          $arrForm[$key] = true;
+  //         }
+  //       }
+  //     }
+  //
+  //     $result = [];
+  //
+  //
+  //     foreach ($flatsFiltrated as $flat) {
+  //       //Flat:: non va bene dovrebbe essere $flat
+  //       // dd($flat );
+  //
+  //       // dd($flat -> services);
+  //       if ($arrForm['wifi']) {
+  //           $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','wifi');
+  //         });
+  //         $result[] = $flat;
+  //       }
+  //       if ($arrForm['balcone']) {
+  //         $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','balcone');
+  //         });
+  //         $result[] = $flat;
+  //       }
+  //       if ($arrForm['mare']) {
+  //         $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','mare');
+  //         });
+  //         $result[] = $flat;
+  //       }
+  //       if ($arrForm['spa']) {
+  //         $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','spa');
+  //         });
+  //         $result[] = $flat;
+  //       }
+  //       if ($arrForm['piscina']) {
+  //         $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','piscina');
+  //         });
+  //         $result[] = $flat;
+  //       }
+  //       if ($arrForm['giardino']) {
+  //         $flat = $flat->whereHas('services', function($query){
+  //             $query->where('name','giardino');
+  //         });
+  //
+  //       }
+  //     }
+  //
+  //
+  //
+  //
+  //     $services = Service::all();
+  //     $flats = "vuoto";
+  //
+  //     dd($result);
+  //
+  //
+  //     return view('allFlatsPage')
+  //                                ->with('flats', $flats)
+  //                                ->with('latin', $latin)
+  //                                ->with('lonin', $lonin)
+  //                                ->with('city', $city)
+  //                                ->with('services', $services);
+  //   }
+  //
 
 
 
