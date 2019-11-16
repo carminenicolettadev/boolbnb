@@ -83,6 +83,8 @@ class FlatController extends Controller
 
       }
 
+      // dd($flats);
+
       $services = Service::all();
 
       return view('allFlatsPage')->with('flats', $flats)
@@ -238,9 +240,9 @@ class FlatController extends Controller
 
 
       $services = Service::all();
-      $flats = "empty";
+      $flats = "vuoto";
 
-      dd($result);
+      // dd($result);
 
 
       return view('allFlatsPage')->with('result', $result)
