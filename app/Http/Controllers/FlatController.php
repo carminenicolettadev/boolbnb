@@ -235,8 +235,6 @@ class FlatController extends Controller
       }
 
 
-      // dd($result);
-
 
 
       $services = Service::all();
