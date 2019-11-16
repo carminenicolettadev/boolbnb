@@ -30,28 +30,23 @@
     <div class="centrone">
       <div class="search-bar">
         <div class="services">
-          <form  action="{{ route('filters')}}"  method="post" id="form-flat"  accept-charset="UTF-8">
-            @csrf
-            @method('POST')
             @foreach ($services as $service)
-              <input type="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}">{{ $service -> name}}
+              <input type="checkbox" class="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}">{{ $service -> name}}
             @endforeach
             <input id="centerx"  name="latin" value="{{$latin}}">
             <input id="centery"  name="lonin" value="{{$lonin}}">
             <input id="centery"  name="city" value="{{$city}}">
 
-            <button type="submit" name="button">invia</button>
+            <button type="" class="getFilters" name="button">invia</button>
 
-          </form>
         </div>
       </div>
+
       <div class="sidebar">
         <div class="results">
           <div class="flats-list">
-            @if ($flats != "vuoto")
-
             @foreach ($flats as $flat)
-              <a href="{{route ('showFlat', $flat ->id)}}" class="box">
+              <a href="{{route ('showFlat', $flat ->id)}}" class="box" ref="">
                 <img src="../img/{{$flat ->detail -> img}}" >
                 <div class="box-sections">
                     <h1 class="flat-title">{{$flat -> detail -> title}}</h1>
@@ -74,37 +69,6 @@
 
               </a>
             @endforeach
-          @endif
-
-
-            @if (!empty($result))
-
-            @foreach ($result as $flat)
-              <a href="{{route ('showFlat', $flat ->id)}}" class="box">
-                <img src="../img/{{$flat ->detail -> img}}" >
-                <div class="box-sections">
-                    <h1 class="flat-title">{{$flat -> detail -> title}}</h1>
-                    <div class="address-section">
-                      <h3>{{$flat -> address -> city}}</h3>
-                    </div>
-                    <div class="details">
-                      <p>rooms : {{$flat -> detail -> num_room}}</p>
-                      <p>bed : {{$flat -> detail -> bed}}</p>
-                    </div>
-                    <div class="services-section">
-                      @foreach ($flat->services as $service)
-                        <p>{{$service -> name}}</p>
-                      @endforeach
-                    </div>
-                    <div class="rate">
-                      <p>{{$flat -> rate }}</p>
-                    </div>
-                </div>
-
-              </a>
-            @endforeach
-            @endif
-
           </div>
           <div class="paginate">
             {{-- {{ $flats -> links()}} --}}
@@ -130,7 +94,6 @@
 
 
     </div>
-
 
 
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.38.0/services/services-web.min.js"></script>
@@ -205,6 +168,60 @@
 
           }
         }
+
+
+
+
+        $('.getFilters').click(function(e){
+          e.preventDefault();
+          var selected = [];
+          $('.checkbox:checked').each(function(){
+              selected.push($(this).val());
+
+          })
+
+
+
+
+          var arr = []; // note this
+          $('.box .services-section').each(function(index){
+            arr[index] = [];
+
+
+
+            $(this).find('p').each(function(num){
+              arr[index][num] =  $(this).text() ;
+
+
+
+            })
+            $(this).parent().attr("rif",index);
+          });
+
+          console.log(arr);
+          console.log(selected);
+          for (var j= 0; j < selected.length; j++) {
+
+            for(var i=0;i<arr.length;i++){
+              if (arr[i].includes(selected[j])) {
+                console.log(i,"match",j);
+
+              }else {
+                  console.log("non corrisponde",arr[i]);
+
+                  $('.box-section[rif=0]').hide();
+                  console.log($('.box-section[rif=0]'));
+
+              }
+
+            }
+          }
+
+
+        })
+
+
+
       });//end jquery
 
     </script>
