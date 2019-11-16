@@ -6,7 +6,7 @@ use App\Address;
 use App\Service;
 use App\Detail;
 use App\User;
-
+use DB;
 class FlatController extends Controller
 {
     /**
@@ -260,10 +260,12 @@ class FlatController extends Controller
       // dd($detail);
       $address ->save();
       //Services add
-      foreach ($request -> checkboxvar  as $value ) {
-        $service = Service::findOrFail($value);
-        $service->flats()->attach($flat_id);
-        $service->save();
+      if($request -> checkboxvar){
+        foreach ($request -> checkboxvar  as $value ) {
+          $service = Service::findOrFail($value);
+          $service->flats()->attach($flat_id);
+          $service->save();
+        }
       }
       $log = $flat->user_id;
       return redirect("profile/$log");
@@ -292,12 +294,17 @@ class FlatController extends Controller
     public function editFlat($id)
     {
       $services = Service::all();
-
+      $servicesFlat = DB::table('flat_service') ->where('flat_id',$id)->get();
+      $servicesassoc=[];
+      foreach ($servicesFlat as $serviceFlat ) {
+        $servicesassoc[] = $serviceFlat ->service_id ;
+      }
       $singleFlat = Flat::findOrFail($id);
       $detailFlat = Detail::where('flat_id', $id)->get();
       $addressFlat = Address::where('flat_id', $id)->get();
       return view('editFlat')->with('singleFlat', $singleFlat)
                              ->with('services', $services)
+                             ->with('servicesassoc',$servicesassoc)
                              ->with('detailFlat', $detailFlat)
                              ->with('addressFlat', $addressFlat);
     }

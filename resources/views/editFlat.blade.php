@@ -105,10 +105,17 @@
                   <h4>Services</h4>
                 </div>
                 <div class="service-control col-md-12">
-                @foreach($services as $service)
-                  <label for="{{$service -> name}}">{{$service ->name}}</label>
-                  <input type="checkbox"   name="checkboxvar[]" value="{{$service ->id}}">
-                @endforeach
+                  @foreach($services as $service)
+                   <label for="{{$service -> name}}">{{$service ->name}}</label>
+
+                   @if (in_array($service -> id, $servicesassoc))
+                     <input type="checkbox"   name="checkboxvar[]" value="{{$service ->id}}"checked>
+                   @else
+                     <input type="checkbox"   name="checkboxvar[]" value="{{$service ->id}}">
+                   @endif
+
+                 @endforeach
+
                 </div>
 
 
