@@ -359,12 +359,13 @@ class FlatController extends Controller
         'road'=> $request->road,
         'civ_num'=> $request->civ_num,
       ]);
+      $services=DB::table('flat_service')->where('flat_id',$id)->delete();
 
-      // $arrServices = [];
-      // foreach ($request -> checkboxvar  as $value ) {
-      //   array_push($arrServices,$value);
-      // }
-
+      $arrServices = [];
+      foreach ($request -> checkboxvar  as $value ) {
+        array_push($arrServices,$value);
+      }
+      dd($arrServices);
 
       // dd($detail,$address,$detailData,$addressData);
       $log = $flat->user_id;
@@ -379,16 +380,15 @@ class FlatController extends Controller
     public function deleteFlat($id)
     {
       $flat = Flat::findOrFail($id);
-      $arrServices =$flat->services;
-      for ($i=0; $i < count($arrServices) ; $i++) {
-        $flat->services[$i]->delete();
-      }
+
       $log = $flat->user_id;
-      $flat->detail->delete();
-      $flat->address->delete();
-
-
+      $flat-> detail-> delete();
+      $flat-> address-> delete();
+      $services=DB::table('flat_service')->where('flat_id',$id)->delete();
+      $messages=DB::table('messages')->where('flat_id',$id)->delete();
       $flat->delete();
+
+
       return redirect("profile/$log");
     }
 }
