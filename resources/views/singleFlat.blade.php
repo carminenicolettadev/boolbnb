@@ -23,9 +23,9 @@
       @auth
         @if ($singleFlat -> user_id === Auth::user()->id)
           <div class="sidebar">
-                {{-- <a class="btn" href="{{ route('indexPayment', $singleFlat -> id)}}">Sponsor Flat</a><br> --}}
-                {{-- <a class="btn-update" href="{{ route('editFlat', $singleFlat -> id)}}">Update Flat</a><br> --}}
-                {{-- <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat -> id)}}">Delete Flat</a><br> --}}
+                <a class="btn" href="{{ route('indexPayment', $singleFlat -> id)}}">Sponsor Flat</a><br>
+                <a class="btn-update" href="{{ route('editFlat', $singleFlat -> id)}}">Update Flat</a><br>
+                <a class="btn-delete" href="{{ route('deleteFlat', $singleFlat -> id)}}">Delete Flat</a><br>
               <a href="../profile/{{Auth::user()->id}}" class="mb-5">Back</a>
           </div>
         @endif
