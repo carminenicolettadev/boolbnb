@@ -28,19 +28,45 @@
 
 
     <div class="centrone">
-      <div class="search-bar">
-        <div class="services">
-            @foreach ($services as $service)
-              <input type="checkbox" class="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}">{{ $service -> name}}
-            @endforeach
-            <input type="hidden" id="centerx"  name="latin" value="{{$latin}}">
-            <input type="hidden" id="centery"  name="lonin" value="{{$lonin}}">
-            <input type="hidden" id="centery"  name="city" value="{{$city}}">
+      <div class="barra">
+        <div class="cerca">
+          <div class="" id="map2">
+          </div>
+        </div>
+        <div class="search-bar prima">
+          <div class="services">
+              @foreach ($services as $service)
+                <div class="">
+                  <input type="checkbox" class="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}"><p>{{ $service -> name}}</p>
+                </div>
+              @endforeach
+              <input type="hidden" id="centerx"  name="latin" value="{{$latin}}">
+              <input type="hidden" id="centery"  name="lonin" value="{{$lonin}}">
+              <input type="hidden" id="centery"  name="city" value="{{$city}}">
 
-            <button type="" class="getFilters" name="button">invia</button>
+              <button type="" class="getFilters" name="button">invia</button>
 
+          </div>
         </div>
       </div>
+      <div class="barra seconda">
+        <div class="search-bar ">
+          <div class="services ">
+              @foreach ($services as $service)
+                <div class="">
+                  <input type="checkbox" class="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}"><p>{{ $service -> name}}</p>
+                </div>
+              @endforeach
+              <input type="hidden" id="centerx"  name="latin" value="{{$latin}}">
+              <input type="hidden" id="centery"  name="lonin" value="{{$lonin}}">
+              <input type="hidden" id="centery"  name="city" value="{{$city}}">
+
+              <button type="" class="getFilters" name="button">invia</button>
+
+          </div>
+        </div>
+      </div>
+
 
       <div class="sidebar">
         <div class="results">
@@ -51,7 +77,8 @@
               @else
               @foreach ($flats as $flat)
               <a href="{{route ('showFlat', $flat ->id)}}" class="box" ref="">
-                <img src="../img/{{$flat ->detail -> img}}" >
+                  <img src="../img/{{$flat ->detail -> img}}" >
+
                 <div class="box-sections">
                     <h1 class="flat-title">{{$flat -> detail -> title}}</h1>
                     <div class="address-section">
@@ -94,23 +121,17 @@
       </div>
 
 
+      <div class="mappa2" id="map"></div>
 
 
 
-      <div class="mappa2" id="map"  >
-        <div class="mappa" id="map2"style="z-index:999;margin-left:50px;height:80px;width:50px;transition:width 2s"  onclick="setheightwidthmap2(this)">
-        </div>
-      </div>
+
 
 
       <script type="text/javascript">
-
-
         function setheightwidthmap2(x){
-
           x.style['width']='300px';
           x.style['height']='239px';
-
         }
       </script>
 
@@ -144,7 +165,6 @@
       .mapboxgl-control-container, .tt-search-box{
         width: 100%
       }
-
       .mapboxgl-canvas{
         display: none;
       }
@@ -158,8 +178,6 @@
         z-index: 999;
         width:100%;
         max-height:188px !important;
-
-
       }
       .tt-search-box-search-icon{
         padding-right:20px;
@@ -175,8 +193,16 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        // $('.flat-title').each(function(){
+        //   console.log($(this).text());
+        //   var str = $(this).text();
+        //   var lung = str.length;
+        //   console.log(lung);
+        //   if (lung > 20) {
+        //     str.slice(0,15);
+        //   }
+        // })
         $("div#map2").click(function(e){
-
           let valInput = $('div#map2 .tt-search-box-input').val();
           console.log(valInput);
           $('input.place').val(valInput) ;
@@ -195,7 +221,6 @@
               })
             });
         var posto = $('#city').val();
-
         var centerx=$('#centerx').val();
         var centery=$('#centery').val();
         if(centerx ==="" || centery ===""){//set default values ​​without location search for map
@@ -203,8 +228,6 @@
           centery = 9.18812;
         };
         createmapmarker();
-
-
         function createmapmarker(){
           var divflats = $('div.flats >div').length;
           var divflatselement = $('div.flats >div');
@@ -220,7 +243,8 @@
          style: 'tomtom://vector/1/basic-main',
          options : {
            showZoom: false,
-           showPitch: false
+           showPitch: false,
+           defaultPrevented : false
          }
         });
           var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
@@ -235,66 +259,47 @@
             let lon = divflatselement[i].children[2].value;//long
             var marker = tomtom.L.marker([lat,lon]).addTo(map);
             marker.bindPopup(title);
-
           }
         }
-
-
-
-
         $('.getFilters').click(function(e){
           $('.box').show();
           e.preventDefault();
           var selected = [];
           $('.checkbox:checked').each(function(){
               selected.push($(this).val());
-
           })
-
-
-
-
           var arr = []; // note this
           $('.box .services-section').each(function(index){
             arr[index] = [];
-
-
-
             $(this).find('p').each(function(num){
               arr[index][num] =  $(this).text() ;
-
-
-
             })
             $(this).parents(".box").attr("rif",index);
           });
-
           console.log(arr);
           console.log(selected);
           for (var j= 0; j < selected.length; j++) {
-
             for(var i=0;i<arr.length;i++){
               if (arr[i].includes(selected[j])) {
                 console.log(i,"match",j);
-
               }else {
                   console.log("non corrisponde",arr[i]);
-
                   $('.box[rif="' + i +'"]').hide();
                   console.log($('.box-section[rif=0]'));
-
               }
-
             }
           }
-
-
         })
 
 
 
-      });//end jquery
 
+
+
+
+
+
+      });//end jquery
     </script>
 
   </body>
