@@ -237,11 +237,11 @@
           var selected = [];
           var arr = [];
 
-          $('.box').each(function(){
-            if ($('.box').hasClass('filtrato')) {
+          $('a.box').each(function(){
+            if ($('a').hasClass('filtrato')) {
               $(this).removeClass('filtrato');
             }
-            if ($('.box').hasClass('nascosto')) {
+            if ($('a').hasClass('nascosto')) {
               $(this).removeClass('nascosto');
             }
           })

@@ -41,7 +41,6 @@ img{
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        flex-wrap: wrap;
         div{
           margin-left: 20px;
           display: flex;
@@ -228,6 +227,9 @@ canvas.mapboxgl-canvas{
   .mappa2{
     // width: 100%;
     display: none;
+  }
+  .services{
+    flex-wrap: wrap;
   }
   .centrone .sidebar {
     width: 100%;
