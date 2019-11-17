@@ -76,7 +76,7 @@
                 <h2>No apartments in this place</h2>
               @else
               @foreach ($flats as $flat)
-              <a href="{{route ('showFlat', $flat ->id)}}" class="box" ref="">
+              <a href="{{route ('showFlat', $flat ->id)}}" class="box filtrato" ref="">
                   <img src="../img/{{$flat ->detail -> img}}" >
 
                 <div class="box-sections">
@@ -98,6 +98,15 @@
                     </div>
                 </div>
 
+
+                <div class="flats2">
+                  <div class="valflat"style="display:none" rif="{{$flat->id}}">
+                    <input id=titleflat type="hidden" value="{{$flat ->detail ->title}}"></input>
+                    <input id="latval"type="hidden" value="{{$flat -> address ->lat}}"></input>
+                    <input id="lonval"type="hidden" value="{{$flat -> address ->lon}}"></input>
+                  </div>
+                </div>
+
               </a>
                 @endforeach
             @endif
@@ -108,9 +117,9 @@
           </div>
         </div>
       </div>
-        <div class="flats">
 
 
+      <div class="flats">
         @foreach ($flats as $flat)
         <div class="valflat"style="display:none" rif="{{$flat->id}}">
           <input id=titleflat type="hidden" value="{{$flat ->detail ->title}}"></input>
@@ -122,10 +131,6 @@
 
 
       <div class="mappa2" id="map"></div>
-
-
-
-
 
 
       <script type="text/javascript">
@@ -193,33 +198,26 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
-        // $('.flat-title').each(function(){
-        //   console.log($(this).text());
-        //   var str = $(this).text();
-        //   var lung = str.length;
-        //   console.log(lung);
-        //   if (lung > 20) {
-        //     str.slice(0,15);
-        //   }
-        // })
+
         $("div#map2").click(function(e){
           let valInput = $('div#map2 .tt-search-box-input').val();
           console.log(valInput);
           $('input.place').val(valInput) ;
             $.ajax({
-              url: 'https://api.tomtom.com/search/2/search/' + $('.tt-search-box-input').val() + '.json?key=i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy&typeahead=true&language=en-GB&lat=0&lon=0&minFuzzyLevel=1&maxFuzzyLevel=2&limit=1',
-              method : 'GET',
-              success : function(data){
-                if(data){
-                  var inputlat = $('input#latinput').val(data.results[0].position.lat);
-                  var inputlon =$('input#loninput').val(data.results[0].position.lon);
-                  if (inputlat != "" && inputlon != "" ){
-                    document.getElementById('bottone-invia').click();
+                url: 'https://api.tomtom.com/search/2/search/' + $('.tt-search-box-input').val() + '.json?key=i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy&typeahead=true&language=en-GB&lat=0&lon=0&minFuzzyLevel=1&maxFuzzyLevel=2&limit=1',
+                method : 'GET',
+                success : function(data){
+                  if(data){
+                    var inputlat = $('input#latinput').val(data.results[0].position.lat);
+                    var inputlon =$('input#loninput').val(data.results[0].position.lon);
+                    if (inputlat != "" && inputlon != "" ){
+                      document.getElementById('bottone-invia').click();
+                    }
                   }
                 }
-              }
               })
             });
+
         var posto = $('#city').val();
         var centerx=$('#centerx').val();
         var centery=$('#centery').val();
@@ -227,10 +225,63 @@
           centerx = 45.46362;
           centery = 9.18812;
         };
+
         createmapmarker();
+
+
+        $('.getFilters').click(function(e){
+
+          $('.box').show();
+          e.preventDefault();
+
+          var selected = [];
+          var arr = [];
+
+          $('.box').each(function(){
+            if ($('.box').hasClass('filtrato')) {
+              $(this).removeClass('filtrato');
+            }
+            if ($('.box').hasClass('nascosto')) {
+              $(this).removeClass('nascosto');
+            }
+          })
+
+          $('.checkbox:checked').each(function(){
+              selected.push($(this).val());
+          })
+
+          $('.box .services-section').each(function(index){
+            arr[index] = [];
+            $(this).find('p').each(function(num){
+              arr[index][num] =  $(this).text() ;
+            })
+            $(this).parents(".box").attr("rif",index);
+          });
+
+          // console.log(arr);
+          // console.log(selected);
+
+          for (var j= 0; j < selected.length; j++) {
+            for(var i=0;i<arr.length;i++){
+
+              if (arr[i].includes(selected[j])) {
+                //ha i filtri selezionati
+                // console.log(i,"match",j);
+                $('.box[rif="' + i +'"]').addClass('filtrato');
+              }else {
+                  console.log("non corrisponde",arr[i]);
+                  $('.box[rif="' + i +'"]').hide();
+                  $('.box[rif="' + i +'"]').addClass('nascosto');
+                  console.log($('.box-section[rif=0]'));
+              }
+            }
+          }
+        })
+
+
         function createmapmarker(){
-          var divflats = $('div.flats >div').length;
-          var divflatselement = $('div.flats >div');
+          var divflats = $('.filtrato .flats2 >div').length;
+          var divflatselement = $('.filtrato .flats2 > div');
           var map = tomtom.L.map('map', {
           key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
           basePath: 'sdk/',
@@ -238,15 +289,15 @@
           center: [centerx,centery],
           });
           var map2 = tt.map({
-         key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
-         container: 'map2',
-         style: 'tomtom://vector/1/basic-main',
-         options : {
-           showZoom: false,
-           showPitch: false,
-           defaultPrevented : false
-         }
-        });
+           key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+           container: 'map2',
+           style: 'tomtom://vector/1/basic-main',
+           options : {
+             showZoom: false,
+             showPitch: false,
+             defaultPrevented : false
+           }
+          });
           var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
             searchOptions: {
               key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
@@ -261,43 +312,6 @@
             marker.bindPopup(title);
           }
         }
-        $('.getFilters').click(function(e){
-          $('.box').show();
-          e.preventDefault();
-          var selected = [];
-          $('.checkbox:checked').each(function(){
-              selected.push($(this).val());
-          })
-          var arr = []; // note this
-          $('.box .services-section').each(function(index){
-            arr[index] = [];
-            $(this).find('p').each(function(num){
-              arr[index][num] =  $(this).text() ;
-            })
-            $(this).parents(".box").attr("rif",index);
-          });
-          console.log(arr);
-          console.log(selected);
-          for (var j= 0; j < selected.length; j++) {
-            for(var i=0;i<arr.length;i++){
-              if (arr[i].includes(selected[j])) {
-                console.log(i,"match",j);
-              }else {
-                  console.log("non corrisponde",arr[i]);
-                  $('.box[rif="' + i +'"]').hide();
-                  console.log($('.box-section[rif=0]'));
-              }
-            }
-          }
-        })
-
-
-
-
-
-
-
-
 
       });//end jquery
     </script>
