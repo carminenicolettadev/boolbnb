@@ -45,7 +45,11 @@
       <div class="sidebar">
         <div class="results">
           <div class="flats-list">
-            @foreach ($flats as $flat)
+
+              @if (empty($flats))
+                <h2>No apartments in this place</h2>
+              @else
+              @foreach ($flats as $flat)
               <a href="{{route ('showFlat', $flat ->id)}}" class="box" ref="">
                 <img src="../img/{{$flat ->detail -> img}}" >
                 <div class="box-sections">
@@ -68,7 +72,9 @@
                 </div>
 
               </a>
-            @endforeach
+                @endforeach
+            @endif
+
           </div>
           <div class="paginate">
             {{-- {{ $flats -> links()}} --}}
@@ -87,9 +93,37 @@
         @endforeach
       </div>
 
-      <div class="mappa2" id="map">
+
+
+
+
+      <div class="mappa2" id="map"  >
+        <div class="mappa" id="map2"style="z-index:999;margin-left:50px;height:80px;width:50px;transition:width 2s"  onclick="setheightwidthmap2(this)">
+        </div>
       </div>
 
+
+      <script type="text/javascript">
+
+
+        function setheightwidthmap2(x){
+
+          x.style['width']='300px';
+          x.style['height']='239px';
+
+        }
+      </script>
+
+      <form  action="{{ route('getCity')}}" id="formparametri" method="get"  accept-charset="UTF-8">
+        @csrf
+        @method('GET')
+      <input type="hidden" class="place" name="place" value="">
+      <input type="hidden" name="latinput" id="latinput" value="">
+      <input type="hidden" name="loninput" id="loninput" value="">
+      <button type="submit" id="bottone-invia" style="display:none">invia</button>
+
+
+      </form>
 
 
 
@@ -107,7 +141,12 @@
     <script type="text/javascript" src="{{ asset('sdk/marker-manager.js')}}"></script>
 
     <style media="screen">
+      .mapboxgl-control-container, .tt-search-box{
+        width: 100%
+      }
+
       .mapboxgl-canvas{
+        display: none;
       }
       .mapboxgl-ctrl-top-right{
         display: none;
@@ -116,19 +155,18 @@
         display: none;
       }
       .tt-search-box-result-list-container{
-        z-index: 10;
+        z-index: 999;
         width:100%;
         max-height:188px !important;
+
+
       }
       .tt-search-box-search-icon{
         padding-right:20px;
       }
       .tt-search-box-result-list:hover{
-       background:rgb(60,179,113);
-       color:red;
-      }
-      .tt-search-box{
-        width:490px !important;
+       background:rgb(228, 228, 228);
+       cursor: pointer;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
@@ -137,7 +175,25 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
+        $("div#map2").click(function(e){
 
+          let valInput = $('div#map2 .tt-search-box-input').val();
+          console.log(valInput);
+          $('input.place').val(valInput) ;
+            $.ajax({
+              url: 'https://api.tomtom.com/search/2/search/' + $('.tt-search-box-input').val() + '.json?key=i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy&typeahead=true&language=en-GB&lat=0&lon=0&minFuzzyLevel=1&maxFuzzyLevel=2&limit=1',
+              method : 'GET',
+              success : function(data){
+                if(data){
+                  var inputlat = $('input#latinput').val(data.results[0].position.lat);
+                  var inputlon =$('input#loninput').val(data.results[0].position.lon);
+                  if (inputlat != "" && inputlon != "" ){
+                    document.getElementById('bottone-invia').click();
+                  }
+                }
+              }
+              })
+            });
         var posto = $('#city').val();
 
         var centerx=$('#centerx').val();
@@ -155,10 +211,24 @@
           var map = tomtom.L.map('map', {
           key: "i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy",
           basePath: 'sdk/',
-          zoom: 10,
+          zoom: 13,
           center: [centerx,centery],
           });
-
+          var map2 = tt.map({
+         key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy',
+         container: 'map2',
+         style: 'tomtom://vector/1/basic-main',
+         options : {
+           showZoom: false,
+           showPitch: false
+         }
+        });
+          var ttSearchBox = new tt.plugins.SearchBox(tt.services.fuzzySearch, {
+            searchOptions: {
+              key: 'i2D5CGYtl0tUEgcZfIEET1lZo9mBMtMy'
+            }
+          });
+          map2.addControl(ttSearchBox, 'top-left');
           for (var i = 0; i < divflats; i++) {
             let title = divflatselement[i].children[0].value;//titleflat
             let lat = divflatselement[i].children[1].value;//lat
