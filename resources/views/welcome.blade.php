@@ -111,7 +111,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 someflats">
                 <div class="row">
                 @foreach ($flatsrates as $flat)
-                  <div class="col-lg-2 col-md-4 col-sm-6">
+                  <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">
                         <img src="../img/{{$flat ->detail -> img}}" alt="">
