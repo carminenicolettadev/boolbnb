@@ -33,9 +33,9 @@
             @foreach ($services as $service)
               <input type="checkbox" class="checkbox" name="checkboxvar[]"  value="{{ $service -> name}}">{{ $service -> name}}
             @endforeach
-            <input id="centerx"  name="latin" value="{{$latin}}">
-            <input id="centery"  name="lonin" value="{{$lonin}}">
-            <input id="centery"  name="city" value="{{$city}}">
+            <input type="hidden" id="centerx"  name="latin" value="{{$latin}}">
+            <input type="hidden" id="centery"  name="lonin" value="{{$lonin}}">
+            <input type="hidden" id="centery"  name="city" value="{{$city}}">
 
             <button type="" class="getFilters" name="button">invia</button>
 
@@ -173,6 +173,7 @@
 
 
         $('.getFilters').click(function(e){
+          $('.box').show();
           e.preventDefault();
           var selected = [];
           $('.checkbox:checked').each(function(){
@@ -195,7 +196,7 @@
 
 
             })
-            $(this).parent().attr("rif",index);
+            $(this).parents(".box").attr("rif",index);
           });
 
           console.log(arr);
@@ -209,7 +210,7 @@
               }else {
                   console.log("non corrisponde",arr[i]);
 
-                  $('.box-section[rif=0]').hide();
+                  $('.box[rif="' + i +'"]').hide();
                   console.log($('.box-section[rif=0]'));
 
               }
