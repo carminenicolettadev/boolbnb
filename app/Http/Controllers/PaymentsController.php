@@ -81,9 +81,22 @@ class PaymentsController extends Controller
 
     public function storeSponsor($flatid,$costo) {
       $payment_id = Payment::where('price',$costo)->get();
+      $current_timestamp = time();
+      $newtime;
+      if($costo == 2.99){
+        $newtime =86400;
+      }else if($costo == 5.99){
+        $newtime = 259200;
+      }else if($costo == 9.99){
+        $newtime =518400;
+      }
+      $time =$current_timestamp + $newtime;
+      $date_from_timestamp = date("Y-m-d H:i:s",$time);
+
+
 
       $Pagamento =DB::table('flat_payment')->insertGetId(
-        ['flat_id' => $flatid, 'payment_id' => $payment_id[0]->id]
+        ['expiration'=>$date_from_timestamp,'flat_id' => $flatid, 'payment_id' => $payment_id[0]->id]
       );
 
 

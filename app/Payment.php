@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
+
   protected $fillable = [
       'price'
 
@@ -15,7 +16,7 @@ class Payment extends Model
   public function flats() {
 
 
-      return $this -> belongsToMany(Flat::class) -> withPivot('expiration');;
+      return $this -> belongsToMany(Flat::class) -> withPivot('expiration',);
 
   }
 }
