@@ -230,7 +230,7 @@
 
 
         $('.getFilters').click(function(e){
-
+          
           $('.box').show();
           e.preventDefault();
 
