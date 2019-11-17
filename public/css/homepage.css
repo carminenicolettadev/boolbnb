@@ -7,7 +7,7 @@ div.mainhomepage #background-1 {
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-  height: 70vh;
+  height: 60vh;
 }
 
 div.mainhomepage .search {
@@ -77,6 +77,7 @@ div.mainhomepage .showflats .flatsratetitle,
 div.mainhomepage .showflatsrates .linkallflats,
 div.mainhomepage .showflatsrates .flatsratetitle {
   padding-top: 50px;
+  margin-bottom: 30px;
 }
 
 div.mainhomepage .showflats .linkallflats h3,
