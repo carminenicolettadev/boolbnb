@@ -92,7 +92,7 @@ class PaymentsController extends Controller
       }
       $time =$current_timestamp + $newtime;
       $date_from_timestamp = date("Y-m-d H:i:s",$time);
-
+      
 
 
       $Pagamento =DB::table('flat_payment')->insertGetId(
@@ -100,6 +100,6 @@ class PaymentsController extends Controller
       );
 
 
-      return view('storeSponsor',compact('flatid','costo'));
+      return view('storeSponsor',compact('flatid','costo','date_from_timestamp'));
     }
 }

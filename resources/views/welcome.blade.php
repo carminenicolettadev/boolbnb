@@ -71,7 +71,7 @@
 
               <div class="col-lg-12 col-md-12 col-sm-12 someflats">
                 <div class="row">
-                @foreach ($flatsevidency as $flat)
+                @foreach ($flats as $flat)
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="flat">
                       <a href="{{route('showFlat',$flat -> id)}}">

@@ -14,7 +14,7 @@
 
   <h1>Informare l'utente della data di scadenza della sua sponsorizzazione</h1>
 
-  <h3>{{$costo}}</h3>
+  <h3>{{$date_from_timestamp}}</h3>
   <h3>{{$flatid}}</h3>
 </body>
 </html>
