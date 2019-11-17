@@ -8,7 +8,7 @@ use App\Payment;
 
 $factory->define(Payment::class, function (Faker $faker) {
     return [
-      'price' => $faker -> randomFloat(1, 1, 5)
+      'price' => $faker->unique()->randomElement($array = array ('2.99','5.99','9.99')),
 
     ];
 });

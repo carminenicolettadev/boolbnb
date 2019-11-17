@@ -13,18 +13,7 @@ class PaymentsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Payment::class, 10)
-        -> create()
-        -> each(function ($payment){
+        factory(Payment::class, 3)-> create();
 
-          $flats = Flat::inRandomOrder()->take(rand(0, 200))->get();
-
-          // Impostiamo data random per popolare colonna expiration
-          $dataRandom = '2019-11-10 16:15:00';
-          $expiration = $dataRandom;
-
-          $payment -> flats() -> attach($flats, ['expiration' => $expiration]);
-          $payment -> save();
-        });
     }
 }
