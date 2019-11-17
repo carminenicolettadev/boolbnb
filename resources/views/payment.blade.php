@@ -22,7 +22,8 @@
   <div>
     <h3>{{$name}} stai mettendo in evidenza l'appartamento "{{$title}}" per {{$ore}} al costo di {{$costo}} €</h3>
   </div>
-
+  <input type="hidden"  id="flatid"name="flatid" value="{{$flat_id}}">
+  <input type="hidden" id="costo"name="costo" value="{{$costo}}">
   <div class="container">
      <div class="row">
        <div class="col-md-8 col-md-offset-2">
@@ -41,11 +42,14 @@
     }, function (createErr, instance) {
       button.addEventListener('click', function () {
         instance.requestPaymentMethod(function (err, payload) {
+
           $.get('{{ route('paymentMake') }}', {payload}, function (response) {
             if (response.success) {
               alert('Payment successfull!');
               window.setTimeout(function () {
-                location.href = "{{ route('storeSponsor') }}";
+                var costo =document.getElementById('costo').value;
+                var flatid=document.getElementById('flatid').value;
+                location.href = "/paymentStore/"+flatid+"/"+costo;
               }, 100);
             } else {
               alert('Payment failed');
