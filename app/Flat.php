@@ -36,7 +36,7 @@ class Flat extends Model
   }
   public function payments() {
 
-      return $this->belongsToMany(Payment::class)->withPivot('expiration');
+      return $this->belongsToMany(Payment::class)->as('expiration')->withTimestamps();
   }
 
 

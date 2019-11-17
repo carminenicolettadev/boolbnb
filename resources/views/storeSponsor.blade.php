@@ -16,5 +16,6 @@
 
   <h3>{{$costo}}</h3>
   <h3>{{$flatid}}</h3>
+  <h3>{{$expiration}}</h3>
 </body>
 </html>

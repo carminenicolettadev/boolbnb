@@ -80,13 +80,28 @@ class PaymentsController extends Controller
     }
 
     public function storeSponsor($flatid,$costo) {
-      $payment_id = Payment::where('price',$costo)->get();
+      $payment_id = Payment::where('price', $costo)->get();
 
-      $Pagamento =DB::table('flat_payment')->insertGetId(
-        ['flat_id' => $flatid, 'payment_id' => $payment_id[0]->id]
+      if ($costo == '2.99') {
+        $periodoSponsor = 86400;
+      } else if ($costo == '5.99') {
+        $periodoSponsor = 259200;
+      } else ($costo == '9.99') {
+        $periodoSponsor = 518400
+      };
+
+      $somma = time() + $periodoSponsor;
+
+      $expiration = date('Y-m-d H:i:s', $somma);
+
+      $Pagamento = DB::table('flat_payment')->insertGetId(
+        [
+          'flat_id' => $flatid,
+          'payment_id' => $payment_id[0]-> id,
+          'expiration' => $expiration
+        ]
       );
 
-
-      return view('storeSponsor',compact('flatid','costo'));
+      return view('storeSponsor',compact('flatid','costo','expiration'));
     }
 }
