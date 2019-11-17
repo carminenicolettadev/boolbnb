@@ -14,8 +14,7 @@ Route::post('/storemesg/{id}', 'MessageController@messageStore')->name('sendmess
 Route::get('/sponsor/{id}', 'PaymentsController@index')->name('indexPayment')->middleware('auth');
 Route::post('/sponsor', 'PaymentsController@pagamento')->name('pagamento')->middleware('auth');
 Route::get('/payment', 'PaymentsController@make')->name('paymentMake')->middleware('auth');
-Route::get('/paymentStore', 'PaymentsController@storeSponsor')->name('storeSponsor')->middleware('auth');
-
+Route::get('/paymentStore/{flatid}/{costo}', 'PaymentsController@storeSponsor')->name('storeSponsor')->middleware('auth');
 // Auth
 Auth::routes();
 

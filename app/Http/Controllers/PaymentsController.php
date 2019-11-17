@@ -8,7 +8,8 @@ use Braintree_Gateway;
 use App\Flat;
 use App\User;
 use App\Detail;
-
+use App\Payment;
+use DB;
 class PaymentsController extends Controller
 {
 
@@ -23,10 +24,11 @@ class PaymentsController extends Controller
         $detail = Detail::where('flat_id', $id)->get();
         $detail = $detail[0];
 
-        return view('sponsorPage', compact('singleFlat', 'user', 'detail'));
+        return view('sponsorPage', compact('singleFlat', 'user', 'detail','id'));
     }
 
     public function pagamento(Request $request) {
+      $flat_id =$request -> flatid;
 
       $datiPagamento = $request -> validate([
         'costo' => 'required',
@@ -48,7 +50,7 @@ class PaymentsController extends Controller
         $ore = '144 ore'
       };
 
-      return view('payment', compact('costo', 'name', 'title', 'ore', 'id'));
+      return view('payment', compact('costo', 'name', 'title', 'ore', 'id','flat_id'));
     }
 
     /*  Function is to process payment on braintree */
@@ -77,12 +79,14 @@ class PaymentsController extends Controller
                     ]);
     }
 
-    public function storeSponsor() {
+    public function storeSponsor($flatid,$costo) {
+      $payment_id = Payment::where('price',$costo)->get();
 
-      // Salvare in Payments il valore nella colonna "price" la variabile $costo
-      // Salvare in Flat-Payment il valore (data e ora) "expiration"
-      // calcolato prendendo il valore dentro "created_ad" e sommandolo a "OGGI"
+      $Pagamento =DB::table('flat_payment')->insertGetId(
+        ['flat_id' => $flatid, 'payment_id' => $payment_id[0]->id]
+      );
 
-      return view('storeSponsor');
+
+      return view('storeSponsor',compact('flatid','costo'));
     }
 }

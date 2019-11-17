@@ -45,7 +45,7 @@
 
         <label for="title"></label>
         <input type="hidden" name="title" required value="{{$detail -> title}}">
-
+        <input type="hidden" name="flatid" value="{{$id}}">
         <button type="submit">Prosegui col pagamento</button>
     </form>
 
