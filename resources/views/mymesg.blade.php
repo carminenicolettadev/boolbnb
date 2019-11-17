@@ -18,14 +18,15 @@
       <div class="single-message">
         @if (count($flat))
             @for ($i=0; $i < count($flat); $i++)
-              <p>{{$flat[$i]->detail ->title}}</p>
+              <h3>Message N.{{$i +1}}</h3>
+              <p>For Flat:<span>{{$flat[$i]->detail ->title}}</span></p>
               @for ($j=$i; $j<=$i ; $j++)
                 <p>Email: {{$messages [$j] -> email}}</p>
                 <p>Messaggio: {{$messages[$j] -> msg}}</p>
               @endfor
             @endfor
           @else
-        <h1>no message</h1>
+        <h1>No message</h1>
         @endif
 
 
