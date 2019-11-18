@@ -158,6 +158,11 @@ div.mainhomepage .showflatsrates .flat a .flex-rate {
           align-items: center;
 }
 
+div.mainhomepage .showflats .flat a .flex-rate p:first-letter,
+div.mainhomepage .showflatsrates .flat a .flex-rate p:first-letter {
+  text-transform: capitalize;
+}
+
 div.mainhomepage .showflats .flat a .flex-rate h3,
 div.mainhomepage .showflatsrates .flat a .flex-rate h3 {
   margin-bottom: 8px;

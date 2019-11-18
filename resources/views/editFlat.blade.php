@@ -79,7 +79,7 @@
 
                 <div class="form-group col-md-6">
                   <label>CAP</label>
-                  <input type="number" id="cap" class="form-control" value="{{$singleFlat-> address->id}}" name="cap" required  placeholder="CAP">
+                  <input type="number" id="cap" class="form-control" value="{{$singleFlat-> address->cap}}" name="cap" required  placeholder="CAP">
                 </div>
 
                 <div class="form-group col-md-6">

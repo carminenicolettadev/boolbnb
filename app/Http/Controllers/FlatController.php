@@ -37,7 +37,7 @@ class FlatController extends Controller
       $unit = "K";
       $lat1= $latin;
       $lon1= $lonin;
-      $raggio = 500;
+      $raggio = 50;
 
       function distance($lat1, $lon1, $lat2, $lon2, $unit) {
           if (($lat1 == $lat2) && ($lon1 == $lon2)) {

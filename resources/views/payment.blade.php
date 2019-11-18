@@ -19,8 +19,8 @@
   @yield('menu')
 
 
-  <div>
-    <h3>{{$name}} stai mettendo in evidenza l'appartamento "{{$title}}" per {{$ore}} al costo di {{$costo}} €</h3>
+  <div style="max-width:1140px;margin:auto;margin-top:40px">
+    <h3>Stai mettendo in evidenza l'appartamento "{{$title}}" per {{$ore}} al costo di {{$costo}} €</h3>
   </div>
   <input type="hidden"  id="flatid"name="flatid" value="{{$flat_id}}">
   <input type="hidden" id="costo"name="costo" value="{{$costo}}">

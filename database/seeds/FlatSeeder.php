@@ -14,16 +14,16 @@ class FlatSeeder extends Seeder
      */
     public function run()
     {
-      factory(Flat::class, 400)
-            -> make()
-            -> each(function($flat) {
+      // factory(Flat::class, 400)
+      //       -> make()
+      //       -> each(function($flat) {
+      //
+      //     $user = User::inRandomOrder()->first();
+      //
+      //     $flat -> user() -> associate($user);
+      //
+      //     $flat -> save();
 
-          $user = User::inRandomOrder()->first();
-
-          $flat -> user() -> associate($user);
-
-          $flat -> save();
-
-      });
+      // });
     }
 }
