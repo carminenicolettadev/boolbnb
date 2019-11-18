@@ -41,6 +41,7 @@
           <div class="">
             <div class="intro">
                 <h1>{{$singleFlat -> detail -> title}}</h1>
+                <input type="hidden"  id="titlemarker" name="" value="{{$singleFlat ->detail ->title}}">
                 <p>{{$singleFlat -> address -> city}}</p>
             </div>
             <h3 class="section-title">Details</h3>
@@ -110,7 +111,7 @@
         var address= $("#addrss").val();
         var city = $("#city").val();
         var civ_num = $("#civ_num").val();
-
+        var title = document.getElementById('titlemarker').value;
 
 
         //create a map
@@ -123,8 +124,8 @@
         //add marker in position[latiVal,longVal]
 
         var marker = tomtom.L.marker([latiVal,longVal]).addTo(map);
-        marker.bindPopup("<b>MY Home</b><br/>" +city + " " +address + " " +
-        "N" + civ_num );
+        marker.bindPopup(title + " " + city + " " + address + " " +
+        "N." + civ_num );
 
       });
     </script>

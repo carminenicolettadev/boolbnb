@@ -17,6 +17,7 @@ div#map {
     height: 70vh;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .intro {
@@ -74,6 +75,10 @@ div#map {
             padding:8px 16px;
             color: white;
             font-size: 18px;
+            border:none;
+            &:hover{
+              cursor: pointer;
+            }
         }
       }
 

@@ -45,7 +45,7 @@ img {
 }
 
 .centrone .barra .search-bar .services {
-  width: 50%;
+  width: auto;
   float: right;
   display: -webkit-box;
   display: flex;

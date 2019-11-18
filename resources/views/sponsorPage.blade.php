@@ -18,8 +18,8 @@
 
   @yield('menu')
 
-  <div style="max-width:1140px;margin:auto;margin-top:70px;">
-    <h1>{{$user -> name}} metti in mostra il tuo appartamento "{{$detail -> title}}"!</h1>
+  <div  style="max-width:1140px;margin:auto;margin-top:40px;">
+    <h1>Metti in mostra il tuo appartamento "{{$detail -> title}}"!</h1>
     <h3>Sponsorizzazione per 24 ore: costo € 2,99</p>
     <h3>Sponsorizzazione per 72 ore: costo € 5,99</p>
     <h3>Sponsorizzazione per 144 ore: costo € 9,99</h3>

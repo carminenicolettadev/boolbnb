@@ -12,17 +12,17 @@ class DetailSeeder extends Seeder
      */
     public function run()
         {
+          //
+          // $tablerif = \DB::table('flats')->get();
+          // $number = count($tablerif);
+          //
+          // for ($i=1; $i <= $number ; $i++) {
+          //   factory(Detail::class, 1)->create([
+          //    'flat_id' => $i
+          //
+          //   ]);
+          // }
 
-          $tablerif = \DB::table('flats')->get();
-          $number = count($tablerif);
-        
-          for ($i=1; $i <= $number ; $i++) {
-            factory(Detail::class, 1)->create([
-             'flat_id' => $i
-            
-            ]);
-          }
-         
         }
 
 }
